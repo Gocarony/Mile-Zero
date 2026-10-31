@@ -1247,6 +1247,18 @@ body.light .mz186-room-stage::after{opacity:.30; filter:blur(3.4px)}
 .served-extra.v54-served-fire::after{left:6px;top:11px;width:5px;height:11px}
 @keyframes mzFireFlicker{0%{transform:scaleX(.94) skewX(-3deg)}100%{transform:scaleX(1.05) skewX(3deg)}}
 @media(prefers-reduced-motion:reduce){.v54-cup-garnish.v54-garnish-fire::before,.served-extra.v54-served-fire::before{animation:none}}
+
+/* v268: each layered standing overlays an expression GIF on its transparent base PNG. */
+.scene #figure .mz267-layered-portrait {
+ position:relative;flex:0 0 auto;height:100%;width:auto;aspect-ratio:3 / 4;
+ max-width:100%;overflow:hidden;
+}
+.scene #figure .mz267-layered-portrait > img {
+ position:absolute;inset:0;display:block;width:100%;height:100%;
+ object-fit:contain;image-rendering:pixelated;pointer-events:none;
+}
+.scene #figure .mz267-expression-layer {z-index:1}
+
 </style>
 
 <style id="mz-v212-actual-counter-layer-fix">
@@ -16794,11 +16806,15 @@ function deliver(){
  note('시스템',v.orders.map(o=>o.name).join(', ')+' 제공 완료');s.sub='after';s.line=0;render();
 }
 function start(){if(s.devPreview&&!todayVisits().length){bootScreen='none';s.phase='closing';render();return;}bootScreen='none';s.phase='open';s.visit=0;startWaiting();s.line=0;s.seenIntro=true;note('시스템',dayLabel(s.day)+' 영업 시작');render()}
-const RIAN_STANDING_GIF='assets/characters/rian-standing.gif';
+// v268: standing portraits share one 900x1200 base + transparent animated expression system.
+// Add future expression paths under the corresponding character, keeping the base image unchanged.
+const STANDING_LAYERS={
+ maren:{label:'마렌',base:'assets/characters/maren-base.png',expressions:{normal:'assets/characters/maren-expression-normal.gif'}},
+ mechanic:{label:'야간 정비사',base:'assets/characters/night-mechanic-base.png',expressions:{normal:'assets/characters/night-mechanic-expression-normal.gif'}},
+ rian:{label:'리안',base:'assets/characters/rian-base.png',expressions:{normal:'assets/characters/rian-expression-normal.gif'}}
+};
 const RIAN_FACE_WEBP='assets/characters/rian-face.webp';
-const MECHANIC_STANDING_GIF='assets/characters/night-mechanic-standing.gif';
 const MECHANIC_FACE_WEBP='assets/characters/night-mechanic-face.webp';
-const MAREN_STANDING_GIF='assets/characters/maren-standing.gif';
 const MAREN_FACE_WEBP='assets/characters/maren-face.webp';
 // Use the drink's actual mix boundary for the serving counter.
 // The mixed portion takes up as much of the glass as its ingredient count;
@@ -16815,7 +16831,16 @@ function mzServedLiquidStrips(drink){
  if(drink.mode==='mix')return `<i style="background:${seq.length?blendColor(seq):'#b58caa'};flex:1 1 0"></i>`;
  return seq.map(key=>`<i style="background:${colorOf(key)};flex:1 1 0"></i>`).join('');
 }
-function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitId=mzVisualPrefs.portraits!==false&&s.phase==='open'&&s.sub!=='interlude'&&v?(v.who==='마렌'?'maren':v.who==='야간 정비사'?'mechanic':v.who==='리안'?'rian':null):null;figure.style.display=portraitId?'flex':'none';if(portraitId){if(figure.dataset.portrait!==portraitId){const src=portraitId==='maren'?MAREN_STANDING_GIF:portraitId==='mechanic'?MECHANIC_STANDING_GIF:RIAN_STANDING_GIF;const alt=portraitId==='maren'?'마렌 스탠딩':portraitId==='mechanic'?'야간 정비사 스탠딩':'리안 스탠딩';figure.innerHTML='<img class="guest-portrait" src="'+src+'" alt="'+alt+'">';figure.dataset.portrait=portraitId;}}else if(figure.dataset.portrait){figure.innerHTML='';delete figure.dataset.portrait;}$('guestIdentity').innerHTML=s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
+function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitId=mzVisualPrefs.portraits!==false&&s.phase==='open'&&s.sub!=='interlude'&&v?(v.who==='마렌'?'maren':v.who==='야간 정비사'?'mechanic':v.who==='리안'?'rian':null):null;figure.style.display=portraitId?'flex':'none';if(portraitId){if(figure.dataset.portrait!==portraitId){const portrait=STANDING_LAYERS[portraitId];
+ if(portrait){
+  const face=portrait.expressions.normal;
+  figure.innerHTML='<div class="mz267-layered-portrait" role="img" aria-label="'+portrait.label+' 스탠딩">'+
+   '<img class="mz267-base-layer" src="'+portrait.base+'" alt="" draggable="false">'+
+   '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
+   '</div>';
+ }
+ figure.dataset.portrait=portraitId;
+}}else if(figure.dataset.portrait){figure.innerHTML='';delete figure.dataset.portrait;}$('guestIdentity').innerHTML=s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
 let activeTypeKey=null,activeTypeTimer=null,activeTypeComplete=true,activeTypeFull='';
 function revealDialogue(){
  if(activeTypeComplete)return false;
