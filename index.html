@@ -1258,6 +1258,60 @@ body.light .mz186-room-stage::after{opacity:.30; filter:blur(3.4px)}
  object-fit:contain;image-rendering:pixelated;pointer-events:none;
 }
 .scene #figure .mz267-expression-layer {z-index:1}
+/* v283: a couple should retain approximately the single portrait height.
+   The shared frame expands sideways; each 3:4 portrait is full-height. */
+.scene #figure.mz267-dual-portraits{
+ flex-direction:row !important;
+ flex-wrap:nowrap !important;
+ gap:0 !important;
+ width:min(98%, 610px) !important;
+ height:360px !important;
+ justify-content:center !important;
+ align-items:flex-end !important;
+}
+.scene #figure.mz267-dual-portraits .mz267-layered-portrait{
+ position:relative;
+ flex:0 0 auto !important;
+ width:auto !important;
+ height:100% !important;
+ max-width:none !important;
+ max-height:none !important;
+ aspect-ratio:3 / 4;
+ align-self:flex-end;
+}
+.scene #figure.mz267-dual-portraits .mz267-layered-portrait + .mz267-layered-portrait{
+ margin-left:-14px;
+}
+@media(max-width:670px){
+ .scene #figure.mz267-dual-portraits{
+  gap:0 !important;
+  width:min(99%, 380px) !important;
+  height:200px !important;
+ }
+ .scene #figure.mz267-dual-portraits .mz267-layered-portrait + .mz267-layered-portrait{
+  margin-left:-8px;
+ }
+}
+/* Developer mode can display a standing directly on the real bar camera. */
+.mz-dev-portrait-controls{
+ position:fixed;top:12px;right:12px;z-index:260;
+ display:flex;flex-wrap:wrap;align-items:center;gap:9px;
+ padding:12px;border:1px solid #bb855e;border-radius:6px;
+ background:#141a28f2;color:#f5e8d8;box-shadow:0 6px 26px #0009;
+ max-width:min(95vw,590px);
+}
+.mz-dev-portrait-controls label{font-size:12px;font-weight:700;letter-spacing:.03em}
+.mz-dev-portrait-controls select{
+ max-width:180px;min-height:35px;background:#20283a;color:#f5e8d8;
+ border:1px solid #72819a;border-radius:3px;padding:5px;
+}
+.mz-dev-portrait-controls button{
+ min-height:35px;background:#273248;color:#f4e4d3;
+ border:1px solid #bb855e;padding:5px 11px;cursor:pointer;
+}
+.mz-dev-portrait-controls button:hover{background:#3c4b68}
+@media(max-width:670px){.mz-dev-portrait-controls{position:fixed;top:6px;left:6px;right:6px;padding:7px;gap:5px}}
+
 
 </style>
 
@@ -17167,8 +17221,29 @@ function mzBindDesk(root){
  board.addEventListener('click',e=>{if(e.target.closest('[data-desk-id]')||!mzDeskSelection)return;const [x,y]=coords(e);if(mzDeskPlace(mzDeskSelection,x,y))redraw();});
 }
 
+let mzDevPortraitChoice='maren';
+const mzDevPortraitChoices=[
+ ['maren','마렌'],['mechanic','야간 정비사'],['rian','리안'],
+ ['freight','정기 화물 기사'],['torban','토르반'],
+ ['torbanwife','토르반의 아내'],['couple','토르반 부부']
+];
+function mzDevPortraitPreview(){
+ bootScreen='devPortrait';render();
+}
 function bootView(){
   let el=$('bootOverlay');
+  if(bootScreen==='devPortrait'){
+   if(el)el.remove();
+   let controls=$('mzDevPortraitControls');
+   if(!controls){controls=document.createElement('div');controls.id='mzDevPortraitControls';controls.className='mz-dev-portrait-controls';document.body.appendChild(controls)}
+   controls.innerHTML='<label for="mzDevPortraitSelect">BAR CAMERA · 스탠딩</label><select id="mzDevPortraitSelect">'+
+     mzDevPortraitChoices.map(([id,label])=>'<option value="'+id+'"'+(id===mzDevPortraitChoice?' selected':'')+'>'+label+'</option>').join('')+
+     '</select><button type="button" id="mzDevPortraitBack">개발자 모드로 돌아가기</button>';
+   controls.querySelector('#mzDevPortraitSelect').onchange=e=>{mzDevPortraitChoice=e.target.value;render()};
+   controls.querySelector('#mzDevPortraitBack').onclick=()=>{bootScreen='developer';render()};
+   return;
+  }
+  $('mzDevPortraitControls')?.remove();
   if(bootScreen==='phone'||(s.phase!=='prep'&&!['weekend','weekendStory'].includes(bootScreen))){if(el)el.remove();return}
   if(!el){el=document.createElement('div');el.id='bootOverlay';el.className='boot-overlay';document.body.appendChild(el)}
   // Bind the boot settings palette to the saved theme, independent of body CSS timing.
@@ -17635,7 +17710,8 @@ const STANDING_LAYERS={
  mechanic:{label:'야간 정비사',base:'assets/characters/night-mechanic-base.png',expressions:{normal:'assets/characters/night-mechanic-expression-normal.gif'}},
  rian:{label:'리안',base:'assets/characters/rian-base.png',expressions:{normal:'assets/characters/rian-expression-normal.gif'}},
  freight:{label:'정기 화물 기사',base:'assets/characters/freight-driver-base.png',expressions:{normal:'assets/characters/freight-driver-expression-normal.gif'}},
- torban:{label:'토르반',base:'assets/characters/torban-base.png',expressions:{normal:'assets/characters/torban-expression-normal.gif'}}
+ torban:{label:'토르반',base:'assets/characters/torban-base.png',expressions:{normal:'assets/characters/torban-expression-normal.gif'}},
+ torbanwife:{label:'토르반의 아내',base:'assets/characters/torban-wife-base.png',expressions:{normal:'assets/characters/torban-wife-expression-normal.gif'}}
 };
 const RIAN_FACE_WEBP='assets/characters/rian-face.webp';
 const MECHANIC_FACE_WEBP='assets/characters/night-mechanic-face.webp';
@@ -17657,12 +17733,31 @@ function mzServedLiquidStrips(drink){
  if(drink.mode==='mix')return `<i style="background:${seq.length?blendColor(seq):'#b58caa'};flex:1 1 0"></i>`;
  return seq.map(key=>`<i style="background:${colorOf(key)};flex:1 1 0"></i>`).join('');
 }
-function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitId=mzVisualPrefs.portraits!==false&&s.phase==='open'&&s.sub!=='interlude'&&v?(v.who==='마렌'?'maren':v.who==='야간 정비사'?'mechanic':v.who==='리안'?'rian':v.who==='정기 화물 기사'?'freight':v.who==='토르반'?'torban':null):null;figure.style.display=portraitId?'flex':'none';if(portraitId){const portrait=STANDING_LAYERS[portraitId];if(portrait){const expressionId=mzActivePortraitExpression(v);const face=(portrait.expressions&&portrait.expressions[expressionId])||portrait.expressions.normal;if(figure.dataset.portrait!==portraitId){figure.innerHTML='<div class="mz267-layered-portrait" role="img" aria-label="'+portrait.label+' 스탠딩">'+
-   '<img class="mz267-base-layer" src="'+portrait.base+'" alt="" draggable="false">'+
-   '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
-   '</div>';
- figure.dataset.portrait=portraitId;}
- const expressionLayer=figure.querySelector('.mz267-expression-layer');if(expressionLayer&&expressionLayer.getAttribute('src')!==face)expressionLayer.setAttribute('src',face);figure.dataset.expression=expressionId;}}else if(figure.dataset.portrait){figure.innerHTML='';delete figure.dataset.portrait;delete figure.dataset.expression;}$('guestIdentity').innerHTML=s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
+function mzPortraitIdForWho(who){
+ if(who==='마렌')return 'maren';
+ if(who==='야간 정비사')return 'mechanic';
+ if(who==='리안')return 'rian';
+ if(who==='정기 화물 기사')return 'freight';
+ if(who==='토르반')return 'torban';
+ if(who==='토르반의 아내')return 'torbanwife';
+ return null;
+}
+function mzPortraitIdsForCurrentVisit(v){
+ if(bootScreen==='devPortrait')return mzDevPortraitChoice==='couple'?['torbanwife','torban']:[mzDevPortraitChoice];
+ if(mzVisualPrefs.portraits===false||s.phase!=='open'||s.sub==='interlude'||!v)return [];
+ if(v.who==='토르반'&&s.day===29)return ['torbanwife','torban'];
+ const id=mzPortraitIdForWho(v.who);
+ return id?[id]:[];
+}
+function mzPortraitHTML(id,face){
+ const portrait=STANDING_LAYERS[id];
+ if(!portrait)return '';
+ return '<div class="mz267-layered-portrait" data-portrait-id="'+id+'" role="img" aria-label="'+portrait.label+' 스탠딩">'+
+  '<img class="mz267-base-layer" src="'+portrait.base+'" alt="" draggable="false">'+
+  '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
+  '</div>';
+}
+function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitIds=mzPortraitIdsForCurrentVisit(v);figure.style.display=portraitIds.length?'flex':'none';if(portraitIds.length){const portraits=portraitIds.map(id=>({id,portrait:STANDING_LAYERS[id]})).filter(x=>x.portrait);const portraitKey=portraits.map(x=>x.id).join(',');const expressionId=bootScreen==='devPortrait'?'normal':mzActivePortraitExpression(v);if(figure.dataset.portraits!==portraitKey){figure.innerHTML=portraits.map(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;return mzPortraitHTML(x.id,face)}).join('');figure.dataset.portraits=portraitKey;}portraits.forEach(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;const expressionLayer=figure.querySelector('[data-portrait-id="'+x.id+'"] .mz267-expression-layer');if(expressionLayer&&expressionLayer.getAttribute('src')!==face)expressionLayer.setAttribute('src',face);});figure.classList.toggle('mz267-dual-portraits',portraits.length>1);figure.dataset.expression=expressionId;}else{if(figure.dataset.portraits){figure.innerHTML='';delete figure.dataset.portraits;delete figure.dataset.expression;}figure.classList.remove('mz267-dual-portraits');}$('guestIdentity').innerHTML=bootScreen==='devPortrait'?'<strong>'+esc(mzDevPortraitChoices.find(x=>x[0]===mzDevPortraitChoice)?.[1]||'스탠딩')+'</strong>':s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
 let activeTypeKey=null,activeTypeTimer=null,activeTypeComplete=true,activeTypeFull='';
 function revealDialogue(){
  if(activeTypeComplete)return false;
@@ -17753,7 +17848,7 @@ function mzDeveloperBoot(el,shell){
  const recipeChoices=marketRecipeRewards.map(r=>`<label class=\"mz-dev-check\"><input type=\"checkbox\" data-dev-recipe=\"${esc(r.name)}\" ${mzDevRewards.includes(r.name)?'checked':''}> ${esc(r.name)}</label>`).join('');
  const quickWeeks=[1,6,11,16,21,26,31,36,41,46].map(d=>`<button type=\"button\" data-dev-day=\"${d}\" class=\"mz-dev-daybtn\">DAY ${String(d).padStart(2,'0')}</button>`).join('');
  const marketChoices=marketCatalog.map(m=>`<label class="mz-dev-check"><input type="checkbox" data-dev-market="${esc(m.id)}" ${mzDevOwned.includes(m.id)?'checked':''}> ${esc(m.name)}</label>`).join('');
- el.innerHTML=shell('DEVELOPER MODE',`<div class="boot-meta">테스트 전용 · 일반 플레이 저장과 별도 · 미작성 DAY는 손님 없음</div><div class="mz-dev-settings"><label>이동 날짜 <select id="mzDevSelect">${dateChoice}</select></label><div class="mz-dev-section">해금 상태</div><label class="mz-dev-check"><input type="checkbox" id="mzDevAllMarket" ${mzDevOptions.market?'checked':''}> 이동 날짜까지 상점 상품 모두 구매한 상태</label><label class="mz-dev-check"><input type="checkbox" id="mzDevDaily" ${mzDevOptions.daily?'checked':''}> 날짜 해금 재료(석양열매·시트러스)</label><label class="mz-dev-check"><input type="checkbox" id="mzDevMechanic" ${mzDevOptions.mechanic?'checked':''}> 야간 정비사 의뢰 완료 · 보상 레시피</label><label class="mz-dev-check"><input type="checkbox" id="mzDevFried" ${mzDevOptions.fried?'checked':''}> DAY 10 튀김 메뉴 해금</label><label class="mz-dev-check"><input type="checkbox" id="mzDevHistory" ${mzDevOptions.history?'checked':''}> 이동 날짜 이전 단골 방문 기록 재현 (테스트용)</label><div class="mz-dev-section">상점 아이템 개별 선택 (위의 전체 구매를 해제하면 적용)</div><div class="mz-dev-item-grid">${marketChoices}</div><p class="boot-meta">상점 레시피는 선택한 재료의 구매 상태에 따라 자동 등록됩니다. 직접 개발한 사용자 메뉴와 과거 대화·퀘스트의 임의 완료 기록은 만들지 않습니다.</p></div><div class="boot-menu u228-host"><button class="boot-btn highlight" id="mzDevLaunch">선택한 상태로 테스트 시작</button><button class="boot-btn" id="mzDevWeekend">주말 화면 / MY DESK 미리보기</button><button class="boot-btn" id="mzDevBack">‹ BACK</button></div>`);
+ el.innerHTML=shell('DEVELOPER MODE',`<div class="boot-meta">테스트 전용 · 일반 플레이 저장과 별도 · 미작성 DAY는 손님 없음</div><div class="mz-dev-settings"><label>이동 날짜 <select id="mzDevSelect">${dateChoice}</select></label><div class="mz-dev-section">해금 상태</div><label class="mz-dev-check"><input type="checkbox" id="mzDevAllMarket" ${mzDevOptions.market?'checked':''}> 이동 날짜까지 상점 상품 모두 구매한 상태</label><label class="mz-dev-check"><input type="checkbox" id="mzDevDaily" ${mzDevOptions.daily?'checked':''}> 날짜 해금 재료(석양열매·시트러스)</label><label class="mz-dev-check"><input type="checkbox" id="mzDevMechanic" ${mzDevOptions.mechanic?'checked':''}> 야간 정비사 의뢰 완료 · 보상 레시피</label><label class="mz-dev-check"><input type="checkbox" id="mzDevFried" ${mzDevOptions.fried?'checked':''}> DAY 10 튀김 메뉴 해금</label><label class="mz-dev-check"><input type="checkbox" id="mzDevHistory" ${mzDevOptions.history?'checked':''}> 이동 날짜 이전 단골 방문 기록 재현 (테스트용)</label><div class="mz-dev-section">상점 아이템 개별 선택 (위의 전체 구매를 해제하면 적용)</div><div class="mz-dev-item-grid">${marketChoices}</div><p class="boot-meta">상점 레시피는 선택한 재료의 구매 상태에 따라 자동 등록됩니다. 직접 개발한 사용자 메뉴와 과거 대화·퀘스트의 임의 완료 기록은 만들지 않습니다.</p></div><div class="boot-menu u228-host"><button class="boot-btn highlight" id="mzDevLaunch">선택한 상태로 테스트 시작</button><button class="boot-btn" id="mzDevWeekend">주말 화면 / MY DESK 미리보기</button><button class="boot-btn" id="mzDevPortraitPreview">바 카메라 · 단골 스탠딩 미리보기</button><button class="boot-btn" id="mzDevBack">‹ BACK</button></div>`);
  el.querySelector('#mzDevBack').onclick=()=>{bootScreen='slots';render()};
  el.querySelector('#mzDevSelect').onchange=e=>{mzDevDay=Number(e.target.value)};
  for(const [id,k] of [['mzDevAllMarket','market'],['mzDevDaily','daily'],['mzDevMechanic','mechanic'],['mzDevFried','fried']])el.querySelector('#'+id).onchange=e=>{mzDevOptions[k]=e.target.checked};
@@ -17762,6 +17857,7 @@ function mzDeveloperBoot(el,shell){
  el.querySelectorAll('[data-dev-market]').forEach(b=>b.onchange=e=>{const id=e.target.dataset.devMarket;mzDevOwned=e.target.checked?[...new Set([...mzDevOwned,id])]:mzDevOwned.filter(x=>x!==id)});
  el.querySelector('#mzDevHistory').onchange=e=>{mzDevOptions.history=e.target.checked};
  el.querySelector('#mzDevWeekend').onclick=()=>{mz186DeveloperWeekend()};
+ el.querySelector('#mzDevPortraitPreview').onclick=()=>mzDevPortraitPreview();
  el.querySelector('#mzDevLaunch').onclick=()=>{mzDeveloperBegin()};
 }
 function nextDay(){
