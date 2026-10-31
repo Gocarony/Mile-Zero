@@ -1366,6 +1366,22 @@ body.mz-scene-backgrounds-off .scene.mz256-friend-counter-active #counter {
   flex-shrink:0;
 }
 .drawer.mz263-save-drawer > .mz263-save-transfer > .item { margin-bottom:0; }
+</style><style id="mz270-sticky-sidebar-panel-heads">
+/* v270: Keep the existing terminal header, title, and section controls visible
+   while the drawer's original content area scrolls. No visual redesign. */
+.drawer.mz270-sticky-drawer > .mz270-sticky-head {
+  position:sticky;
+  top:-22px; /* counteracts the drawer's existing top padding */
+  z-index:12;
+  background:var(--panel);
+  padding-top:22px;
+  margin-top:-22px;
+  isolation:isolate;
+}
+.drawer.mz270-sticky-drawer > .mz270-sticky-head > header {
+  background:var(--panel);
+}
+/* Keep original terminal margins, font sizes, layout, and active tab styles. */
 </style></head><body><div class="app"><header><div><h1 id="brandTitle">MILE ZERO</h1><small id="branchDay">ZERO GATE BRANCH · DAY 01</small></div><div class="top-right"><button class="btn bgm-toggle" id="headerBgmButton" type="button" aria-label="음향 설정 열기">⚙ SOUND</button><button class="btn theme-toggle" id="headerLightButton" type="button" aria-label="다크 모드와 라이트 모드 전환">☀ 라이트 모드</button><div class="time-block" title="저녁 근무 18:00–다음 날 02:00"><div id="clock">18:00</div><small id="phaseLabel">영업 준비</small></div></div></header><div class="columns"><main class="main"><section class="scene"><div class="identity" id="guestIdentity">관문 구역<br><strong>영업 준비 중</strong></div><!-- Replace the image src below with assets/characters/character_name.png when art is ready. --><div class="mz-window-city-gif" aria-hidden="true"></div><div class="figure" id="figure" style="display:none" aria-label="캐릭터 이미지 영역"></div><div class="counter" id="counter"></div></section><section class="dialogue"><div class="speaker" id="speaker">MILE ZERO</div><p id="dialogueText">영업 준비를 시작합니다.</p><div class="actions" id="choices"></div></section><section class="station"><nav class="station-indicator" aria-label="현재 제조대"><button type="button" id="drinkIndicator" class="station-indicator-item" aria-label="음료 제조대">01 DRINKS</button><span class="station-indicator-sep">/</span><button type="button" id="foodIndicator" class="station-indicator-item" aria-label="안주 제조대">02 FOOD</button></nav><div class="station-head"><div style="display:flex;gap:5px;align-items:center"><button class="btn" id="prevStation" aria-label="이전 작업대">‹</button><strong id="stationName">DRINK STATION</strong><button class="btn" id="nextStation" aria-label="다음 작업대">›</button></div><span class="note" id="orderLabel">주문 대기</span></div><div id="stationBody"></div></section></main><aside class="sidebar u228-host"><button class="side" data-panel="recipes" id="v57RecipeSide"><b>▤</b>레시피<span id="v57RecipeUnread" class="unread-badge" hidden>NEW</span></button><button class="side" data-panel="ingredients"><b>◈</b>재료</button><button class="side" data-panel="guests" id="v48GuestSide"><b>♙</b>손님<span id="v48GuestUnread" class="unread-badge" hidden>NEW</span></button><button class="side" data-panel="messages" id="messageSide"><b>✉</b>메시지<span id="messageUnread" class="unread-badge" hidden></span></button><button class="side" data-panel="log"><b>☰</b>대화기록</button><button class="side" data-panel="save"><b>▣</b>저장</button><span class="grow"></span><button class="side mz-sidebar-return" id="returnToTitle" type="button" aria-label="메인 화면으로 돌아가기"><b>⌂</b>메인</button></aside></div></div><div class="mz-panorama-strip" id="mzPanoramaStrip" data-enabled="true" data-running="true" aria-hidden="true"><div class="mz-panorama-track"><span class="mz-panorama-tile"></span><span class="mz-panorama-tile"></span></div></div><div id="modalRoot"></div>
 <script>
 
@@ -1659,7 +1675,7 @@ const visits=[
     "dialogue": [
       [
         "마렌",
-        "어라. 여기 처음 보는 직원이 있네. 새로 오셨어요?"
+        "어라. 여기 처음 보는 직원이 있네. 새로 오셨어요? [일반]"
       ],
       [
         "마렌",
@@ -1692,7 +1708,7 @@ const visits=[
       ],
       [
         "마렌",
-        "이제 저도 돌아가 볼게요. 다음에 또 봐요."
+        "이제 저도 돌아가 볼게요. 다음에 또 봐요. [웃음]"
       ]
     ]
   },
@@ -2103,7 +2119,7 @@ const dayFourVisits=[
       ],
       [
         "마렌",
-        "그러고보니, 어제 운송대가 돌아와서 거래처 쪽에 평소에 못 보던 재료가 풀렸어요. 그 소식 들었나요?"
+        "그러고보니, 어제 운송대가 돌아와서 거래처 쪽에 평소에 못 보던 재료가 풀렸어요. 그 소식 들었나요? [웃음]"
       ]
     ],
     "orders": [
@@ -2120,7 +2136,7 @@ const dayFourVisits=[
     "after": [
       [
         "마렌",
-        "잘 먹었어요. 여긴 퇴근 전에 한 번 들르기 딱 좋다니까."
+        "잘 먹었어요. 여긴 퇴근 전에 한 번 들르기 딱 좋다니까. [일반]"
       ],
       [
         "마렌",
@@ -2490,11 +2506,11 @@ const daySixVisits=[
     "after": [
       [
         "마렌",
-        "덕분에 힘이 나겠어요."
+        "덕분에 힘이 나겠어요. [웃음]"
       ],
       [
         "마렌",
-        "참, 요즘 관문 쪽 상점들은 밤에도 배달이 들어오더라고요. 장사가 잘되는 건지, 다들 바쁜 건지."
+        "참, 요즘 관문 쪽 상점들은 밤에도 배달이 들어오더라고요. 장사가 잘되는 건지, 다들 바쁜 건지. [의문]"
       ]
     ]
   },
@@ -3301,11 +3317,11 @@ const dayNineVisits=[
       ],
       [
         "마렌",
-        "그런데 글쎄, 이번에 다시 돌아와서 가게를 열었다지 뭐예요! "
+        "그런데 글쎄, 이번에 다시 돌아와서 가게를 열었다지 뭐예요! [웃음] "
       ],
       [
         "마렌",
-        "이렇게 하나 둘 다시 돌아오는 걸 보니 기분이 좋네요. 아, 오늘은 가든 야채스프랑 프리즘 믹스 주세요."
+        "이렇게 하나 둘 다시 돌아오는 걸 보니 기분이 좋네요. 아, 오늘은 가든 야채스프랑 프리즘 믹스 주세요. [일반]"
       ]
     ],
     "orders": [
@@ -3653,11 +3669,11 @@ const dayTenVisits=[
     "dialogue": [
       [
         "마렌",
-        "길 건너 가게에 새 간판을 달았어요. 전구를 갈았더니 밤에도 환하게 빛나는 거 있죠?"
+        "길 건너 가게에 새 간판을 달았어요. 전구를 갈았더니 밤에도 환하게 빛나는 거 있죠? [웃음]"
       ],
       [
         "마렌",
-        "저녁은 허니버터 감자튀김으로 할래요. 루비 라인도 하나 주세요."
+        "저녁은 허니버터 감자튀김으로 할래요. 루비 라인도 하나 주세요. [일반]"
       ]
     ],
     "orders": [
@@ -4336,7 +4352,7 @@ const dayTwelveVisits=[
     "after": [
       [
         "마렌",
-        "이런 유행도 가끔은 재미있네요."
+        "이런 유행도 가끔은 재미있네요. [웃음]"
       ]
     ]
   },
@@ -5666,7 +5682,7 @@ const day16Visits=[
       ],
       [
         "마렌",
-        "가게가 추천 지점에 올랐다면서요? 축하해요. 요즘 골목을 지나는 사람이 부쩍 늘었다 싶더라니."
+        "가게가 추천 지점에 올랐다면서요? 축하해요. 요즘 골목을 지나는 사람이 부쩍 늘었다 싶더라니. [웃음]"
       ],
       [
         "마렌",
@@ -5686,7 +5702,7 @@ const day16Visits=[
     "after": [
       [
         "마렌",
-        "잘 마셨어요. 가게에만 있다 보면 잘 모르겠지만, 이렇게 나와 동네를 둘러보는 것도 재미있네요."
+        "잘 마셨어요. 가게에만 있다 보면 잘 모르겠지만, 이렇게 나와 동네를 둘러보는 것도 재미있네요. [일반]"
       ]
     ]
   },
@@ -6688,16 +6704,16 @@ const day18Visits=[
       ],
       [
         "마렌",
-        "아, 그러고 보니 이번 주말에 관문 앞 광장에서 운송대 장터가 열린다더라고요."
+        "아, 그러고 보니 이번 주말에 관문 앞 광장에서 운송대 장터가 열린다더라고요. [의문]"
       ]
     ],
     "appointmentOffer": {
       "id": "maren_market",
-      "prompt": "저도 구경하러 갈 생각인데, 시간 되면 같이 가실래요?",
+      "prompt": "저도 구경하러 갈 생각인데, 시간 되면 같이 가실래요? [웃음]",
       "acceptLabel": "좋아. 같이 가자.",
       "declineLabel": "이번 주말은 좀 어려울 것 같아.",
-      "acceptReply": "좋아요! 그럼 주말에 봐요. 재미있는 거 있으면 같이 구경해요!",
-      "declineReply": "아쉽네요. 다음에 기회 되면 같이 가요!"
+      "acceptReply": "좋아요! 그럼 주말에 봐요. 재미있는 거 있으면 같이 구경해요! [웃음]",
+      "declineReply": "아쉽네요. 다음에 기회 되면 같이 가요! [일반]"
     }
   },
   {
@@ -9200,7 +9216,7 @@ const day23Visits=[
       ],
       [
         "마렌",
-        "손님 한 분이 예전에 샀던 물건을 찾으러 오셨거든요. 그런데 아무리 물어봐도 이름이 기억 안 난다고 하시더라고? 동그랗고, 손바닥만 하고, 돌리면 소리가 나는 물건이라나?"
+        "손님 한 분이 예전에 샀던 물건을 찾으러 오셨거든요. 그런데 아무리 물어봐도 이름이 기억 안 난다고 하시더라고? 동그랗고, 손바닥만 하고, 돌리면 소리가 나는 물건이라나? [의문]"
       ],
       [
         "마렌",
@@ -9208,7 +9224,7 @@ const day23Visits=[
       ],
       [
         "마렌",
-        "글쎄, 다른 가게에서 산 거였대요!"
+        "글쎄, 다른 가게에서 산 거였대요! [웃음]"
       ],
       [
         "마렌",
@@ -9216,7 +9232,7 @@ const day23Visits=[
       ],
       [
         "마렌",
-        "아, 주문해야지. 허브구이 감자하고 프리즘 부탁해요."
+        "아, 주문해야지. 허브구이 감자하고 프리즘 부탁해요. [일반]"
       ]
     ],
     "orders": [
@@ -9248,7 +9264,7 @@ const day23Visits=[
       ],
       [
         "마렌",
-        "그럼 저도 슬슬 돌아가 볼게요. 다음에 또 봐요!"
+        "그럼 저도 슬슬 돌아가 볼게요. 다음에 또 봐요! [웃음]"
       ]
     ]
   },
@@ -10287,7 +10303,7 @@ const day25Visits=[
       ],
       [
         "마렌",
-        "분명 신어 봤을 땐 딱 맞았는데 말이에요. 한참 걸어오다가 결국 뒤꿈치를 꾹꾹 눌러 신고 왔어요."
+        "분명 신어 봤을 땐 딱 맞았는데 말이에요. 한참 걸어오다가 결국 뒤꿈치를 꾹꾹 눌러 신고 왔어요. [의문]"
       ],
       [
         "마렌",
@@ -10295,7 +10311,7 @@ const day25Visits=[
       ],
       [
         "마렌",
-        "오늘은 익숙한 걸로 먹어야겠네. 허브구이 감자랑 루비 라인 주세요."
+        "오늘은 익숙한 걸로 먹어야겠네. 허브구이 감자랑 루비 라인 주세요. [일반]"
       ]
     ],
     "orders": [
@@ -10319,7 +10335,7 @@ const day25Visits=[
       ],
       [
         "마렌",
-        "안 되면 뭐, 다음엔 편한 걸 사야죠. 아하하."
+        "안 되면 뭐, 다음엔 편한 걸 사야죠. 아하하. [웃음]"
       ],
       [
         "마렌",
@@ -11612,11 +11628,11 @@ const day27Visits=[
       ],
       [
         "마렌",
-        "아하하, 나도 무슨 일인가 하고 들여다봤어요. 여기도 오늘 토핑 때문에 시끌벅적한가 봐요?"
+        "아하하, 나도 무슨 일인가 하고 들여다봤어요. 여기도 오늘 토핑 때문에 시끌벅적한가 봐요? [웃음]"
       ],
       [
         "마렌",
-        "우리 가게 손님들도 요새 음료 사진을 많이 보여 주시거든요. 처음엔 다 같은 사진인 줄 알았는데 자세히 보면 컵마다 조금씩 다르더라고요."
+        "우리 가게 손님들도 요새 음료 사진을 많이 보여 주시거든요. 처음엔 다 같은 사진인 줄 알았는데 자세히 보면 컵마다 조금씩 다르더라고요. [일반]"
       ],
       [
         "마렌",
@@ -13709,11 +13725,11 @@ const day29Visits=[
    ],
    [
     "마렌",
-    "글쎄, 어떤 분은 들어오자마자 여기서 음료를 주문할 수 있느냐고 하시는 거예요. 아하하, 여기하고 저희 가게를 헷갈리신 모양이죠."
+    "글쎄, 어떤 분은 들어오자마자 여기서 음료를 주문할 수 있느냐고 하시는 거예요. 아하하, 여기하고 저희 가게를 헷갈리신 모양이죠. [웃음]"
    ],
    [
     "마렌",
-    "처음 온 분들은 이 골목이 좀 복잡해 보일 수 있겠더라고요. 그래서 작은 안내도를 하나 그려 볼까 해요."
+    "처음 온 분들은 이 골목이 좀 복잡해 보일 수 있겠더라고요. 그래서 작은 안내도를 하나 그려 볼까 해요. [일반]"
    ],
    [
     "마렌",
@@ -13741,11 +13757,11 @@ const day29Visits=[
    ],
    [
     "마렌",
-    "그림을 워낙 오랜만에 그려서 걱정이긴 한데, 그래도 재미있을 것 같아요."
+    "그림을 워낙 오랜만에 그려서 걱정이긴 한데, 그래도 재미있을 것 같아요. [의문]"
    ],
    [
     "마렌",
-    "잘 만들어지면 가져와서 보여드릴게요. 히히."
+    "잘 만들어지면 가져와서 보여드릴게요. 히히. [일반]"
    ]
   ]
  },
@@ -14094,7 +14110,7 @@ function dayTwelveVariants(base){
  };
  const regularReplies={
   '관문 청소 직원':'오늘은 평소 마시던 맛이 역시 편하네요.',
-  '마렌':'이런 유행도 가끔은 재미있네요. 저는 평소 마시던 게 좋지만요.',
+  '마렌':'이런 유행도 가끔은 재미있네요. [웃음] 저는 평소 마시던 게 좋지만요.',
   '여행 중인 부부':'덕분에 편히 쉬었다 갑니다.',
   '관문 경비 보조':'오늘은 익숙한 맛으로 충분하네요. 잘 마셨습니다.',
   '야간 정비사':'오늘은 평소 먹던 게 좋네요. 잘 먹었습니다.',
@@ -14765,6 +14781,48 @@ function seedPick(state,day,index,salt){let h=((state.randomSeed||104729) ^ Math
 let s=initial(),modal=null;
 const $=x=>document.getElementById(x),esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const note=(who,line)=>s.log.push({who,line});
+
+const MZ_EXPRESSION_TAGS={일반:'normal',웃음:'smile',의문:'question',normal:'normal',smile:'smile',question:'question'};
+function mzParseExpressionLine(raw){
+ if(typeof raw!=='string')return {text:raw==null?'':String(raw),expression:null};
+ const match=raw.match(/^(.*?)(?:\s*\[([^\[\]]+)\])\s*$/);
+ if(!match)return {text:raw,expression:null};
+ const key=(match[2]||'').trim();
+ const expression=MZ_EXPRESSION_TAGS[key]||null;
+ return expression?{text:match[1].replace(/\s+$/,''),expression}:{text:raw,expression:null};
+}
+function mzTaggedLineDisplay(raw){return mzParseExpressionLine(raw).text;}
+function mzVisitPortraitExpression(v,sub,lineIndex){
+ if(!v||v.who!=='마렌')return 'normal';
+ let current='normal';
+ const apply=(raw)=>{const parsed=mzParseExpressionLine(raw);if(parsed.expression)current=parsed.expression;};
+ if(sub==='dialogue'||sub==='after'){
+  const dialogLines=Array.isArray(v.dialogue)?v.dialogue:[];
+  const afterLines=currentAfterLines(v);
+  if(sub==='dialogue'){
+   for(let i=0;i<=Math.min(lineIndex,dialogLines.length-1);i++)apply(dialogLines[i]?.[1]);
+  }else{
+   for(const line of dialogLines)apply(line?.[1]);
+   for(let i=0;i<=Math.min(lineIndex,afterLines.length-1);i++)apply(afterLines[i]?.[1]);
+  }
+  return current;
+ }
+ if(sub==='appointment'||sub==='appointmentReply'){
+  const offer=v.appointmentOffer||{};
+  if(typeof offer.prompt==='string')apply(offer.prompt);
+  if(sub==='appointmentReply')apply(lineIndex===1?offer.acceptReply:offer.declineReply);
+ }
+ return current;
+}
+function mzActivePortraitExpression(v){
+ if(!v)return 'normal';
+ if(v.who!=='마렌')return 'normal';
+ if(s.sub==='dialogue'||s.sub==='after')return mzVisitPortraitExpression(v,s.sub,s.line);
+ if(s.sub==='order')return mzVisitPortraitExpression(v,'dialogue',Math.max(0,(Array.isArray(v.dialogue)?v.dialogue.length:1)-1));
+ if(s.sub==='appointment'||s.sub==='appointmentReply')return mzVisitPortraitExpression(v,s.sub,s.line);
+ return 'normal';
+}
+
 const feedPosts=[
   {
     "id": "p1",
@@ -16809,7 +16867,7 @@ function start(){if(s.devPreview&&!todayVisits().length){bootScreen='none';s.pha
 // v268: standing portraits share one 900x1200 base + transparent animated expression system.
 // Add future expression paths under the corresponding character, keeping the base image unchanged.
 const STANDING_LAYERS={
- maren:{label:'마렌',base:'assets/characters/maren-base.png',expressions:{normal:'assets/characters/maren-expression-normal.gif'}},
+ maren:{label:'마렌',base:'assets/characters/maren-base.png',expressions:{normal:'assets/characters/maren-expression-normal.gif',smile:'assets/characters/maren-expression-smile.png',question:'assets/characters/maren-expression-question.gif'}},
  mechanic:{label:'야간 정비사',base:'assets/characters/night-mechanic-base.png',expressions:{normal:'assets/characters/night-mechanic-expression-normal.gif'}},
  rian:{label:'리안',base:'assets/characters/rian-base.png',expressions:{normal:'assets/characters/rian-expression-normal.gif'}}
 };
@@ -16831,16 +16889,12 @@ function mzServedLiquidStrips(drink){
  if(drink.mode==='mix')return `<i style="background:${seq.length?blendColor(seq):'#b58caa'};flex:1 1 0"></i>`;
  return seq.map(key=>`<i style="background:${colorOf(key)};flex:1 1 0"></i>`).join('');
 }
-function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitId=mzVisualPrefs.portraits!==false&&s.phase==='open'&&s.sub!=='interlude'&&v?(v.who==='마렌'?'maren':v.who==='야간 정비사'?'mechanic':v.who==='리안'?'rian':null):null;figure.style.display=portraitId?'flex':'none';if(portraitId){if(figure.dataset.portrait!==portraitId){const portrait=STANDING_LAYERS[portraitId];
- if(portrait){
-  const face=portrait.expressions.normal;
-  figure.innerHTML='<div class="mz267-layered-portrait" role="img" aria-label="'+portrait.label+' 스탠딩">'+
+function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitId=mzVisualPrefs.portraits!==false&&s.phase==='open'&&s.sub!=='interlude'&&v?(v.who==='마렌'?'maren':v.who==='야간 정비사'?'mechanic':v.who==='리안'?'rian':null):null;figure.style.display=portraitId?'flex':'none';if(portraitId){const portrait=STANDING_LAYERS[portraitId];if(portrait){const expressionId=mzActivePortraitExpression(v);const face=(portrait.expressions&&portrait.expressions[expressionId])||portrait.expressions.normal;if(figure.dataset.portrait!==portraitId){figure.innerHTML='<div class="mz267-layered-portrait" role="img" aria-label="'+portrait.label+' 스탠딩">'+
    '<img class="mz267-base-layer" src="'+portrait.base+'" alt="" draggable="false">'+
    '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
    '</div>';
- }
- figure.dataset.portrait=portraitId;
-}}else if(figure.dataset.portrait){figure.innerHTML='';delete figure.dataset.portrait;}$('guestIdentity').innerHTML=s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
+ figure.dataset.portrait=portraitId;}
+ const expressionLayer=figure.querySelector('.mz267-expression-layer');if(expressionLayer&&expressionLayer.getAttribute('src')!==face)expressionLayer.setAttribute('src',face);figure.dataset.expression=expressionId;}}else if(figure.dataset.portrait){figure.innerHTML='';delete figure.dataset.portrait;delete figure.dataset.expression;}$('guestIdentity').innerHTML=s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
 let activeTypeKey=null,activeTypeTimer=null,activeTypeComplete=true,activeTypeFull='';
 function revealDialogue(){
  if(activeTypeComplete)return false;
@@ -16866,21 +16920,21 @@ $('dialogueText').addEventListener('click',()=>revealDialogue());
 function canDevelopToday(){return s.phase==='closing'&&s.day>=3&&s.day%3===0&&!(s.developmentDays||[]).includes(s.day);}
 function completeDevelopment(){if(!Array.isArray(s.developmentDays))s.developmentDays=[];if(!s.developmentDays.includes(s.day))s.developmentDays.push(s.day);if(s.day===3){s.developmentDone=true;if(!s.unlockedExtras.includes('sunfruit'))s.unlockedExtras.push('sunfruit');}}
 function dialog(){if(s.phase!=='open'||!['dialogue','after'].includes(s.sub)){if(activeTypeTimer){clearInterval(activeTypeTimer);activeTypeTimer=null}activeTypeKey=null;activeTypeComplete=true;$('dialogueText').classList.remove('typing')}const choices=$('choices');choices.innerHTML='';let oldMarket=$('v54ClosingMarket');if(oldMarket)oldMarket.remove();const add=(title,fn,primary=false)=>{const b=document.createElement('button');b.className='btn'+(primary?' primary':'');b.textContent=title;b.onclick=fn;choices.appendChild(b)};if(s.phase==='prep'){$('speaker').textContent='MILE ZERO · 영업 준비';$('dialogueText').textContent='오늘의 영업을 준비합니다.';add('레시피북 확인',()=>openPanel('recipes'));add('영업 시작',()=>{if(s.devPreview&&!todayVisits().length){s.phase='closing';render();}else start()},true);return;}if(s.phase==='closing'){$('speaker').textContent='MILE ZERO · 마감';$('dialogueText').innerHTML=`${dayLabel(s.day)} 영업이 끝났습니다. 오늘 완료한 주문은 <b>${(s.dayStats[s.day]||{}).orders||0}건</b>입니다. 누적 팁 <b>${s.tips}</b> · 현재 잔액 <b>${marketBalance()} 크레딧</b>.<br><span class="note">${canDevelopToday()?(s.day===3?'첫 번째 지점 한정 메뉴 개발이 가능합니다.':'지점 한정 메뉴 개발이 가능합니다.'):s.day===1?'첫날 영업을 마쳤습니다.':'오늘의 영업을 마쳤습니다.'}</span>`;add('오늘의 손님 기록',()=>openPanel('guests'));add('저장하기',()=>openPanel('save'),true);if(canDevelopToday())add('신메뉴 개발',()=>openDevelopment(),true);if(mzWeekendEligible())add('주말 보내기',()=>mzOpenWeekend(),true);else if(s.day>=mzDayLimit())add('현재 버전 종료',()=>openPanel('save'),true);else add('다음 날',()=>nextDay(),true);if(s.day>=7){const market=document.createElement('div');market.id='v54ClosingMarket';market.className='v54-closing-market';market.innerHTML='<button type="button" class="v54-closing-market-button"><span class="v54-market-symbol" aria-hidden="true">▦</span><span><strong>관문 시장 둘러보기</strong><small>마감 후 식재료 구매 · 보유 '+marketBalance().toLocaleString()+' CR</small></span><span aria-hidden="true">›</span></button>';market.querySelector('button').onclick=()=>openPanel('market');choices.insertAdjacentElement('afterend',market);}return;}
-if(s.sub==='interlude'){$('speaker').textContent='MILE ZERO';$('dialogueText').textContent=s.visit>=todayVisits().length?interludes[interludes.length-1]:interludes[Math.min(Math.max(s.visit-1,0),interludes.length-2)];return;}const v=current();if(s.lightComment && s.sub!=='order'){$('speaker').textContent=v.who;typeDialogue(v.who,'“'+s.lightComment+'”','light:'+s.visit+':'+s.lightComment);add('계속',dialogueClick(()=>{s.lightComment=null;render()}),true);return;}if(s.sub==='order'){$('speaker').textContent=v.who+' · 주문 접수';$('dialogueText').innerHTML=`<b>${v.orders.map(o=>esc(o.name)+(o.type==='drink'&&o.ice?' (얼음 추가)':'')).join(' + ')}</b><br><span class="note"></span>`;if(allDone())add('카운터의 메뉴 서빙하기',deliver,true);else add('레시피북 열기',()=>openPanel('recipes'));return;}
+if(s.sub==='interlude'){$('speaker').textContent='MILE ZERO';$('dialogueText').textContent=s.visit>=todayVisits().length?interludes[interludes.length-1]:interludes[Math.min(Math.max(s.visit-1,0),interludes.length-2)];return;}const v=current();if(s.lightComment && s.sub!=='order'){$('speaker').textContent=v.who;const lightLine=mzTaggedLineDisplay(s.lightComment);typeDialogue(v.who,'“'+lightLine+'”','light:'+s.visit+':'+lightLine);add('계속',dialogueClick(()=>{s.lightComment=null;render()}),true);return;}if(s.sub==='order'){$('speaker').textContent=v.who+' · 주문 접수';$('dialogueText').innerHTML=`<b>${v.orders.map(o=>esc(o.name)+(o.type==='drink'&&o.ice?' (얼음 추가)':'')).join(' + ')}</b><br><span class="note"></span>`;if(allDone())add('카운터의 메뉴 서빙하기',deliver,true);else add('레시피북 열기',()=>openPanel('recipes'));return;}
 if(s.sub==='appointment'||s.sub==='appointmentReply'){
   const offer=v.appointmentOffer||{};
   if(s.sub==='appointment'){
-   $('speaker').textContent=v.who;$('dialogueText').textContent=offer.prompt||'이번 주말에 함께 갈래요?';
+   $('speaker').textContent=v.who;$('dialogueText').textContent=mzTaggedLineDisplay(offer.prompt||'이번 주말에 함께 갈래요?');
    add(offer.acceptLabel||'좋아요. 같이 가요.',()=>mzAnswerAppointment(true),true);
    add(offer.declineLabel||'이번에는 어려울 것 같아요.',()=>mzAnswerAppointment(false));
   }else{
    const accepted=s.line===1;
-   $('speaker').textContent=v.who;$('dialogueText').textContent=accepted?(offer.acceptReply||'그럼 주말에 봐요!'):(offer.declineReply||'알겠어요. 다음에 기회가 있겠죠.');
+   $('speaker').textContent=v.who;$('dialogueText').textContent=mzTaggedLineDisplay(accepted?(offer.acceptReply||'그럼 주말에 봐요!'):(offer.declineReply||'알겠어요. 다음에 기회가 있겠죠.'));
    add('다음 손님',()=>advanceGuest(),true);
   }
   return;
  }
- const lines=s.sub==='after'?currentAfterLines(v):v.dialogue;const [who,line]=lines[s.line];const displayWho=s.day>=22&&/^손님(?: [AB])?$/.test(who)?(who==='손님'?v.who:v.who+' · '+who.slice(-1)):(s.day>=23&&((who==='방문객'&&v.who==='퇴근길 방문객')||(who==='화물 기사'&&v.who==='정기 화물 기사'))?v.who:who);$('speaker').textContent=displayWho;typeDialogue(who,line,s.visit+':'+s.sub+':'+s.line);add(s.line===lines.length-1?s.sub==='after'?'손님 배웅하기':'주문 받기':'계속',dialogueClick(()=>{note(who,line);if(s.day===6&&s.visit===2&&s.sub==='dialogue'&&s.line===2){recordGuestClue('야간 정비사',6,2)}nextLine()}),true);}
+ const lines=s.sub==='after'?currentAfterLines(v):v.dialogue;const [who,line]=lines[s.line];const displayWho=s.day>=22&&/^손님(?: [AB])?$/.test(who)?(who==='손님'?v.who:v.who+' · '+who.slice(-1)):(s.day>=23&&((who==='방문객'&&v.who==='퇴근길 방문객')||(who==='화물 기사'&&v.who==='정기 화물 기사'))?v.who:who);const shownLine=mzTaggedLineDisplay(line);$('speaker').textContent=displayWho;typeDialogue(who,shownLine,s.visit+':'+s.sub+':'+s.line+':'+shownLine);add(s.line===lines.length-1?s.sub==='after'?'손님 배웅하기':'주문 받기':'계속',dialogueClick(()=>{note(who,shownLine);if(s.day===6&&s.visit===2&&s.sub==='dialogue'&&s.line===2){recordGuestClue('야간 정비사',6,2)}nextLine()}),true);}
 let v119GarnishPage=0;
 function renderStation(){v119GarnishPage=Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1));const isOpen=s.phase==='open'&&s.sub==='order';$('stationName').textContent=s.station==='drink'?'DRINK STATION':'FOOD STATION';for(const [id,type] of [['drinkIndicator','drink'],['foodIndicator','food']]){const el=$(id);el.classList.toggle('selected',s.station===type);el.setAttribute('aria-current',s.station===type?'page':'false')} $('orderLabel').textContent=isOpen?current().orders.filter(o=>!orderDone(o)).map(o=>(o.forGuest?o.forGuest+' / ':'')+o.name).join(' · ')||'서빙 대기':'주문 대기';let html='';if(s.station==='drink'){
 html=`<div class="view"><div><div class="materials">${ingredients.map(a=>`<button class="material" style="background:${a[2]}" data-add="${a[0]}" ${!isOpen||!selectedOrder('drink')||s.mix.length>=10||s.mix.filter(x=>x===a[0]).length>=5?'disabled':''}>${a[0]}<small>${a[1]}</small></button>`).join('')}</div>${unlockedGarnishes().length?`<section class="v32-extra v35-garnish" aria-label="가니쉬 조리대"><div class="v32-extra-head"><span>GARNISH / 가니쉬</span><span class="v32-extra-count">${String(unlockedGarnishes().length).padStart(2,'0')} AVAILABLE</span></div><div class="v120-garnish-row">${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="prev"  aria-label="이전 가니시 4개">‹</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}<div class="v35-garnish-grid">${unlockedGarnishes().slice(Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4,Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4+4).map(g=>garnishCard(g,s.extra===g.id,!isOpen||!selectedOrder('drink'))).join('')}</div>${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="next"  aria-label="다음 가니시 4개">›</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}</div></section>`:''}<div class="ingredient-count">${esc(countStr())} · ${s.mix.length}/10</div><div class="tools"><button class="btn ${s.ice?'active':''}" id="iceBtn" ${!isOpen||!selectedOrder('drink')?'disabled':''}>❄ 얼음 ${s.iceCount?`${s.iceCount}회`:'추가'}</button><button class="btn ${s.stirred?'active':''}" id="stirBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length||s.mixAt===s.mix.length&&s.stirred?'disabled':''}>↻ 섞기 ${s.stirred&&s.mixAt===s.mix.length?'완료':'실행'}</button><button class="btn" id="clearBtn" ${!s.mix.length&&!s.ice&&!s.stirred&&!s.extra?'disabled':''}>▤ 쓰레기통</button></div><div class="actions"><button class="btn primary" id="finishBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length?'disabled':''}>완성 · 카운터에 놓기</button></div></div><div class="cupbox"><div class="note">제조 중인 컵</div><div class="cup">${s.stirred?`<div class="layer" style="height:${s.mixAt*14}px;background:${blendColor(s.mix.slice(0,s.mixAt))}"></div>`+s.mix.slice(s.mixAt).map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join(''):s.mix.map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join('')}${iceVisual(s.iceCount)}${s.extra?`<span class="v54-cup-garnish v54-garnish-${esc(s.extra)}" title="${esc(garnishById(s.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',mintchoco:'❧',fire:'♨'})[s.extra]||'✦')}</span>`:''}</div><div class="note">${s.stirred?`혼합 ${s.mixAt}단위${s.mix.length>s.mixAt?' + 위쪽 층 '+(s.mix.length-s.mixAt)+'단위':''}`:esc(s.mix.join(' → ')||'—')}</div></div></div>`;
@@ -17733,7 +17787,23 @@ function showExitDialog(){
  document.querySelectorAll('[data-exit-save]').forEach(b=>b.onclick=()=>{const slot=Number(b.dataset.exitSave);confirmOverwriteSlot(slot,()=>{if(saveSessionToSlot(slot))returnToTitleNow()})});
  $('mzExitCancel').focus();
 }
-function openPanel(type, u321SkipCurtain=false){if(type==='market'&&(s.day<7||s.phase!=='closing'))return;if(type==='market'&&!u321SkipCurtain){u321MarketNavigate(true);return;}if(type==='recipes'){openRecipeQuick();return;}modal=type;$('modalRoot').innerHTML=`<div class="overlay ${type==='market'?'v55-market-overlay':''}" id="overlay"><div class="drawer ${type==='market'?'v55-market-screen':''} ${type==='save'?'mz263-save-drawer':''}" role="dialog" aria-modal="true" aria-label="${type==='market'?'관문 시장':'게임 메뉴'}"><header><span class="note">${type==='market'?'GATE DISTRICT / MILE MARKET':'MILE ZERO TERMINAL'}</span><button class="btn" id="closeModal">${type==='market'?'가게로 돌아가기':'닫기 ×'}</button></header>${panelMarkup(type)}</div></div>`;if(type==='market')v48BindMarket();if(type==='settings'){bindAudioSettings($('modalRoot'));}if(type==='guests')bindGuestArchive();if(type==='ingredients')bindIngredientAtlas();$('closeModal').onclick=()=>closePanel();$('overlay').onclick=e=>{if(e.target.id==='overlay')closePanel()};if(type==='messages'){v32NetworkTab='mail';mzNetworkScroll={mail:0,sns:0};showInbox();return;}if(type==='recipes'){const draw=food=>{let box=$('recipesList');box.innerHTML=(food?foods:drinks).map(v=>`<div class="item"><h3>${esc(v.name)}</h3><p>${food?`주재료 ${v.base} · 양념 ${v.sauce} · ${v.kind}`:`${v.seq.split('').map(k=>ingredients.find(i=>i[0]===k)[1]).join(' → ')} · ${v.mode==='mix'?'섞기 (순서 무관)':'층 유지 (순서대로)'}`}</p></div>`).join('');$('rtDrink').classList.toggle('active',!food);$('rtFood').classList.toggle('active',food)};$('rtDrink').onclick=()=>draw(false);$('rtFood').onclick=()=>draw(true);draw(false)}if(type==='save'){mzBindTransferButtons($('modalRoot'));document.querySelectorAll('[data-delete-slot]').forEach(b=>b.onclick=()=>confirmDeleteSlot(Number(b.dataset.deleteSlot)));document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>{const slot=Number(b.dataset.save);confirmOverwriteSlot(slot,()=>{if(saveSessionToSlot(slot)){openPanel('save');const status=document.createElement('p');status.id='mzSaveStatus';status.className='mz-save-success';status.setAttribute('role','status');status.textContent=`슬롯 0${slot}에 저장했습니다.`;const drawer=$('modalRoot').querySelector('.drawer');if(drawer)drawer.insertBefore(status,drawer.children[1]||null);}})});document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{let n=b.dataset.load;if(!confirm(`슬롯 ${n}을 불러오시겠어요? 현재 진행은 덮어씌워집니다.`))return;try{let data=JSON.parse(localStorage.getItem(KEY+n));restoreState(data);bootScreen=s.phase==='prep'?'phone':'none';if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule',...(s.phase==='closing'?['closing']:[])];closePanel();render()}catch(e){alert('저장 데이터를 불러올 수 없습니다.')}})}}
+// v270: reparent existing UI nodes into one sticky surface without rebuilding them.
+// Keeping the same elements retains their event bindings and current visual styling.
+function mz270PinPanelHeader(type){
+ if(!['ingredients','guests','messages'].includes(type))return;
+ const drawer=$('modalRoot')?.querySelector('.drawer');
+ if(!drawer||drawer.classList.contains('mz270-sticky-drawer'))return;
+ const elements=[drawer.querySelector(':scope > header'),drawer.querySelector(':scope > h2')];
+ const selectors=type==='ingredients'?['.v119-atlas-search','.v41-atlas-tabs']:
+  type==='guests'?['.v39-archive-tabs']:['.v32-network-tabs'];
+ for(const selector of selectors)elements.push(drawer.querySelector(':scope > '+selector));
+ if(elements.some(el=>!el))return;
+ const head=document.createElement('div');head.className='mz270-sticky-head';
+ drawer.insertBefore(head,elements[0]);
+ for(const el of elements)head.appendChild(el);
+ drawer.classList.add('mz270-sticky-drawer');
+}
+function openPanel(type, u321SkipCurtain=false){if(type==='market'&&(s.day<7||s.phase!=='closing'))return;if(type==='market'&&!u321SkipCurtain){u321MarketNavigate(true);return;}if(type==='recipes'){openRecipeQuick();return;}modal=type;$('modalRoot').innerHTML=`<div class="overlay ${type==='market'?'v55-market-overlay':''}" id="overlay"><div class="drawer ${type==='market'?'v55-market-screen':''} ${type==='save'?'mz263-save-drawer':''}" role="dialog" aria-modal="true" aria-label="${type==='market'?'관문 시장':'게임 메뉴'}"><header><span class="note">${type==='market'?'GATE DISTRICT / MILE MARKET':'MILE ZERO TERMINAL'}</span><button class="btn" id="closeModal">${type==='market'?'가게로 돌아가기':'닫기 ×'}</button></header>${panelMarkup(type)}</div></div>`;mz270PinPanelHeader(type);if(type==='market')v48BindMarket();if(type==='settings'){bindAudioSettings($('modalRoot'));}if(type==='guests')bindGuestArchive();if(type==='ingredients')bindIngredientAtlas();$('closeModal').onclick=()=>closePanel();$('overlay').onclick=e=>{if(e.target.id==='overlay')closePanel()};if(type==='messages'){v32NetworkTab='mail';mzNetworkScroll={mail:0,sns:0};showInbox();return;}if(type==='recipes'){const draw=food=>{let box=$('recipesList');box.innerHTML=(food?foods:drinks).map(v=>`<div class="item"><h3>${esc(v.name)}</h3><p>${food?`주재료 ${v.base} · 양념 ${v.sauce} · ${v.kind}`:`${v.seq.split('').map(k=>ingredients.find(i=>i[0]===k)[1]).join(' → ')} · ${v.mode==='mix'?'섞기 (순서 무관)':'층 유지 (순서대로)'}`}</p></div>`).join('');$('rtDrink').classList.toggle('active',!food);$('rtFood').classList.toggle('active',food)};$('rtDrink').onclick=()=>draw(false);$('rtFood').onclick=()=>draw(true);draw(false)}if(type==='save'){mzBindTransferButtons($('modalRoot'));document.querySelectorAll('[data-delete-slot]').forEach(b=>b.onclick=()=>confirmDeleteSlot(Number(b.dataset.deleteSlot)));document.querySelectorAll('[data-save]').forEach(b=>b.onclick=()=>{const slot=Number(b.dataset.save);confirmOverwriteSlot(slot,()=>{if(saveSessionToSlot(slot)){openPanel('save');const status=document.createElement('p');status.id='mzSaveStatus';status.className='mz-save-success';status.setAttribute('role','status');status.textContent=`슬롯 0${slot}에 저장했습니다.`;const drawer=$('modalRoot').querySelector('.drawer');if(drawer)drawer.insertBefore(status,drawer.children[1]||null);}})});document.querySelectorAll('[data-load]').forEach(b=>b.onclick=()=>{let n=b.dataset.load;if(!confirm(`슬롯 ${n}을 불러오시겠어요? 현재 진행은 덮어씌워집니다.`))return;try{let data=JSON.parse(localStorage.getItem(KEY+n));restoreState(data);bootScreen=s.phase==='prep'?'phone':'none';if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule',...(s.phase==='closing'?['closing']:[])];closePanel();render()}catch(e){alert('저장 데이터를 불러올 수 없습니다.')}})}}
 // Navigation keeps the existing market and closing-screen DOM/events intact.
 let u321MarketBusy=false;
 function u321MarketNavigate(enter){
