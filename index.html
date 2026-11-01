@@ -1313,6 +1313,61 @@ body.light .mz186-room-stage::after{opacity:.30; filter:blur(3.4px)}
 @media(max-width:670px){.mz-dev-portrait-controls{position:fixed;top:6px;left:6px;right:6px;padding:7px;gap:5px}}
 
 
+
+/* v290: bright, STATIC CSS overlay and slow independently drifting pixel bubbles.
+   The effect is clipped to the measured, currently filled liquid area.
+   No dark shading, scanning beams, or sprite sheets. */
+.served-cup .served-liquid{position:relative;}
+.cup .mz289-fluid-fx,
+.served-cup .mz289-fluid-fx{
+ position:absolute;left:0;right:0;pointer-events:none;
+ overflow:hidden;clip-path:inset(0);z-index:2;isolation:isolate;
+}
+.cup .mz289-fluid-fx::before,
+.served-cup .mz289-fluid-fx::before{
+ content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+ background:
+  linear-gradient(90deg, transparent 6%,rgba(255,255,255,.18) 14%,rgba(255,255,255,.05) 22%,transparent 34%,transparent 74%,rgba(255,255,255,.12) 83%,transparent 91%),
+  linear-gradient(to bottom,rgba(255,255,255,.29) 0%,rgba(255,255,255,.17) 20%,rgba(255,255,255,.06) 55%,transparent 100%);
+ /* No animation here: the glass should not look scanned. */
+}
+.mz289-bubble{
+ position:absolute;top:101%;left:var(--bubble-x);
+ display:block;width:var(--bubble-size);height:var(--bubble-size);
+ box-sizing:border-box;border:2px solid rgba(255,255,255,.82);
+ border-radius:2px;background:rgba(255,255,255,.04);
+ opacity:0;image-rendering:pixelated;z-index:1;
+ animation:mz290-bubble-drift var(--bubble-duration) ease-in-out var(--bubble-delay) infinite;
+}
+/* v291: equal absolute dimensions prevent low-fill bubble squashing. */
+.mz289-bubble.small{--bubble-size:6px}
+.mz289-bubble.large{--bubble-size:10px}
+.served-cup .mz289-bubble.small{--bubble-size:3px;border-width:1px;border-radius:0}
+.served-cup .mz289-bubble.large{--bubble-size:6px;border-width:1px;border-radius:1px}
+@keyframes mz290-bubble-drift{
+ 0%{top:103%;left:var(--bubble-x);opacity:0}
+ 9%{opacity:.58}
+ 22%{left:calc(var(--bubble-x) + var(--bubble-wiggle));opacity:.73}
+ 45%{left:calc(var(--bubble-x) - var(--bubble-wiggle));opacity:.64}
+ 67%{left:calc(var(--bubble-x) + var(--bubble-wiggle));opacity:.62}
+ 84%{left:calc(var(--bubble-x) - var(--bubble-wiggle));opacity:.42}
+ 95%{opacity:0}
+ 100%{top:-12%;left:var(--bubble-x);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){.mz289-bubble{animation:none;top:50%;opacity:.4}}
+
+
+/* v293: show decor stock in All tab and keep market entry clearly visible in light theme. */
+.v55-market-screen .mz293-market-interior-group{grid-column:1/-1;min-width:0;margin-top:10px;padding-top:18px;border-top:1px solid var(--line)}
+.mz293-market-interior-group>h3{margin:0 0 6px;color:var(--orange)}
+.mz293-market-interior-group>.v48-market-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(225px,1fr));gap:13px;margin-top:12px}
+body.light #v54ClosingMarket{display:block!important;visibility:visible!important;opacity:1!important}
+body.light #v54ClosingMarket .v54-closing-market-button{display:flex!important;background:#fffaf4!important;color:#23364b!important;border:2px solid #9b491d!important;box-shadow:0 2px 0 rgba(71,54,44,.13)!important}
+body.light #v54ClosingMarket .v54-closing-market-button strong{color:#843811!important}
+body.light #v54ClosingMarket .v54-closing-market-button small{color:#46566b!important}
+body.light #v54ClosingMarket .v54-market-symbol{color:#9b491d!important}
+body.light #v54ClosingMarket .v54-closing-market-button:hover,body.light #v54ClosingMarket .v54-closing-market-button:focus-visible{background:#f4e7d9!important;outline:2px solid #a05229;outline-offset:2px}
+@media(max-width:570px){.mz293-market-interior-group>.v48-market-grid{grid-template-columns:repeat(auto-fit,minmax(155px,1fr))}}
 </style>
 
 <style id="mz-v212-actual-counter-layer-fix">
@@ -17440,21 +17495,36 @@ function flavorDrinkCandidates(){
 }
 function matchedFlavorDrink(rule){
  if(!hasRequestedFlavors(mzDrinkTasteTags(),rule))return undefined;
- return flavorDrinkCandidates().find(d=>preparedDrinkMatchesRecipe(d)&&(!d.extra||d.extra===s.extra));
+ // Only a real, available menu recipe can satisfy a taste-only order.
+ // This also includes market rewards unlocked by owned ingredients, even if
+ // an older save has not yet reconstructed the corresponding recipe entry.
+ const unlockedMarket=marketRecipeRewards.filter(r=>r.kind==='drink'&&r.required.every(id=>(s.ownedMarket||[]).includes(id)));
+ return [...flavorDrinkCandidates(),...unlockedMarket].find(d=>preparedDrinkMatchesRecipe(d)&&(!d.extra||d.extra===s.extra));
 }
 function flavorFoodCandidates(){
- // User-developed dishes have the same eligibility as market-unlocked dishes.
+ // Include story-reward recipes only after they have been unlocked.
+ // This list is shared by flavor-only orders and any-menu orders.
  const registered=(s.customRecipes||[]).filter(r=>r.registered&&r.kind==='food');
- return [...registered,...availableFoods()];
+ const story=(s.regularUnlocks||[]).includes('mechanic')?[mechanicRecipe]:[];
+ return [...registered,...availableFoods(),...story];
 }
 function matchedFlavorFood(rule){
  if(!hasRequestedFlavors(mzFoodTasteTags(),rule))return undefined;
- const found=flavorFoodCandidates().find(f=>{
+ const preparedAddons=(s.foodAddons||[]).slice().sort().join('|');
+ const matchesBase=f=>{
   const spec=foodRecipeSpec(f)||f;
-  const base=spec.base,sauce=spec.sauce,kind=spec.kind;
-  if(s.foodBase!==base||s.foodSauce!==sauce||s.foodKind!==kind)return false;
-  if(f.source==='market'&&(f.addons||[]).slice().sort().join('|')!==(s.foodAddons||[]).slice().sort().join('|'))return false;
-  return true;
+  return s.foodBase===spec.base&&s.foodSauce===spec.sauce&&s.foodKind===spec.kind;
+ };
+ const candidates=flavorFoodCandidates().filter(matchesBase);
+ // Prefer a real unlocked recipe whose toppings match exactly. Otherwise,
+ // preserve the existing taste-order policy allowing optional add-on variation.
+ const found=candidates.find(f=>{
+  const spec=foodRecipeSpec(f)||f;
+  return (spec.addons||[]).slice().sort().join('|')===preparedAddons;
+ })||candidates.find(f=>{
+  if(f.source!=='market')return true;
+  const spec=foodRecipeSpec(f)||f;
+  return (spec.addons||[]).slice().sort().join('|')===preparedAddons;
  });
  return found?{...found,base:found.foodBase||found.base,sauce:found.foodSauce||found.sauce,kind:found.foodKind||found.kind}:undefined;
 }
@@ -17481,7 +17551,6 @@ function mzAnyFoodRecipe(o){
  if(!mzIsAnyMenuOrder(o)||!mzFoodMatchesDiet(o))return undefined;
  if(o.flavorRequest&&!hasRequestedFlavors(mzFoodTasteTags(),o.flavorRequest))return undefined;
  const candidates=flavorFoodCandidates();
- if((s.regularUnlocks||[]).includes('mechanic'))candidates.push(mechanicRecipe);
  const found=candidates.find(f=>{
   const spec=foodRecipeSpec(f)||f;
   return s.foodBase===spec.base&&s.foodSauce===spec.sauce&&s.foodKind===spec.kind&&
@@ -17952,7 +18021,55 @@ function v48RenderWallet(){
  let chip=$('v48Wallet');if(!chip){chip=document.createElement('span');chip.id='v48Wallet';chip.className='v54-wallet-status';chip.setAttribute('aria-label','현재 보유 자금');$('phaseLabel').replaceWith(chip);}
  chip.innerHTML='<span aria-hidden="true" class="v54-wallet-dot"></span><b>'+marketBalance().toLocaleString()+'</b><small>CR</small>';
 }
-function render(){mzRestoreHearts();if(!Array.isArray(s.readPosts))s.readPosts=[];if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule'];const unread=s.deliveredMessages.filter(id=>!s.readMessages.includes(id)).length;mzRefreshGuestNewBadge();const recipeBadge=$('v57RecipeUnread');if(recipeBadge)recipeBadge.hidden=!v57UnseenRecipes().length;const dot=$('messageUnread');dot.hidden=unread===0;dot.textContent=unread;const side=$('messageSide');side.classList.toggle('mail-alert',unread>0);side.setAttribute('aria-label',unread?'새 메시지 '+unread+'개, 받은편지함':'받은편지함');side.title=unread?'새 메시지 '+unread+'개':'메시지';document.body.classList.toggle('light',s.light==='light');window.mzVisuals?.apply?.();$('clock').textContent=s.phase==='open'?(s.sub==='interlude'?(todayVisits()[Math.max(0,s.visit-1)]?.time||'18:00'):current().time):s.phase==='closing'?'02:00':'18:00';$('branchDay').textContent='ZERO GATE BRANCH · '+dayLabel(s.day)+(s.day===27?' · 토핑 데이: '+(garnishById(mzDay27TrendId())?.name||'기본 메뉴'):'');v48RenderWallet();scene();dialog();renderStation();bootView();phoneView();waitTick();$('headerLightButton').textContent=s.light==='dark'?'☀ 라이트 모드':'☾ 다크 모드';$('headerLightButton').setAttribute('aria-pressed',s.light==='light'?'true':'false');u219SyncThemeButtons();}
+
+/* v290: position CSS decoration from REAL rendered liquid bounds. This avoids
+   fixed pixel positions, percent-of-cup guessing and bubbles escaping the fill. */
+let mz289ResizeBound=false;
+function mz289DecorateLiquid(){
+ if(!mz289ResizeBound){window.addEventListener('resize',mz289DecorateLiquid,{passive:true});mz289ResizeBound=true;}
+ const holders=document.querySelectorAll('.cup, .served-cup');
+ holders.forEach(holder=>{
+  const liquid=holder.classList.contains('served-cup')?holder.querySelector('.served-liquid'):holder;
+  if(!liquid)return;
+  const layers=holder.classList.contains('served-cup')?[...liquid.children].filter(x=>x.tagName==='I'):[...holder.children].filter(x=>x.classList.contains('layer'));
+  liquid.querySelector('.mz289-fluid-fx')?.remove();
+  if(!layers.length)return;
+  const containerBox=liquid.getBoundingClientRect();
+  const bounds=layers.map(x=>x.getBoundingClientRect());
+  const top=Math.max(0,Math.min(...bounds.map(x=>x.top))-containerBox.top);
+  const bottom=Math.min(containerBox.height,Math.max(...bounds.map(x=>x.bottom))-containerBox.top);
+  if(!(bottom-top>1))return;
+  const fx=document.createElement('div');
+  fx.className='mz289-fluid-fx';
+  fx.setAttribute('aria-hidden','true');
+  // Keep animation coordinates in the full cup instead of the changing
+  // filled-height box. Only the visible section is clipped to actual liquid.
+  // Adding a layer now reveals more liquid without moving existing bubbles.
+  fx.style.top='0px';
+  fx.style.height=containerBox.height+'px';
+  fx.style.clipPath='inset('+top+'px 0px '+Math.max(0,containerBox.height-bottom)+'px 0px)';
+  // A small set of independently animated bubbles; positions and travel
+  // always resolve against the CURRENT fluid container, not the viewport.
+  const tiny=holder.classList.contains('served-cup');
+  const specs=tiny?[[27,'small',13.5,-4.2,2],[70,'large',18.5,-9.0,3]]:
+   [[20,'small',14.5,-2.0,3],[64,'large',21.0,-11.0,4],[43,'small',17.5,-7.5,2],[79,'small',24.0,-16.5,3]];
+  specs.forEach(([left,size,duration,delay,wiggle])=>{
+   const b=document.createElement('span');
+   b.className='mz289-bubble '+size;
+   b.style.setProperty('--bubble-x',left+'%');
+   b.style.setProperty('--bubble-wiggle',wiggle+'%');
+   b.style.setProperty('--bubble-duration',duration+'s');
+   // renderStation recreates the whole cup on every ingredient addition.
+   // Synchronize each replacement animation to a stable page clock so it
+   // resumes at the same phase rather than restarting from its first frame.
+   b.style.setProperty('--bubble-delay',(delay-performance.now()/1000)+'s');
+   fx.appendChild(b);
+  });
+  liquid.appendChild(fx);
+ });
+}
+
+function render(){mzRestoreHearts();if(!Array.isArray(s.readPosts))s.readPosts=[];if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule'];const unread=s.deliveredMessages.filter(id=>!s.readMessages.includes(id)).length;mzRefreshGuestNewBadge();const recipeBadge=$('v57RecipeUnread');if(recipeBadge)recipeBadge.hidden=!v57UnseenRecipes().length;const dot=$('messageUnread');dot.hidden=unread===0;dot.textContent=unread;const side=$('messageSide');side.classList.toggle('mail-alert',unread>0);side.setAttribute('aria-label',unread?'새 메시지 '+unread+'개, 받은편지함':'받은편지함');side.title=unread?'새 메시지 '+unread+'개':'메시지';document.body.classList.toggle('light',s.light==='light');window.mzVisuals?.apply?.();$('clock').textContent=s.phase==='open'?(s.sub==='interlude'?(todayVisits()[Math.max(0,s.visit-1)]?.time||'18:00'):current().time):s.phase==='closing'?'02:00':'18:00';$('branchDay').textContent='ZERO GATE BRANCH · '+dayLabel(s.day)+(s.day===27?' · 토핑 데이: '+(garnishById(mzDay27TrendId())?.name||'기본 메뉴'):'');v48RenderWallet();scene();dialog();renderStation();bootView();phoneView();mz289DecorateLiquid();waitTick();$('headerLightButton').textContent=s.light==='dark'?'☀ 라이트 모드':'☾ 다크 모드';$('headerLightButton').setAttribute('aria-pressed',s.light==='light'?'true':'false');u219SyncThemeButtons();}
 const U219_SUN='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l-1 1"/></g></svg>';
 const U219_MOON='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.8A5.6 5.6 0 0 1 6.2 2.5a5.6 5.6 0 1 0 7.3 7.3z" fill="currentColor"/></svg>';
 function u219RefreshThemeButton(button){
@@ -18332,7 +18449,7 @@ function marketMarkup(){
  const category=m=>m.category.includes('음료')?'drink':'food';
  const visible=marketCatalog.filter(m=>(!m.unlockDay||s.day>=m.unlockDay)&&(v48MarketCategory==='all'||category(m)===v48MarketCategory)).sort((a,b)=>Number(hasMarketItem(a.id))-Number(hasMarketItem(b.id)));
  const ico={fire:'♨',fish:'◇',rice:'▦',chocoball:'●',tapioca:'◌',mint:'♧',cherry:'◉',smoke:'♨',crisp:'✦',spiceoil:'◇',sugar:'✧'};
- return `<div class="v55-market-banner"><div class="v55-market-banner-copy"><div style="display:flex;align-items:center;gap:16px"><span class="v55-market-sign" aria-hidden="true">▤</span><span><small>관문 시장 / 재료와 인테리어</small><strong>관문 야시장<span class="v55-market-kicker">관문 너머의 물건과 저녁빛이 모이는 곳</span></strong></span></div></div><div class="v55-market-hero" aria-hidden="true"></div></div><div class="v48-market-title"><h2>MILE MARKET</h2><div class="v48-market-wallet">잔액 <strong>${marketBalance().toLocaleString()} CR</strong></div></div><p class="note">관문 시장 · 재료와 소품은 한번 구매하면 영구 보유합니다.</p>${mz256FriendRedeemMarkup()}<nav class="v48-market-tabs" aria-label="상품 분류">${[['all','전체'],['drink','음료 가니쉬'],['food','안주 재료'],['interior','인테리어']].map(([id,label])=>`<button type="button" class="btn" data-v48-market-tab="${id}" aria-pressed="${v48MarketCategory===id}">${label}</button>`).join('')}</nav><div class="v48-market-grid">${v48MarketCategory==='interior'?mzDeskMarketMarkup():visible.map(m=>{const owned=hasMarketItem(m.id);return `<article class="v48-market-card ${owned?'is-owned v54-sold':''}" ${owned?'aria-label="구매 완료"':''}>${owned?'<span class="v54-sold-label">SOLD OUT</span>':''}<div class="v48-market-top"><span class="v48-market-icon" aria-hidden="true">${ico[m.id]||'◇'}</span><div><strong>${esc(m.name)}</strong><small class="note">${esc(m.category)}</small></div></div><div class="market-tag-list">${m.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div><p>${esc(m.description)}</p><button class="btn ${owned?'active':''}" data-market-buy="${m.id}" ${owned||marketBalance()<m.price?'disabled':''}>${owned?'구매 완료':m.price+' CR · 구매'}</button></article>`}).join('')}</div>`;
+ return `<div class="v55-market-banner"><div class="v55-market-banner-copy"><div style="display:flex;align-items:center;gap:16px"><span class="v55-market-sign" aria-hidden="true">▤</span><span><small>관문 시장 / 재료와 인테리어</small><strong>관문 야시장<span class="v55-market-kicker">관문 너머의 물건과 저녁빛이 모이는 곳</span></strong></span></div></div><div class="v55-market-hero" aria-hidden="true"></div></div><div class="v48-market-title"><h2>MILE MARKET</h2><div class="v48-market-wallet">잔액 <strong>${marketBalance().toLocaleString()} CR</strong></div></div><p class="note">관문 시장 · 재료와 소품은 한번 구매하면 영구 보유합니다.</p>${mz256FriendRedeemMarkup()}<nav class="v48-market-tabs" aria-label="상품 분류">${[['all','전체'],['drink','음료 가니쉬'],['food','안주 재료'],['interior','인테리어']].map(([id,label])=>`<button type="button" class="btn" data-v48-market-tab="${id}" aria-pressed="${v48MarketCategory===id}">${label}</button>`).join('')}</nav><div class="v48-market-grid">${v48MarketCategory==='interior'?mzDeskMarketMarkup():visible.map(m=>{const owned=hasMarketItem(m.id);return `<article class="v48-market-card ${owned?'is-owned v54-sold':''}" ${owned?'aria-label="구매 완료"':''}>${owned?'<span class="v54-sold-label">SOLD OUT</span>':''}<div class="v48-market-top"><span class="v48-market-icon" aria-hidden="true">${ico[m.id]||'◇'}</span><div><strong>${esc(m.name)}</strong><small class="note">${esc(m.category)}</small></div></div><div class="market-tag-list">${m.tags.map(t=>`<span>${esc(t)}</span>`).join('')}</div><p>${esc(m.description)}</p><button class="btn ${owned?'active':''}" data-market-buy="${m.id}" ${owned||marketBalance()<m.price?'disabled':''}>${owned?'구매 완료':m.price+' CR · 구매'}</button></article>`}).join('')}${v48MarketCategory==='all'?`<section class="mz293-market-interior-group"><h3>인테리어</h3><p class="note">MY DESK에 배치할 수 있는 소품</p><div class="v48-market-grid">${mzDeskMarketMarkup()}</div></section>`:''}</div>`;
 }
 function v48BindMarket(){mz256BindFriendRedeem();const root=$('modalRoot');root?.querySelectorAll('[data-market-desk-buy]').forEach(b=>b.onclick=()=>buyMarketDeskItem(b.dataset.marketDeskBuy));root?.querySelectorAll('[data-market-buy]').forEach(b=>b.onclick=()=>buyMarketItem(b.dataset.marketBuy));root?.querySelectorAll('[data-v48-market-tab]').forEach(b=>b.onclick=()=>{v48MarketCategory=b.dataset.v48MarketTab;const drawer=root.querySelector('.drawer');const pos=drawer?.scrollTop||0;const content=drawer?.querySelector('.v48-market-title')?.parentElement;if(!content)return;const html=marketMarkup();const header=drawer.querySelector('header');drawer.innerHTML='';drawer.append(header);drawer.insertAdjacentHTML('beforeend',html);v48BindMarket();drawer.scrollTop=pos;});}
 // Show recipe unlocks only for an actual market purchase, never during save migration.
