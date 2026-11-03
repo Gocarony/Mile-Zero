@@ -1549,6 +1549,39 @@ body.mz-scene-backgrounds-off .scene.mz256-friend-counter-active #counter {
  .boot-overlay:has(.audio-settings) .boot-content{padding:10px 14px}
 }
 </style>
+<style id="mz329-settings-scroll-layout">
+/* v329: Settings uses one bounded scroll pane and a fixed footer.
+   This supersedes the older v317 sticky footer and v328 whole-content scroll. */
+.boot-overlay:has(.mz329-settings-window){overflow:hidden;overscroll-behavior:none}
+.boot-overlay .boot-window.mz329-settings-window{
+  height:min(900px,calc(100dvh - 24px));
+  max-height:calc(100dvh - 24px);
+  min-height:0;
+  display:flex;flex-direction:column;overflow:hidden;
+}
+.boot-overlay .mz329-settings-window > .boot-bar{flex:0 0 auto}
+.boot-overlay .mz329-settings-window > .boot-content{
+  flex:1 1 0;min-height:0;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-start;
+  padding:0 24px 16px;gap:0;
+}
+.boot-overlay .mz329-settings-scroll{
+  flex:1 1 0;min-height:0;overflow-y:auto;overflow-x:hidden;
+  overscroll-behavior-y:contain;-webkit-overflow-scrolling:touch;
+  padding:24px 0 16px;
+}
+.boot-overlay .mz329-settings-window .boot-foot{
+  position:static;bottom:auto;z-index:auto;
+  flex:0 0 auto;min-height:0;margin:0;padding:12px 0 0;
+  border-top:1px solid var(--line);background:var(--base);
+}
+.boot-overlay.mz-title-settings-light .mz329-settings-window .boot-foot{background:#fff}
+@media(max-height:530px){
+ .boot-overlay .boot-window.mz329-settings-window{height:calc(100dvh - 12px);max-height:calc(100dvh - 12px)}
+ .boot-overlay .mz329-settings-window > .boot-content{padding:0 14px 8px}
+ .boot-overlay .mz329-settings-scroll{padding:12px 0}
+}
+</style>
 </head><body><div class="app"><header><div><h1 id="brandTitle">MILE ZERO</h1><small id="branchDay">ZERO GATE BRANCH · DAY 01</small></div><div class="top-right"><button class="btn bgm-toggle" id="headerBgmButton" type="button" aria-label="음향 설정 열기">⚙ SOUND</button><button class="btn theme-toggle" id="headerLightButton" type="button" aria-label="다크 모드와 라이트 모드 전환">☀ 라이트 모드</button><div class="time-block" title="저녁 근무 18:00–다음 날 02:00"><div id="clock">18:00</div><small id="phaseLabel">영업 준비</small></div></div></header><div class="columns"><main class="main"><section class="scene"><div class="identity" id="guestIdentity">관문 구역<br><strong>영업 준비 중</strong></div><div class="mz-window-city-gif" aria-hidden="true"></div><div class="figure" id="figure" style="display:none" aria-label="캐릭터 이미지 영역"></div><div class="counter" id="counter"></div></section><section class="dialogue"><div class="speaker" id="speaker">MILE ZERO</div><p id="dialogueText">영업 준비를 시작합니다.</p><div class="actions" id="choices"></div></section><section class="station"><nav class="station-indicator" aria-label="현재 제조대"><button type="button" id="drinkIndicator" class="station-indicator-item" aria-label="음료 제조대">01 DRINKS</button><span class="station-indicator-sep">/</span><button type="button" id="foodIndicator" class="station-indicator-item" aria-label="안주 제조대">02 FOOD</button></nav><div class="station-head"><div style="display:flex;gap:5px;align-items:center"><button class="btn" id="prevStation" aria-label="이전 작업대">‹</button><strong id="stationName">DRINK STATION</strong><button class="btn" id="nextStation" aria-label="다음 작업대">›</button></div><span class="note" id="orderLabel">주문 대기</span></div><div id="stationBody"></div></section></main><aside class="sidebar u228-host"><button class="side" data-panel="recipes" id="v57RecipeSide"><b>▤</b>레시피<span id="v57RecipeUnread" class="unread-badge" hidden>NEW</span></button><button class="side" data-panel="ingredients"><b>◈</b>재료</button><button class="side" data-panel="guests" id="v48GuestSide"><b>♙</b>손님<span id="v48GuestUnread" class="unread-badge" hidden>NEW</span></button><button class="side" data-panel="messages" id="messageSide"><b>✉</b>메시지<span id="messageUnread" class="unread-badge" hidden></span></button><button class="side" data-panel="log"><b>☰</b>대화기록</button><button class="side" data-panel="save"><b>▣</b>저장</button><span class="grow"></span><button class="side mz-sidebar-return" id="returnToTitle" type="button" aria-label="메인 화면으로 돌아가기"><b>⌂</b>메인</button></aside></div></div><div class="mz-panorama-strip" id="mzPanoramaStrip" data-enabled="true" data-running="true" aria-hidden="true"><div class="mz-panorama-track"><span class="mz-panorama-tile"></span><span class="mz-panorama-tile"></span></div></div><div id="modalRoot"></div>
 <script>
 
@@ -17833,6 +17866,22 @@ const day35Visits=[
       [
         "정기 화물 기사",
         "운송 일정이랑 차 안에 둘 자리도 다시 생각해 봐야겠지만... 동행자가 생긴 건 나름 괜찮은 기분이네요."
+      ],
+      [
+        "정기 화물 기사",
+        "아, 그러고 보니 녀석이 먹을 것도 알아보고 있습니다. 아무거나 먹였다가는 탈이 날 수도 있으니까요."
+      ],
+      [
+        "정기 화물 기사",
+        "얼마 전에 식재료를 납품하던 분께 이것저것 여쭤봤는데, 그분이 재미있는 이야기를 해 주시더군요. 사람 먹는 음식 중에도 불에 익히지 않고 만드는 요리가 꽤 있다고요."
+      ],
+      [
+        "정기 화물 기사",
+        "물론 녀석에게 그런 걸 그대로 먹일 생각은 아닙니다만... 이야기를 듣다 보니 이 가게가 생각났습니다."
+      ],
+      [
+        "정기 화물 기사",
+        "혹시 도움이 될까 해서 조리법을 몇 가지 적어 왔습니다. 한번 보시겠습니까?"
       ]
     ],
     "day35FreightEnding": true
@@ -21169,7 +21218,7 @@ function bootView(){
   if(!el){el=document.createElement('div');el.id='bootOverlay';el.className='boot-overlay';document.body.appendChild(el)}
   // Bind the boot settings palette to the saved theme, independent of body CSS timing.
   el.classList.toggle('mz-title-settings-light',bootScreen==='settings'&&s.light==='light');
-  const shell=(title,body)=>`<div class="boot-window ${bootScreen==='settings'?'boot-window-scroll':''}" role="dialog" aria-modal="true" aria-label="${title}"><div class="boot-bar"><span>ZERO TERMINAL / ${title}</span><button class="boot-btn mz275-weekend-save" type="button" id="mz275WeekendSave" ${title.startsWith('WEEKEND')?'':'hidden'}>저장 / 불러오기</button><button class="boot-theme" type="button" id="bootTheme">${s.light==='dark'?'☀ LIGHT':'☾ DARK'}</button></div><div class="boot-content ${bootScreen==='settings'?'boot-content-scroll':''}">${body}</div></div>`;
+  const shell=(title,body)=>`<div class="boot-window ${bootScreen==='settings'?'boot-window-scroll mz329-settings-window':''}" role="dialog" aria-modal="true" aria-label="${title}"><div class="boot-bar"><span>ZERO TERMINAL / ${title}</span><button class="boot-btn mz275-weekend-save" type="button" id="mz275WeekendSave" ${title.startsWith('WEEKEND')?'':'hidden'}>저장 / 불러오기</button><button class="boot-theme" type="button" id="bootTheme">${s.light==='dark'?'☀ LIGHT':'☾ DARK'}</button></div><div class="boot-content ${bootScreen==='settings'?'boot-content-scroll':''}">${body}</div></div>`;
   if(bootScreen==='weekendStory'){
     const appointment=mzPendingWeekendStory(),event=appointment&&mzAppointmentCatalog[appointment.id];
     if(!event){bootScreen='weekend';bootView();return;}
@@ -21242,7 +21291,7 @@ function bootView(){
   }else if(bootScreen==='developer'){
     mzDeveloperBoot(el,shell);
   }else if(bootScreen==='settings'){
-    el.innerHTML=shell('SETTINGS',`<div class="boot-meta">AUDIO SETTINGS</div>${audioSettingsMarkup()}<div class="boot-foot"><button class="boot-btn" id="backSettings">‹ BACK</button></div>`);
+    el.innerHTML=shell('SETTINGS',`<div class="mz329-settings-scroll"><div class="boot-meta">AUDIO SETTINGS</div>${audioSettingsMarkup()}</div><div class="boot-foot"><button class="boot-btn" id="backSettings">‹ BACK</button></div>`);
     $('backSettings').onclick=()=>{bootScreen='title';render()};
     bindAudioSettings(el);
   }else if(bootScreen==='credits'){
