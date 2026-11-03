@@ -1,194 +1,254 @@
 [
   {
     "index": 0,
-    "path": "assets/backgrounds/panorama.png",
-    "bytes": 103692,
-    "sha256": "54417d37e0afb82b18ea2a7c31b43357560a7a8deb0030960d209fd3f123709a"
-  },
-  {
-    "index": 1,
-    "path": "assets/backgrounds/market-banner.webp",
-    "bytes": 34252,
-    "sha256": "9c51c5eb6440daa261671133250112c92a75411a769a0b9086128e6d2b533513"
-  },
-  {
-    "index": 2,
-    "path": "assets/backgrounds/market-banner.webp",
-    "bytes": 34252,
-    "sha256": "9c51c5eb6440daa261671133250112c92a75411a769a0b9086128e6d2b533513"
-  },
-  {
-    "index": 3,
-    "path": "assets/backgrounds/weekend-room.png",
-    "bytes": 844241,
-    "sha256": "cda7e38447cfada755982acd8222e54e7b2cff1ee7678c3cb54eefd91a1eb8ff"
-  },
-  {
-    "index": 4,
-    "path": "assets/backgrounds/bar-scene.png",
-    "bytes": 193828,
-    "sha256": "aac0c7bed73773a9dd9bd738ce3094e66104b570faa83d565e1c5d8ee4e82348"
-  },
-  {
-    "index": 5,
-    "path": "assets/backgrounds/bar-scene.png",
-    "bytes": 193828,
-    "sha256": "aac0c7bed73773a9dd9bd738ce3094e66104b570faa83d565e1c5d8ee4e82348"
-  },
-  {
-    "index": 8,
-    "path": "assets/backgrounds/weekend-room-alt.png",
-    "bytes": 695785,
-    "sha256": "aff45864f78cc1dcc1f4b02b1e983873fa6a74da048b62299711f94b5687b6a7"
-  },
-  {
-    "index": 9,
-    "path": "assets/backgrounds/weekend-room-alt.png",
-    "bytes": 695785,
-    "sha256": "aff45864f78cc1dcc1f4b02b1e983873fa6a74da048b62299711f94b5687b6a7"
-  },
-  {
-    "index": 10,
-    "path": "assets/ui/counter-top.png",
-    "bytes": 14126,
-    "sha256": "ea4fc7994754971c20f6ed6b9188ed16d35efa7b33e640c29a79ebfec447088b"
-  },
-  {
-    "index": 11,
-    "path": "assets/backgrounds/window-city.gif",
-    "bytes": 2129107,
-    "sha256": "bd6c22f2ed5e91e5f19b5be7c715fc087ab1deadd91996af043038ac1c7813d7"
-  },
-  {
-    "index": 12,
-    "path": "assets/characters/rian-standing.gif",
-    "bytes": 49047,
-    "sha256": "35f66cfbf8b080801ff5f82e81070d6a0eae77feb7a11bd40c29a3ace73166f6"
-  },
-  {
-    "index": 13,
-    "path": "assets/characters/rian-face.webp",
-    "bytes": 18056,
-    "sha256": "0cf7d0ab3d31ab6080a432e331cb0f1f6617f196cd25649cce8f50eb217a86a8"
-  },
-  {
-    "index": 14,
-    "path": "assets/characters/night-mechanic-standing.gif",
-    "bytes": 45316,
-    "sha256": "afcfa9b466ad61ef4c6d06481e60219f78ae5729c1ab6baec06e71c4a0501ff3"
-  },
-  {
-    "index": 15,
-    "path": "assets/characters/night-mechanic-face.webp",
-    "bytes": 22404,
-    "sha256": "5ff8041911817a1271bb9612ef35231976c4b30276e5b8e73af60cdaf847675c"
-  },
-  {
-    "index": 16,
-    "path": "assets/characters/maren-standing.gif",
-    "bytes": 44485,
-    "sha256": "561879fbb91631c70cecff7ce11a904d4ad5ab892b731527d5012486ca1d963b"
-  },
-  {
-    "index": 17,
-    "path": "assets/characters/maren-face.webp",
-    "bytes": 56036,
-    "sha256": "65b01cf65a2b8f2e5cb9205d2a5be10755f9dac62348c4594d95c863b6bbca43"
-  },
-  {
-    "index": 18,
-    "path": "assets/audio/pour.mp3",
-    "bytes": 20684,
-    "sha256": "99de3fb4aa64f412f07ebdc39ac9ace7fa9a8be09475e7f03d1a7cb4960fa6bd"
-  },
-  {
-    "index": 19,
-    "path": "assets/audio/ice.mp3",
-    "bytes": 13004,
-    "sha256": "2e4e391fb95df3a3e8a05a629da9fdb2ba194561e6e81edb333ddb2c8eae3573"
-  },
-  {
-    "index": 20,
-    "path": "assets/audio/mix.mp3",
-    "bytes": 15884,
-    "sha256": "10850cdded6a83bd5c51eb3604041203e33139c025c951ec2425ba925e5cd967"
-  },
-  {
-    "index": 21,
-    "path": "assets/audio/complete.mp3",
-    "bytes": 10124,
-    "sha256": "2bd4030d6ff5736b5220b8416b4d3330e47da3a53840563b2d76905583ab4f33"
-  },
-  {
-    "index": 22,
-    "path": "assets/audio/clear.mp3",
-    "bytes": 10604,
-    "sha256": "ff397b25e9721307e7b965d3e8d625209feaa049c8e3fd277fa4fc24782eed27"
-  },
-  {
-    "index": 23,
-    "path": "assets/audio/food.mp3",
-    "bytes": 2924,
-    "sha256": "08021dd217b0c7a278554fd266cd5d34b75c00df5fbc3e0d2acd64d5109280e4"
-  },
-  {
-    "index": 24,
-    "path": "assets/audio/topping.mp3",
-    "bytes": 9164,
-    "sha256": "643d3c0637ab52d0467493a9742dbfabbd8eee8c0ac0ba11decae164289be25c"
-  },
-  {
-    "index": 25,
-    "path": "assets/audio/door.mp3",
-    "bytes": 30764,
-    "sha256": "2c9d549d9497614d1dd7fd95067437cadca7e2b6553fb6806a0de257b5c3925c"
-  },
-  {
-    "index": 26,
-    "path": "assets/audio/click.mp3",
-    "bytes": 12524,
-    "sha256": "41ef94cfc0f28cecf09d1de4e4dec320422aeb0087fbaf3a9b5aed76c1fc8080"
-  },
-  {
-    "index": 27,
-    "path": "assets/audio/recipe.mp3",
-    "bytes": 8204,
-    "sha256": "9876a9c627d97fbb4af6ffd944f6900ba394a5c028e5072f94b97ea4202ac0c8"
-  },
-  {
-    "index": 28,
-    "path": "assets/audio/mail.mp3",
-    "bytes": 4364,
-    "sha256": "1385952298e1808a1bb5a6c0997887e0e10f1364bf874acadf49d688f0848758"
-  },
-  {
-    "index": 29,
-    "path": "assets/audio/sns.mp3",
-    "bytes": 5376,
-    "sha256": "3b1d4d64e26b4f12185af2e351ca566c3d3a6b0ed9c3e2d595f48f6311248e30"
-  },
-  {
-    "index": 30,
     "path": "assets/audio/bg-cassette-tape-dream.mp3",
     "bytes": 5564528,
     "sha256": "8287e4597866bfdd4a677e82b95a631d8e7fd6580bedcb0593b299285395d553"
   },
   {
-    "index": 31,
+    "index": 1,
     "path": "assets/audio/bg-kyoto.mp3",
     "bytes": 9385573,
     "sha256": "58f9b2c45d9600b813cf12e1388b6dd9e68ec9efdef9e6333c4d42434b0f34f3"
   },
   {
-    "index": 32,
+    "index": 2,
     "path": "assets/audio/bg-tokyo.mp3",
     "bytes": 3842987,
     "sha256": "d9d69bfe8ac8511cc1d55dd67a43cfce5f150bc6b259f8f4efd83d05b53da30a"
   },
   {
+    "index": 3,
+    "path": "assets/audio/clear.mp3",
+    "bytes": 10604,
+    "sha256": "ff397b25e9721307e7b965d3e8d625209feaa049c8e3fd277fa4fc24782eed27"
+  },
+  {
+    "index": 4,
+    "path": "assets/audio/click.mp3",
+    "bytes": 12524,
+    "sha256": "41ef94cfc0f28cecf09d1de4e4dec320422aeb0087fbaf3a9b5aed76c1fc8080"
+  },
+  {
+    "index": 5,
+    "path": "assets/audio/complete.mp3",
+    "bytes": 10124,
+    "sha256": "2bd4030d6ff5736b5220b8416b4d3330e47da3a53840563b2d76905583ab4f33"
+  },
+  {
+    "index": 6,
+    "path": "assets/audio/door.mp3",
+    "bytes": 30764,
+    "sha256": "2c9d549d9497614d1dd7fd95067437cadca7e2b6553fb6806a0de257b5c3925c"
+  },
+  {
+    "index": 7,
+    "path": "assets/audio/food.mp3",
+    "bytes": 2924,
+    "sha256": "08021dd217b0c7a278554fd266cd5d34b75c00df5fbc3e0d2acd64d5109280e4"
+  },
+  {
+    "index": 8,
+    "path": "assets/audio/ice.mp3",
+    "bytes": 13004,
+    "sha256": "2e4e391fb95df3a3e8a05a629da9fdb2ba194561e6e81edb333ddb2c8eae3573"
+  },
+  {
+    "index": 9,
+    "path": "assets/audio/mail.mp3",
+    "bytes": 4364,
+    "sha256": "1385952298e1808a1bb5a6c0997887e0e10f1364bf874acadf49d688f0848758"
+  },
+  {
+    "index": 10,
+    "path": "assets/audio/mix.mp3",
+    "bytes": 15884,
+    "sha256": "10850cdded6a83bd5c51eb3604041203e33139c025c951ec2425ba925e5cd967"
+  },
+  {
+    "index": 11,
+    "path": "assets/audio/pour.mp3",
+    "bytes": 20684,
+    "sha256": "99de3fb4aa64f412f07ebdc39ac9ace7fa9a8be09475e7f03d1a7cb4960fa6bd"
+  },
+  {
+    "index": 12,
+    "path": "assets/audio/recipe.mp3",
+    "bytes": 8204,
+    "sha256": "9876a9c627d97fbb4af6ffd944f6900ba394a5c028e5072f94b97ea4202ac0c8"
+  },
+  {
+    "index": 13,
+    "path": "assets/audio/sns.mp3",
+    "bytes": 5376,
+    "sha256": "3b1d4d64e26b4f12185af2e351ca566c3d3a6b0ed9c3e2d595f48f6311248e30"
+  },
+  {
+    "index": 14,
+    "path": "assets/audio/topping.mp3",
+    "bytes": 9164,
+    "sha256": "643d3c0637ab52d0467493a9742dbfabbd8eee8c0ac0ba11decae164289be25c"
+  },
+  {
+    "index": 15,
+    "path": "assets/backgrounds/bar-scene.png",
+    "bytes": 193828,
+    "sha256": "aac0c7bed73773a9dd9bd738ce3094e66104b570faa83d565e1c5d8ee4e82348"
+  },
+  {
+    "index": 16,
+    "path": "assets/backgrounds/market-banner.webp",
+    "bytes": 34252,
+    "sha256": "9c51c5eb6440daa261671133250112c92a75411a769a0b9086128e6d2b533513"
+  },
+  {
+    "index": 17,
+    "path": "assets/backgrounds/panorama.png",
+    "bytes": 103692,
+    "sha256": "54417d37e0afb82b18ea2a7c31b43357560a7a8deb0030960d209fd3f123709a"
+  },
+  {
+    "index": 18,
+    "path": "assets/backgrounds/weekend-room-alt.png",
+    "bytes": 695785,
+    "sha256": "aff45864f78cc1dcc1f4b02b1e983873fa6a74da048b62299711f94b5687b6a7"
+  },
+  {
+    "index": 19,
+    "path": "assets/backgrounds/weekend-room.png",
+    "bytes": 844241,
+    "sha256": "cda7e38447cfada755982acd8222e54e7b2cff1ee7678c3cb54eefd91a1eb8ff"
+  },
+  {
+    "index": 20,
+    "path": "assets/backgrounds/window-city.gif",
+    "bytes": 2129107,
+    "sha256": "bd6c22f2ed5e91e5f19b5be7c715fc087ab1deadd91996af043038ac1c7813d7"
+  },
+  {
+    "index": 21,
+    "path": "assets/characters/freight-driver-base.png",
+    "bytes": 64578,
+    "sha256": "84142dc6b29e402a29c35112ce9af15cb08b03cf82c44a37265a0e1f4a2e8f45"
+  },
+  {
+    "index": 22,
+    "path": "assets/characters/freight-driver-expression-normal.gif",
+    "bytes": 12392,
+    "sha256": "4a93f6f1061d954d8aca7bc901cc538bad3a3458a1e727f9f722dc1edd738a94"
+  },
+  {
+    "index": 23,
+    "path": "assets/characters/freight-face.webp",
+    "bytes": 17820,
+    "sha256": "69bb92ed5af86d3587a78b0f9dc85e92c5acaacb06e246408a318949dd4e966c"
+  },
+  {
+    "index": 24,
+    "path": "assets/characters/maren-base.png",
+    "bytes": 74024,
+    "sha256": "830266363c1a7b6e9e1132680df0fad58e18a72239c5c5c5df19bf654999012b"
+  },
+  {
+    "index": 25,
+    "path": "assets/characters/maren-expression-normal.gif",
+    "bytes": 11682,
+    "sha256": "6da4b90a12929fff1abb866b68c9eab59d6bf5a5083f2c99dc3cacf320264f33"
+  },
+  {
+    "index": 26,
+    "path": "assets/characters/maren-expression-question.gif",
+    "bytes": 12547,
+    "sha256": "92ecf1a418ce78d9fc6b27a52f500926518c7d57dbeedcb96d3258d572240678"
+  },
+  {
+    "index": 27,
+    "path": "assets/characters/maren-expression-smile.png",
+    "bytes": 22547,
+    "sha256": "74cffa99e06a8328e634f3d8726aa04b6a8c2357630b65db5221db494335466c"
+  },
+  {
+    "index": 28,
+    "path": "assets/characters/maren-face.webp",
+    "bytes": 56036,
+    "sha256": "65b01cf65a2b8f2e5cb9205d2a5be10755f9dac62348c4594d95c863b6bbca43"
+  },
+  {
+    "index": 29,
+    "path": "assets/characters/night-mechanic-base.png",
+    "bytes": 66015,
+    "sha256": "06120aad3eeac0a80d4f4f0789ae677b35143cf871e751eb93b21f7ec6df9f6f"
+  },
+  {
+    "index": 30,
+    "path": "assets/characters/night-mechanic-expression-normal.gif",
+    "bytes": 11900,
+    "sha256": "591664d7465b22053d03504dc9029e2dca3bf205c25034733acd7bb4316430c5"
+  },
+  {
+    "index": 31,
+    "path": "assets/characters/night-mechanic-face.webp",
+    "bytes": 22404,
+    "sha256": "5ff8041911817a1271bb9612ef35231976c4b30276e5b8e73af60cdaf847675c"
+  },
+  {
+    "index": 32,
+    "path": "assets/characters/rian-base.png",
+    "bytes": 71405,
+    "sha256": "6b5ee3013f23a223dbd68a86e0bb65571157344c488785a3d1f31189639ec3e8"
+  },
+  {
     "index": 33,
+    "path": "assets/characters/rian-expression-normal.gif",
+    "bytes": 11709,
+    "sha256": "acffcefeaf62230d26b830442eb529105db417a91a9832654cfac0e569a63352"
+  },
+  {
+    "index": 34,
+    "path": "assets/characters/rian-face.webp",
+    "bytes": 18056,
+    "sha256": "0cf7d0ab3d31ab6080a432e331cb0f1f6617f196cd25649cce8f50eb217a86a8"
+  },
+  {
+    "index": 35,
+    "path": "assets/characters/torban-base.png",
+    "bytes": 85301,
+    "sha256": "9dc5efb0dbfab3fd304ad54e27ddf7741151c62cf2cc4edd70d1992a9b8fc6db"
+  },
+  {
+    "index": 36,
+    "path": "assets/characters/torban-expression-normal.gif",
+    "bytes": 21201,
+    "sha256": "34efed42feeceec066276be136d73244fd6afef2c3dc5346eefa6257a37753d3"
+  },
+  {
+    "index": 37,
+    "path": "assets/characters/torban-face.webp",
+    "bytes": 22254,
+    "sha256": "c069404031038442fb159345a5df7c33ab9e2c2f8fafcef268a4ce6e5b373161"
+  },
+  {
+    "index": 38,
+    "path": "assets/characters/torban-wife-base.png",
+    "bytes": 70772,
+    "sha256": "aeec13167f800527200ef0148eebe29bb4813131035df1fa0b381adb7bfe26bd"
+  },
+  {
+    "index": 39,
+    "path": "assets/characters/torban-wife-expression-normal.gif",
+    "bytes": 11487,
+    "sha256": "248d2aafcab3ce0257565908015d11acfa7b2d9a52434280f2612ec1cb2e59d1"
+  },
+  {
+    "index": 40,
     "path": "assets/ui/counter-top.png",
     "bytes": 14126,
     "sha256": "ea4fc7994754971c20f6ed6b9188ed16d35efa7b33e640c29a79ebfec447088b"
+  },
+  {
+    "index": 41,
+    "path": "assets/ui/friend-counter.png",
+    "bytes": 53449,
+    "sha256": "d4927cd55d69191306ef8c76d3eeb964f02e5cfc9909a410a95d4395c55c9fef"
   }
 ]
