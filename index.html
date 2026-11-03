@@ -23672,20 +23672,35 @@ render();
 
  // Keep arcade sounds in the parent document so that deployment and
  // single-file TEST builds use the same reliable audio playback path.
- const mzArcadeSfxPaths = {"item":"assets/audio/arcade-item-pop.mp3","ghost":"assets/audio/arcade-ghost-eat.mp3","hurt":"assets/audio/arcade-hurt.mp3","gameover":"assets/audio/arcade-gameover-scream.mp3"};
+ const mzArcadeSfxPaths = {"item":"assets/audio/arcade-item-pop.mp3","ghost":"assets/audio/arcade-ghost-eat.mp3","hurt":"assets/audio/arcade-hurt.mp3","gameover":"assets/audio/arcade-gameover-wilhelm-v351.mp3"};
  const mzArcadeSfxPlayers = Object.fromEntries(Object.entries(mzArcadeSfxPaths).map(([name,source]) => {
    const player=new Audio(source);
    player.preload='auto';
    return [name,player];
  }));
+ // Audio paths are in the parent document. The game-over sound is constructed
+ // directly rather than cloned, so it can start reliably even if not preloaded.
+ // If the clip cannot load or play, do not leave the final hit silent.
  function mzArcadePlaySfx(name){
    if(!mzArcadeActive || sfxVolume<=0) return;
-   const original=mzArcadeSfxPlayers[name];
-   if(!original)return;
-   const clip=original.cloneNode(true);
+   const source=mzArcadeSfxPaths[name];
+   if(!source)return;
+   let fellBack=false;
+   const fallback=()=>{
+     if(name!=='gameover' || fellBack)return;
+     fellBack=true;
+     console.warn('MILE ZERO game-over clip unavailable; playing hurt sound instead');
+     mzArcadePlaySfx('hurt');
+   };
+   const clip=new Audio(source);
+   clip.preload='auto';
    clip.volume=sfxVolume;
    clip.muted=false;
-   clip.play().catch(err=>console.warn('MILE ZERO arcade SFX playback failed',name,err));
+   clip.addEventListener('error',fallback,{once:true});
+   clip.play().catch(err=>{
+     console.warn('MILE ZERO arcade SFX playback failed',name,err);
+     fallback();
+   });
    clip.addEventListener('ended',()=>{clip.removeAttribute('src');clip.load()}, {once:true});
  }
  window.addEventListener('message',event=>{
