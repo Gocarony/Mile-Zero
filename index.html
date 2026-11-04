@@ -1,7 +1,8 @@
 <!-- MILE ZERO script integration based on user-edited DAY 01–04 TXT; test-mode controls disabled. -->
 <!DOCTYPE html>
 <!-- Lucian UX/UI Prompt #228 · MIT License (c) 2026 Seokwoooo · https://lucianlabs.dev/uxui-prompt/#228 -->
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MILE ZERO</title>
+<html lang="ko"><head>
+<meta name="mile-zero-build" content="MZ_BUILD_DAY35_SNS_GUARD_20261104"><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>MILE ZERO</title>
 
 
 
@@ -19891,6 +19892,11 @@ function findGarnishReaction(v){
 }
 function currentAfterLines(v){
  if(s.specialOutcome==='ignored-request'&&v.afterBad)return v.afterBad;
+ // DAY35 final visitor: the saved auxiliary line array can contain text
+ // accidentally imported from a historical script build (including SNS data).
+ // This visitor has no authored garnish reaction; only its canonical after
+ // dialogue may ever be shown here. Preserve all other visitors' behavior.
+ if(s.day===35&&v?.who==='퇴근길 인쇄소 직원')return v.after;
  return v.after.concat(Array.isArray(s.garnishDialogue)?s.garnishDialogue:[]);
 }
 
@@ -22631,7 +22637,14 @@ function restoreState(raw){
  if(Array.isArray(s.guestArchiveSeen))s.guestArchiveSeen=s.guestArchiveSeen.filter(id=>!/^clue:10:(3:마렌|7:토르반|9:황무지 출신 정착민)$/.test(id));
  if(s.sunsetRoadRecipe&&!mzValidSunsetSpec(s.sunsetRoadRecipe.seq,s.sunsetRoadRecipe.mixAt,s.sunsetRoadRecipe.extra))s.sunsetRoadRecipe=null;if(!Array.isArray(s.regularUnlocks))s.regularUnlocks=[];if(s.regularUnlocks.includes('mechanic')&&!Number.isInteger(s.mechanicRegularFrom))s.mechanicRegularFrom=8;if(!Array.isArray(s.recipeNotices))s.recipeNotices=[];if(!Array.isArray(s.recipeNoticeSeen))s.recipeNoticeSeen=[];if(s.day>=10){for(const recipe of friedRecipes)if(!s.recipeNotices.includes(recipe.name))s.recipeNotices.push(recipe.name);}
  if(mzNonheatUnlocked()){for(const dish of nonheatRecipes)if(!s.recipeNotices.includes(dish.name))s.recipeNotices.push(dish.name);}
- if(s.regularUnlocks.includes('mechanic')){s.mechanicRegularFrom=8;if(!s.recipeNotices.includes('훈연 바삭 꼬치'))s.recipeNotices.push('훈연 바삭 꼬치');}for(const r of s.customRecipes){if(r.kind==='food'){const spec=foodRecipeSpec(r);if(spec){r.foodBase=spec.base;r.foodSauce=spec.sauce;r.foodKind=spec.kind;}r.extra=null;}}syncMarketRecipeRewards();mzEnsureCustomIds();if(!Array.isArray(s.unlockedExtras))s.unlockedExtras=[];if(!Array.isArray(s.garnishDiscoveries))s.garnishDiscoveries=[];if(!Array.isArray(s.garnishDialogue))s.garnishDialogue=[];mzRestoreHearts();if(!Number.isInteger(s.mixAt)||s.mixAt<0||s.mixAt>s.mix.length)s.mixAt=s.stirred?s.mix.length:0;if(!s.lightSeen||typeof s.lightSeen!=='object')s.lightSeen={};if(!unlockedGarnishes().some(g=>g.id===s.extra))s.extra=null;
+ if(s.regularUnlocks.includes('mechanic')){s.mechanicRegularFrom=8;if(!s.recipeNotices.includes('훈연 바삭 꼬치'))s.recipeNotices.push('훈연 바삭 꼬치');}for(const r of s.customRecipes){if(r.kind==='food'){const spec=foodRecipeSpec(r);if(spec){r.foodBase=spec.base;r.foodSauce=spec.sauce;r.foodKind=spec.kind;}r.extra=null;}}syncMarketRecipeRewards();mzEnsureCustomIds();if(!Array.isArray(s.unlockedExtras))s.unlockedExtras=[];if(!Array.isArray(s.garnishDiscoveries))s.garnishDiscoveries=[];if(!Array.isArray(s.garnishDialogue))s.garnishDialogue=[];
+ // Drop legacy contaminated extension lines without modifying the save slot
+ // itself. On the last DAY35 visitor, the fixed after-script is one line.
+ if(s.day===35&&s.visit===14){
+  s.garnishDialogue=[];
+  if(s.phase==='open'&&s.sub==='after'&&(!Number.isInteger(s.line)||s.line<0||s.line>=day35Visits[14].after.length))s.line=0;
+ }
+ mzRestoreHearts();if(!Number.isInteger(s.mixAt)||s.mixAt<0||s.mixAt>s.mix.length)s.mixAt=s.stirred?s.mix.length:0;if(!s.lightSeen||typeof s.lightSeen!=='object')s.lightSeen={};if(!unlockedGarnishes().some(g=>g.id===s.extra))s.extra=null;
  if(s.phase==='open'&&s.sub==='interlude'&&!(Number.isFinite(s.waitUntil)&&s.waitUntil>0))s.waitUntil=Date.now()+WAIT_SECONDS[Math.min(s.visit,WAIT_SECONDS.length-1)]*1000;
  s.stationError=null;
 }
