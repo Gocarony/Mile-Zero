@@ -1801,6 +1801,23 @@ inbox.push(...[{"id":"day37","sender":"사장님","title":"업데이트의 중�
 
 inbox.push(...[{"id": "day38", "sender": "사장님", "title": "부탁 하나만", "body": "좋은 저녁!\n\n오늘 아침에 연락을 하나 받았어. 오래전에 다른 지점에서 일했던 직원인데, 이번에 새 가게를 준비한다더라고. 아직 문도 열기 전인데 간판 색을 정하느라 며칠째 고민 중이래.\n\n내가 무슨 색을 추천했는지 알아? 손님들이 멀리서도 알아볼 수 있는 색이면 된다고 했어. 별 도움이 안 됐는지 한참 웃더라.\n\n가게를 새로 연다는 건 언제 들어도 기분 좋은 일이야. 우리도 오늘 하루 잘 부탁해!", "when": "prep"}, {"id": "closing38", "sender": "사장님", "title": "라디오 퀴즈", "body": "오늘 정리할 게 있어서 라디오를 켜 뒀는데, 청취자 퀴즈를 하더라. 문제를 듣고 바로 답을 알았거든? 신나서 단말기를 집어 들었는데 참여 시간이 이미 끝났대.\n\n그 뒤로 나온 문제는 하나도 모르겠더라고. 첫 문제에서 아는 척이라도 해 둘 걸 그랬어. 하하.\n\n오늘도 수고했어. 내일 보자!", "when": "closing"}]);
 
+// DAY39 director-reviewed owner mail.
+inbox.push(...[
+  {
+    "id": "day39",
+    "sender": "사장님",
+    "title": "돌고 도는 유행",
+    "body": "좋은 저녁!\n\n전에 토핑 하나가 유행해서 손님들이 한동안 비슷한 음료만 찾던 거 기억나지? 오늘도 또 토핑 하나가 화제라더라.\n오늘 관문 쪽에서도 그걸 찾는 손님이 많을 모양이야. 그게, 요즘 유행하는 영화의 주인공이 그렇게 해서 음료를 마셨다나? 토핑은 주문한 것만 올려 주고, 음료 자체는 평소 레시피대로 만들어 줘.\n그럼 오늘도 잘 부탁해.",
+    "when": "prep"
+  },
+  {
+    "id": "closing39",
+    "sender": "사장님",
+    "title": "오늘 사진 봤어?",
+    "body": "오늘은 {유행 토핑} 찾는 손님이 많았다면서? 여기저기 올라온 사진을 봤는데, 같은 토핑이어도 어떤 음료에 올렸는지에 따라 느낌이 다르더라.\n전에 토핑 유행하던 날도 생각났어. 다들 한 가지를 찾으면서도 주문은 제각각이더라. 가게마다 사진을 비교하는 사람도 있던데, 참 재미있어.\n\n늦게까지 수고 많았어. 내일 보자!",
+    "when": "closing"
+  }
+]);
 const foods=[{name:'소금구이 꼬치',base:'육류',sauce:'소금',kind:'구이'},{name:'칠리 버섯볶음',base:'버섯',sauce:'매운 양념',kind:'볶음'},{name:'허브구이 감자',base:'감자',sauce:'허브',kind:'구이'},{name:'가든 야채스프',base:'채소',sauce:'소금',kind:'국물'},{name:'허니 팬케이크',base:'곡물 반죽',sauce:'달콤한 소스',kind:'구이'},{name:'스파이시 그릴 미트',base:'육류',sauce:'매운 양념',kind:'구이'}];
 const fishRecipes=[{name:'피쉬 커틀릿',base:'생선',sauce:'허브',kind:'튀김'},{name:'생선구이',base:'생선',sauce:'소금',kind:'구이'},{name:'매운탕',base:'생선',sauce:'매운 양념',kind:'국물'}];
 const friedRecipes=[{name:'크리스피 치킨',base:'육류',sauce:'소금',kind:'튀김',unlockDay:10},{name:'허니버터 감자튀김',base:'감자',sauce:'달콤한 소스',kind:'튀김',unlockDay:10},{name:'양념 치킨',base:'육류',sauce:'매운 양념',kind:'튀김',unlockDay:10}];
@@ -19744,7 +19761,487 @@ const day38Visits=[
   }
 ];
 
-const dailyVisits={1:visits,2:dayTwoVisits,3:dayThreeVisits,4:dayFourVisits,5:dayFiveVisits,6:daySixVisits,7:daySevenVisits,8:dayEightVisits,9:dayNineVisits,10:dayTenVisits,11:dayElevenVisits,12:dayTwelveVisits,13:day13Visits,14:day14Visits,15:day15Visits,16:day16Visits,17:day17Visits,18:day18Visits,19:day19Visits,20:day20Visits,21:day21Visits,22:day22Visits,23:day23Visits,24:day24Visits,25:day25Visits,26:day26Visits,27:day27Visits,28:day28Visits,29:day29Visits,30:day30Visits,31:day31Visits,32:day32Visits,33:day33Visits,34:day34Visits,35:day35Visits,36:day36Visits,37:day37Visits,38:day38Visits};
+// DAY39 — user-reviewed topping trend story; original dialogue preserved.
+const day39Visits=[
+  {
+    "who": "관문 안내원",
+    "time": "18:07",
+    "dialogue": [
+      [
+        "관문 안내원",
+        "게이트 라이트 한 잔 주세요."
+      ],
+      [
+        "관문 안내원",
+        "아, 오늘 유행한다는 {유행 토핑}도 하나 올려 주시겠어요? 다른 분이 보여 주신 사진이 자꾸 생각나서요. 눈 앞에서 아른아른거려요..."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "게이트 라이트",
+        "D39": "T"
+      }
+    ],
+    "after": [
+      [
+        "관문 안내원",
+        "오, 사진으로 봤을 때랑 느낌이 좀 다르네요. 잘 마시겠습니다."
+      ]
+    ]
+  },
+  {
+    "who": "시장 방문객",
+    "time": "18:29",
+    "dialogue": [
+      [
+        "시장 방문객",
+        "허니 팬케이크 하나 주세요. 음료는 안 시킬게요."
+      ],
+      [
+        "시장 방문객",
+        "오늘 다들 비슷하게 꾸민 음료를 들고 다니던데, 여기서 파는 거였군요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허니 팬케이크"
+      }
+    ],
+    "after": [
+      [
+        "시장 방문객",
+        "감사합니다. 전 일단 이걸로 충분해요."
+      ]
+    ]
+  },
+  {
+    "who": "관문 주변 대학생",
+    "time": "18:56",
+    "dialogue": [
+      [
+        "관문 주변 대학생",
+        "저 친구한테 보낼 사진 한 장만 찍어도 돼요? 물론 주문한 다음에요."
+      ],
+      [
+        "관문 주변 대학생",
+        "프리즘에 {유행 토핑} 올려 주세요. 이 음료랑은 어떻게 어울릴지 궁금해요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "프리즘",
+        "D39": "T"
+      }
+    ],
+    "after": [
+      [
+        "관문 주변 대학생",
+        "잠깐만요, 사진 한 장만 더 찍을게요. 아, 됐다. 감사합니다!"
+      ]
+    ]
+  },
+  {
+    "who": "야간 열차 승객",
+    "time": "19:24",
+    "dialogue": [
+      [
+        "야간 열차 승객",
+        "라스트 마일 한 잔 부탁드릴게요."
+      ],
+      [
+        "야간 열차 승객",
+        "다들 {유행 토핑} 토핑을 올리던데, 저는 그냥 원래대로 마실게요. 남들 주문한 건 구경만 해도 충분하네요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "라스트 마일"
+      }
+    ],
+    "after": [
+      [
+        "야간 열차 승객",
+        "잘 마셨습니다. 다음 열차까지 시간 맞춰서 갈 수 있겠네요."
+      ]
+    ]
+  },
+  {
+    "who": "관문 근무자",
+    "time": "19:53",
+    "dialogue": [
+      [
+        "관문 근무자",
+        "블루 아워 하나, 소금구이 꼬치 하나 주세요."
+      ],
+      [
+        "관문 근무자",
+        "그리고 블루 아워에는 {유행 토핑}도 얹어 주세요. 여기서 그 영화랑 똑같은 음료를 마실 수 있다면서요?"
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "D39": "T"
+      },
+      {
+        "type": "food",
+        "name": "소금구이 꼬치"
+      }
+    ],
+    "after": [
+      [
+        "관문 근무자",
+        "우와, 상상 이상이에요. 진짜 멋진데."
+      ]
+    ]
+  },
+  {
+    "who": "인근 직장인",
+    "time": "20:25",
+    "dialogue": [
+      [
+        "인근 직장인",
+        "안녕하세요. 오늘은 가든 야채스프 하나하고 애프터 시프트 한 잔 주세요."
+      ],
+      [
+        "인근 직장인",
+        "...아, 저기 종이는 뭐예요? 한번 봐도 되나요?"
+      ],
+      [
+        "인근 직장인",
+        "손수 그린 지도인가요? ...근처 가게들 목록이랑.. 아, 이쪽은 비어 있는 점포네요."
+      ],
+      [
+        "인근 직장인",
+        "'새로 가게를 열어 보고 싶은 분께'... 이런 것도 여기서 안내해 주는군요."
+      ],
+      [
+        "인근 직장인",
+        "그... 혹시 이 종이 한 장 가져가도 될까요? 그냥, 좀 읽어 보고 싶어서요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "가든 야채스프"
+      },
+      {
+        "type": "drink",
+        "name": "애프터 시프트"
+      }
+    ],
+    "after": [
+      [
+        "인근 직장인",
+        "잘 먹었습니다."
+      ],
+      [
+        "인근 직장인",
+        "아까 그 공고요. 지금 당장 뭘 해 보겠다는 건 아니에요. 가게를 연다는 건 생각해 본 적도 없어서요."
+      ],
+      [
+        "인근 직장인",
+        "그래도 어떤 자리가 비어 있는지 정도는 알아둬도 되겠죠. ...이런 걸 제가 궁금해하게 될 줄은 몰랐네요."
+      ],
+      [
+        "인근 직장인",
+        "그럼 다음에 또 올게요."
+      ]
+    ]
+  },
+  {
+    "who": "여행객 A·B",
+    "time": "20:57",
+    "dialogue": [
+      [
+        "여행객 A",
+        "아까 영상에서 보던 {유행 토핑}, 여기서도 올릴 수 있는 거 맞지?"
+      ],
+      [
+        "여행객 B",
+        "난 그냥 프리즘 믹스 마실래. 너만 해."
+      ],
+      [
+        "여행객 A",
+        "그럼 저는 루비 라인에 {유행 토핑} 하나, 이 사람은 프리즘 믹스 하나요."
+      ],
+      [
+        "여행객 B",
+        "그리고 허브구이 감자도 하나 같이 먹자."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "루비 라인",
+        "D39": "T"
+      },
+      {
+        "type": "drink",
+        "name": "프리즘 믹스"
+      },
+      {
+        "type": "food",
+        "name": "허브구이 감자"
+      }
+    ],
+    "after": [
+      [
+        "여행객 A",
+        "네 잔도 예쁜데? 우리 바꿔서 한 번 찍을까?"
+      ],
+      [
+        "여행객 B",
+        "찍는 건 좋은데 마시는 건 각자 마시자."
+      ]
+    ]
+  },
+  {
+    "who": "황무지 출신 정착민",
+    "time": "21:29",
+    "dialogue": [
+      [
+        "황무지 출신 정착민",
+        "안녕하세요. 며칠 만이네요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "오늘은 게이트 라이트 한 잔 부탁드릴게요. 그냥 평소처럼요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "밖에서 다들 이상한 토핑 얘기를 하던데, 오늘은 그게 유행인가봐요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "게이트 라이트"
+      }
+    ],
+    "after": [
+      [
+        "황무지 출신 정착민",
+        "잘 마셨어요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "...."
+      ],
+      [
+        "황무지 출신 정착민",
+        "..크, 크흠. 저번에 제가 했던 얘기 말인데요,"
+      ],
+      [
+        "황무지 출신 정착민",
+        "사실 그날은 그런 얘기까지 할 생각이 전혀 없었어요. 저도 말하고 나서 좀 놀랐거든요. 그 뒤로 여기 다시 와도 되나, 그런 생각도 했고요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "그런데 뭐... 음, 오늘은 그냥 이게 마시고 싶더라고요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "아, 그러고 보니, 얼마 전에 집에 있던 짐을 좀 정리했어요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "짐 안에는 그때 그 사람들이랑 찍은 사진도 있고, 뭐, 이것저것 들어있더라고요. 처음에는 그냥 다시 닫아두려고 했는데..."
+      ],
+      [
+        "황무지 출신 정착민",
+        "...그래도 계속 상자 안에만 넣어둘 필요는 없겠다 싶어서요."
+      ],
+      [
+        "황무지 출신 정착민",
+        "그럼 다음에 또 올게요."
+      ]
+    ]
+  },
+  {
+    "who": "퇴근길 판매 직원",
+    "time": "22:02",
+    "dialogue": [
+      [
+        "퇴근길 판매 직원",
+        "오늘은 뭘 시켜야 하나... 다들 같은 토핑을 얹어 드시네요."
+      ],
+      [
+        "퇴근길 판매 직원",
+        "저도 하나 해 볼게요. 나이트 드라이브에 {유행 토핑} 올려 주세요. 안주는 양념 치킨으로요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "나이트 드라이브",
+        "D39": "T"
+      },
+      {
+        "type": "food",
+        "name": "양념 치킨"
+      }
+    ],
+    "after": [
+      [
+        "퇴근길 판매 직원",
+        "이런 건 보통 사진부터 찍고 마시나요? 조금 어마무시하네요..."
+      ]
+    ]
+  },
+  {
+    "who": "토르반",
+    "time": "22:34",
+    "dialogue": [
+      [
+        "토르반",
+        "안녕하세요. 소금구이 꼬치 하나하고 라스트 마일 한 잔 부탁드립니다!"
+      ],
+      [
+        "토르반",
+        "오늘은 괜히 평소와 다른 걸 시켜 보고 싶군요. 라스트 마일에 {유행 토핑}도 추가해 주시겠습니까?"
+      ],
+      [
+        "토르반",
+        "제가 아는 사람 하나가 이런 건 꼭 직접 봐야 한다고 하더군요. 무슨 이야기인가 했는데 이제 알겠습니다. 하하."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "소금구이 꼬치"
+      },
+      {
+        "type": "drink",
+        "name": "라스트 마일",
+        "D39": "T"
+      }
+    ],
+    "after": [
+      [
+        "토르반",
+        "잘 먹었습니다. 다음에 다시 마실 때는 원래대로도 한번 비교해 봐야겠네요."
+      ]
+    ]
+  },
+  {
+    "who": "시장 상인",
+    "time": "23:08",
+    "dialogue": [
+      [
+        "시장 상인",
+        "블루 아워에 {유행 토핑} 하나 부탁드려요."
+      ],
+      [
+        "시장 상인",
+        "오늘 하루 종일 그걸 찾는 손님이 있었어요. 저희 가게에는 음료가 없다고 설명하는 데도 한참 걸렸다니까요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "D39": "T"
+      }
+    ],
+    "after": [
+      [
+        "시장 상인",
+        "아, 이거였구나. 그분들이 왜 그렇게 찾았는지는 알겠네요..."
+      ]
+    ]
+  },
+  {
+    "who": "심야 배송원",
+    "time": "23:41",
+    "dialogue": [
+      [
+        "심야 배송원",
+        "허브구이 감자 하나 주세요."
+      ],
+      [
+        "심야 배송원",
+        "오늘은 여기저기서 손이 특이한 걸 들고 사진 찍느라 잠깐씩 멈춰 서 있더라고요. 무슨 큰 행사라도 하는 줄 알았습니다."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허브구이 감자"
+      }
+    ],
+    "after": [
+      [
+        "심야 배송원",
+        "감사합니다. 전 얼른 다음 곳으로 가 봐야겠네요."
+      ]
+    ]
+  },
+  {
+    "who": "옆 가게 사장님",
+    "time": "00:16",
+    "dialogue": [
+      [
+        "옆 가게 사장님",
+        "게이트 라이트 한 잔과 생선구이 하나 부탁드려요."
+      ],
+      [
+        "옆 가게 사장님",
+        "세상에. 거리가 온통 {유행 토핑} 투성이에요. 그러니까 저도 탐나더라고요? 그거까지 올려서 부탁드릴게요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "게이트 라이트",
+        "D39": "T"
+      },
+      {
+        "type": "food",
+        "name": "생선구이"
+      }
+    ],
+    "after": [
+      [
+        "옆 가게 사장님",
+        "고마워요. 세상에, 이게 뭐람."
+      ]
+    ]
+  },
+  {
+    "who": "늦은 귀가객",
+    "time": "01:12",
+    "dialogue": [
+      [
+        "늦은 귀가객",
+        "아직 주문되죠? 애프터 시프트 한 잔 주세요."
+      ],
+      [
+        "늦은 귀가객",
+        "아, 오늘 유행하는 {유행 토핑}도 올려 주세요. 늦게 와서 못 마실 줄 알았거든요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "애프터 시프트",
+        "D39": "T"
+      }
+    ],
+    "after": [
+      [
+        "늦은 귀가객",
+        "잘 마셨습니다. 사진을 보내 달라는 사람이 있어서요. 이제 가봐야겠네요."
+      ]
+    ]
+  }
+];
+const dailyVisits={1:visits,2:dayTwoVisits,3:dayThreeVisits,4:dayFourVisits,5:dayFiveVisits,6:daySixVisits,7:daySevenVisits,8:dayEightVisits,9:dayNineVisits,10:dayTenVisits,11:dayElevenVisits,12:dayTwelveVisits,13:day13Visits,14:day14Visits,15:day15Visits,16:day16Visits,17:day17Visits,18:day18Visits,19:day19Visits,20:day20Visits,21:day21Visits,22:day22Visits,23:day23Visits,24:day24Visits,25:day25Visits,26:day26Visits,27:day27Visits,28:day28Visits,29:day29Visits,30:day30Visits,31:day31Visits,32:day32Visits,33:day33Visits,34:day34Visits,35:day35Visits,36:day36Visits,37:day37Visits,38:day38Visits,39:day39Visits};
 
 let dayEightCacheKey=null,dayEightCache=null,dayFiveCacheKey=null,dayFiveCache=null,dayTenCacheKey=null,dayTenCache=null;
 
@@ -20632,7 +21129,35 @@ function mzDay38Variants(v,day,index){
  }
  return v;
 }
+
+// DAY39: one saved trend for the whole day. Fire wins only when owned;
+// otherwise choose from the player's actually unlocked garnishes.
+function mzDay39TrendId(){
+ if(s.day39TrendId && garnishById(s.day39TrendId))return s.day39TrendId;
+ const available=unlockedGarnishes().filter(g=>g&&g.id);
+ // At least sunfruit and citrus are available by DAY39.
+ if(!available.length)return null;
+ const id=available.some(g=>g.id==='fire')?'fire':available[Math.floor(seedPick(s,39,0,39039)*available.length)].id;
+ s.day39TrendId=id;
+ return id;
+}
+function mzDay39Variants(v,day,index){
+ const id=mzDay39TrendId(),g=garnishById(id);
+ const dialogue=(v.dialogue||[]).map(([who,line])=>[who,String(line).replaceAll('{유행 토핑}',g?.name||'오늘의 토핑')]);
+ const after=(v.after||[]).map(([who,line])=>[who,String(line).replaceAll('{유행 토핑}',g?.name||'오늘의 토핑')]);
+ const orders=(v.orders||[]).map(o=>{
+  const {D39,...item}=o;
+  return D39==='T'?{...item,requestedGarnish:id}:item;
+ });
+ return {...v,dialogue,after,orders};
+}
+function mzDay39MailText(value){
+ const raw=String(value);
+ if(!raw.includes('{유행 토핑}'))return raw;
+ return raw.replaceAll('{유행 토핑}',garnishById(mzDay39TrendId())?.name||'오늘의 토핑');
+}
 function mzResolveVisitVariants(v,day,index){
+ if(day===39)return mzDay39Variants(v,day,index);
  if(day===38)return mzDay38Variants(v,day,index);
  if(day===36&&v.day36Mukbang)return mzDay36Mukbang(v,day,index);
  if(v.randomOrderV1)return mzRandomVisitOrder(v,day,index);
@@ -20905,7 +21430,7 @@ let mzVisualPrefs=mzReadVisualPrefs();document.body?.classList.toggle('mz-custom
 function mzWriteVisualPrefs(next){mzVisualPrefs={...mzVisualPrefs,...next};try{localStorage.setItem(MZ_VISUAL_KEY,JSON.stringify(mzVisualPrefs));}catch(e){};mzApplyVisualPrefs();}
 function mzApplyVisualPrefs(root=document){const enabled=mzVisualPrefs.panorama!==false;document.body.classList.toggle('mz-panorama-disabled',!enabled);document.body.classList.toggle('mz-custom-images-disabled',mzVisualPrefs.portraits===false);const strip=root.getElementById?root.getElementById('mzPanoramaStrip'):document.getElementById('mzPanoramaStrip');if(strip){strip.dataset.enabled=enabled?'true':'false';strip.dataset.running=enabled?'true':'false';}}
 window.mzVisuals={getPrefs:()=>({...mzVisualPrefs}),isPanoramaEnabled:()=>mzVisualPrefs.panorama!==false,setPanoramaEnabled:v=>mzWriteVisualPrefs({panorama:!!v}),isPortraitEnabled:()=>mzVisualPrefs.portraits!==false,setPortraitEnabled:v=>{mzWriteVisualPrefs({portraits:!!v});scene();},apply:mzApplyVisualPrefs};
-function initial(){return {day:1,phase:'prep',visit:0,line:0,sub:'dialogue',waitUntil:null,station:'drink',mix:[],ice:false,iceCount:0,stirred:false,mixAt:0,extra:null,foodBase:null,foodSauce:null,foodKind:null,foodHeat:0,completed:[],tips:0,served:0,mistakes:0,light:'dark',lightSeen:{},log:[],remarked:false,lightComment:null,seenIntro:false,phoneTab:'feed',readPosts:[],readMessages:[],deliveredMessages:['welcome','schedule'],dayStats:{},customRecipes:[],unlockedExtras:[],developmentDone:false,developmentDays:[],ownedMarket:[],wallet:0,friendCounterUnlockDay:null,randomSeed:Math.floor(Math.random()*2147483647),day27TrendId:null,sunsetRoadRecipe:null,regularUnlocks:[],mechanicRegularFrom:null,dayTenMechanicScheduled:null,foodAddons:[],specialOutcome:null,garnishDialogue:[],garnishDiscoveries:[],snsHearts:[],guestVisits:[],guestClues:[],guestArchiveSeen:[],recipeNotices:[],recipeNoticeSeen:[],darkMatterFound:false,weekendDiaries:{},weekendsCompleted:[],appointments:[],weekendStoriesDone:[],weekendStoryCursor:0,weekendStoryAnswers:{},appointmentDecisions:[],deskOwned:[],deskPlaced:[],marketSeenStockIds:[],weekendActive:false,arcadeRepaired:false};}
+function initial(){return {day:1,phase:'prep',visit:0,line:0,sub:'dialogue',waitUntil:null,station:'drink',mix:[],ice:false,iceCount:0,stirred:false,mixAt:0,extra:null,foodBase:null,foodSauce:null,foodKind:null,foodHeat:0,completed:[],tips:0,served:0,mistakes:0,light:'dark',lightSeen:{},log:[],remarked:false,lightComment:null,seenIntro:false,phoneTab:'feed',readPosts:[],readMessages:[],deliveredMessages:['welcome','schedule'],dayStats:{},customRecipes:[],unlockedExtras:[],developmentDone:false,developmentDays:[],ownedMarket:[],wallet:0,friendCounterUnlockDay:null,randomSeed:Math.floor(Math.random()*2147483647),day27TrendId:null,day39TrendId:null,sunsetRoadRecipe:null,regularUnlocks:[],mechanicRegularFrom:null,dayTenMechanicScheduled:null,foodAddons:[],specialOutcome:null,garnishDialogue:[],garnishDiscoveries:[],snsHearts:[],guestVisits:[],guestClues:[],guestArchiveSeen:[],recipeNotices:[],recipeNoticeSeen:[],darkMatterFound:false,weekendDiaries:{},weekendsCompleted:[],appointments:[],weekendStoriesDone:[],weekendStoryCursor:0,weekendStoryAnswers:{},appointmentDecisions:[],deskOwned:[],deskPlaced:[],marketSeenStockIds:[],weekendActive:false,arcadeRepaired:false};}
 function seedPick(state,day,index,salt){let h=((state.randomSeed||104729) ^ Math.imul(day+1,0x45d9f3b) ^ Math.imul(index+1,0x119de1f3) ^ Math.imul(salt+1,0x27d4eb2d))>>>0;h^=h>>>16;h=Math.imul(h,0x7feb352d);h^=h>>>15;return (h>>>0)/4294967296;}
 let s=initial(),modal=null;
 const $=x=>document.getElementById(x),esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -22717,7 +23242,7 @@ feedPosts.push(...[
 
 function phoneView(){const mzWeekendPhone=bootScreen==='weekend'&&mzWeekendPhoneOpen;if(!mzWeekendPhone&&(bootScreen!=='phone'||s.phase!=='prep')){const old=$('prePhone');if(old)old.remove();return;}let el=$('prePhone');if(!el){el=document.createElement('div');el.id='prePhone';el.className='prephone-wrap';document.body.appendChild(el)}el.classList.toggle('mz116-weekend-phone',mzWeekendPhone);let tab=s.phoneTab||'feed';const oldBody=el.querySelector('.phone-body');if(oldBody)mzPhoneScroll[el.dataset.activeTab||tab]=oldBody.scrollTop;const nav=['feed','mail','schedule'].map((id,i)=>`<button class="phone-tab ${tab===id?'active':''}" data-ptab="${id}">${['FEED','MAIL','SCHEDULE'][i]}${id==='feed'&&unreadPosts()?` <span class="phone-count">${unreadPosts()}</span>`:''}${id==='mail'&&inbox.filter(m=>s.deliveredMessages.includes(m.id)&&!s.readMessages.includes(m.id)).length?` <span class="phone-count">${inbox.filter(m=>s.deliveredMessages.includes(m.id)&&!s.readMessages.includes(m.id)).length}</span>`:''}</button>`).join('');let body='';
 if(tab==='feed'){body=visiblePosts().map(p=>`<article class="post"><div class="post-head"><strong>${esc(p.author)}</strong><small>${dayLabel(p.day||1)}${p.weekendOnly?' · 주말':''} · ${p.time} ${!(s.readPosts||[]).includes(p.id)?'<span class="phone-new">NEW</span>':''}</small></div><p>${esc(snsDisplayText(p.text))}</p><div class="post-actions">${mzHeartMarkup(p.id)}<button class="phone-link" data-post="${p.id}">댓글 ${p.comments.length} ${expandedPosts.has(p.id)?'▴':'▾'}</button></div>${expandedPosts.has(p.id)?p.comments.map(c=>`<div class="comment"><strong>${esc(c[0])}</strong> ${esc(c[1])}</div>`).join(''):''}</article>`).join('')}
-else if(tab==='mail'){const messages=receivedMail();const m=messages.find(m=>m.id===phoneMail);body=m?`<button class="phone-link phone-back" id="backPhoneMail">‹ 받은편지함</button><div class="post"><div class="mail-head"><strong>${esc(m.title)}</strong></div><div class="phone-muted">${esc(m.sender)}</div><hr><p class="phone-copy">${esc(m.body)}</p></div>`:messages.map(m=>`<button class="phone-row" data-pmail="${m.id}"><strong>${esc(m.title)} ${!s.readMessages.includes(m.id)?'<span class="phone-new">NEW</span>':''}</strong><small>${esc(m.sender)}</small></button>`).join('')}
+else if(tab==='mail'){const messages=receivedMail();const m=messages.find(m=>m.id===phoneMail);body=m?`<button class="phone-link phone-back" id="backPhoneMail">‹ 받은편지함</button><div class="post"><div class="mail-head"><strong>${esc(m.title)}</strong></div><div class="phone-muted">${esc(m.sender)}</div><hr><p class="phone-copy">${esc(mzDay39MailText(m.body))}</p></div>`:messages.map(m=>`<button class="phone-row" data-pmail="${m.id}"><strong>${esc(m.title)} ${!s.readMessages.includes(m.id)?'<span class="phone-new">NEW</span>':''}</strong><small>${esc(m.sender)}</small></button>`).join('')}
 else {body=mzScheduleMarkup()}
 el.innerHTML=`<div class="phone" role="dialog" aria-label="출근 전 휴대 단말기"><div class="phone-head"><strong>CITY NETWORK</strong><span>${dayLabel(s.day)} · 17:42</span><button class="phone-theme" type="button" id="phoneTheme">${s.light==='dark'?'☀ LIGHT':'☾ DARK'}</button></div><nav class="phone-tabs">${nav}</nav><div class="phone-body">${body}</div><footer class="phone-footer"><button id="phoneStart">${mzWeekendPhone?'‹ 주말 화면으로 돌아가기':'출근하기 ›'}</button></footer></div>`;
 el.dataset.activeTab=tab;const phoneBody=el.querySelector('.phone-body');if(phoneBody)phoneBody.scrollTop=mzPhoneScroll[tab]||0;el.querySelectorAll('[data-ptab]').forEach(b=>b.onclick=()=>{if(phoneBody)mzPhoneScroll[tab]=phoneBody.scrollTop;s.phoneTab=b.dataset.ptab;phoneMail=null;phoneView()});el.querySelectorAll('[data-post]').forEach(b=>b.onclick=()=>{const id=b.dataset.post;if(phoneBody)mzPhoneScroll.feed=phoneBody.scrollTop;expandedPosts.has(id)?expandedPosts.delete(id):expandedPosts.add(id);if(!s.readPosts.includes(id))s.readPosts.push(id);phoneView()});el.querySelectorAll('[data-pmail]').forEach(b=>b.onclick=()=>{phoneMail=b.dataset.pmail;if(!s.readMessages.includes(phoneMail))s.readMessages.push(phoneMail);phoneView()});const back=$('backPhoneMail');if(back)back.onclick=()=>{phoneMail=null;phoneView()};$('phoneStart').onclick=()=>{if(mzWeekendPhone){mzWeekendPhoneOpen=false;phoneMail=null;phoneView();return;}start();phoneView()};u219RefreshThemeButton($('phoneTheme'));$('phoneTheme').onclick=()=>switchLight('settings');}
@@ -22991,6 +23516,73 @@ function clearDrink(){s.mix=[];s.ice=false;s.iceCount=0;s.stirred=false;s.mixAt=
 function addIng(id){if(s.phase!=='open'||s.sub!=='order')return;const cnt=s.mix.filter(x=>x===id).length;if(cnt>=5||s.mix.length>=10)return;s.mix.push(id);s.stationError=null;render()}
 feedPosts.push(...[{"id": "p10a", "day": 10, "author": "베란다농부", "time": "17:26", "text": "화분에 물 주다가 아래층 화분에도 물 줌. 일단 모른 척할까", "comments": [["개굴", "아래층에서 비 왔다고 생각할 듯"], ["베란다농부", "방금 초인종 울림"], ["나사한통", "도망가지 마"]]}, {"id": "p10b", "day": 10, "author": "야근망령", "time": "16:43", "text": "오늘은 퇴근하고 진짜 아무것도 안 할 거임", "comments": [["관성", "구라ㄴㄴ 어제도 그 말 했잖아"], ["야근망령", "내일도 할 예정"], ["개굴", "그냥 안쉬는거잖아"]]}, {"id": "p10c", "day": 10, "author": "온도조절실패", "time": "15:19", "text": "집에서 튀김 해먹으려다 주방 청소만 두 시간 함 조졌다....", "comments": [["감자", "튀김은 원래 사 먹는 거야"], ["온도조절실패", "이제야 깨달음 흑흑"]]}, {"id": "p10d", "day": 10, "author": "새벽고양이", "time": "14:00", "text": "우리집 고양이 방금 허공에 화냄. 뭘 본 건지 궁금함", "comments": [["동네산책", "고양이는 원래 그래"], ["새벽고양이", "허공이 잘못했나 봄"]]}, {"id": "p10e", "day": 10, "author": "종점에서내려요", "time": "12:32", "text": "버스에서 책 읽다가 내릴 정류장 세 번 놓쳤다", "comments": [["맥스", "잘가게"], ["종점에서내려요", "집에보내줘집에보내줘집에"]]}, {"id": "p10f", "day": 10, "author": "관성", "time": "11:21", "text": "음료에 초코칩 넣으면 마지막에 숟가락 줘야 하는 거 아님?", "comments": [["개굴", "그냥 먹어"], ["관성", "어떻게"], ["나사한통", "혀로 줏어먹어"]]}, {"id": "p10g", "day": 10, "author": "중고라라", "time": "09:55", "text": "중고 세탁기 팔아요 네고가능", "comments": [["동네산책", "쿨거 ㄱ?"], ["중고라라", "먼저 연락 오신 분이 있습니다ㅠㅠ"]]}, {"id": "p10h", "day": 10, "author": "새벽빵", "time": "08:10", "text": "아침에 일어나서 밤인 줄 알고 출근 준비함", "comments": [["야근망령", "난 반대로 밤에 일어나서 출근함"], ["새벽빵", "그건 원래 야근이잖아"]]}]);
 feedPosts.push(...[{"id": "mzday22p01", "day": 22, "author": "초록장갑", "time": "11:48", "text": "화분에 물 주려고 컵 가져왔는데 정작 그 컵으로 커피 마시고 화분은 방치했어", "comments": [["동네산책", "너만 잘 살면 됐지 뭐"], ["초록장갑", "아니 식물도 살아야 된다고"], ["개굴", "화분에도 커피 줘"], ["초록장갑", "화분 죽일 일 있니"]]}, {"id": "mzday22p02", "day": 22, "author": "나사한통", "time": "13:17", "text": "공구함 새로 정리함. 이제 어디에 뭐 있는지 다 기억한다!!", "comments": [["관성", "내일 다시 물어볼게"], ["나사한통", "자신있음"], ["야근망령", "나 이 말 지난주에도 본 것 같은데"], ["나사한통", "그때랑 다르거든???"]]}, {"id": "mzday22p03", "day": 22, "author": "개굴", "time": "15:06", "text": "어제 길에서 아는 사람 만났는데 이름이 기억 안 나서 10분 동안 야!!!! 라고 부름", "comments": [["프리즘수집가", "진짜 아는 사람 맞아?"], ["개굴", "응"], ["관성", "야!!!!"], ["개굴", "야!!!!!!!"], ["동네산책", "호!!!!!!"]]}, {"id": "mzday22p04", "day": 22, "author": "종이수집가", "time": "16:39", "text": "새 노트 샀는데 아까워서 첫 장을 못 쓰겠어 글씨 잘못 쓰면 처음부터 망할 것 같아서", "comments": [["초록장갑", "두 번째 장부터 써"], ["종이수집가", "그럼 첫 장은?"], ["개굴", "나 줘"], ["종이수집가", "왜??"], ["개굴", "내가 망쳐줄게"]]}, {"id": "mzday22p05", "day": 22, "author": "버슝슝", "time": "17:22", "text": "어제 셔틀에서 졸다가 종점까지 갔다. 오늘은 제발 제대로 내리고 싶다", "comments": [["종점에서내려요", "어서 와"], ["버슝슝", "닉네임 진짜 너 진짜"], ["동네산책", "오늘도 가겠네"], ["버슝슝", "저주하지 마아악"], ["동네산책", "잘가게"]]}]);
+// DAY39 director-reviewed SNS posts.
+feedPosts.push(...[
+  {
+    "id": "p39_01",
+    "day": 39,
+    "author": "프리즘수집가",
+    "time": "09:38",
+    "text": "오늘 유행하는 그 토핑 얹은 음료 사진 봤는데, 나도 찍어보고 싶어졌어",
+    "comments": [
+      [
+        "관성",
+        "그거 맛있어?"
+      ],
+      [
+        "프리즘수집가",
+        "아직 한번도 안 먹어봤음!! 오늘 먹어보고 알려줄게"
+      ]
+    ]
+  },
+  {
+    "id": "p39_02",
+    "day": 39,
+    "author": "야근망령",
+    "time": "12:06",
+    "text": "아무 생각 없이 단말기 켰는데 영화에 나온 음료 영상만 여섯 개 연속으로 봄... 이 정도면 나도 마셔야 할 것 같음",
+    "comments": [
+      [
+        "무밈미",
+        "광고의 승리다"
+      ]
+    ]
+  },
+  {
+    "id": "p39_03",
+    "day": 39,
+    "author": "유리창너머",
+    "time": "15:19",
+    "text": "관문 쪽은 요즘 뭐가 유행만 하면 다 똑같이 하는 느낌",
+    "comments": [
+      [
+        "동네산책",
+        "그럼 안 하면 되지"
+      ],
+      [
+        "유리창너머",
+        "그냥 그렇다는 거야"
+      ]
+    ]
+  },
+  {
+    "id": "p39_04",
+    "day": 39,
+    "author": "오늘의운세는",
+    "time": "18:44",
+    "text": "[광고] 당신에게 어울리는 오늘의 토핑 음료를 알려드립니다! 단 세 문항으로 오늘의 추천 음료 확인",
+    "comments": [
+      [
+        "개굴",
+        "어차피 다 똑같은 거 추천하는 거 아님?"
+      ],
+      [
+        "오늘의운세는",
+        "고객님의 취향에 맞는 메뉴를 추천해 드립니다!"
+      ]
+    ]
+  }
+]);
 // Apply user-authored revisions LAST so subsequent day additions cannot overwrite them.
 for(const p of feedPosts){const update=mzScriptPostOverrides[p.id];if(update)Object.assign(p,update)}
 
@@ -23510,7 +24102,7 @@ $('stationBody').innerHTML=(s.stationError&&isOpen?`<div class="station-error" r
 $('stationBody').querySelectorAll('[data-food-addon]').forEach(b=>b.onclick=()=>{const id=b.dataset.foodAddon;if(!hasMarketItem(id))return;const list=s.foodAddons||[];s.foodAddons=list.includes(id)?list.filter(x=>x!==id):list.length<2?[...list,id]:list;s.stationError=null;render()});$('stationBody').querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>addIng(b.dataset.add));$('stationBody').querySelectorAll('[data-field]').forEach(b=>b.onclick=()=>{s[b.dataset.field]=b.dataset.value;if(b.dataset.field==='foodKind'&&s.foodKind==='비가열')s.foodHeat=0;s.stationError=null;render()});$('stationBody').querySelectorAll('[data-garnish-page]').forEach(b=>b.onclick=()=>{const max=Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1);v119GarnishPage=(v119GarnishPage+(b.dataset.garnishPage==='next'?1:-1)+(max+1))%(max+1);renderStation()});$('stationBody').querySelectorAll('[data-garnish]').forEach(b=>b.onclick=()=>{const id=b.dataset.garnish;if(!unlockedGarnishes().some(g=>g.id===id))return;const adding=s.extra!==id;s.extra=adding?id:null;s.stationError=null;if(adding)playEffect('topping');render()});for(let [id,fn] of [['iceBtn',()=>{const max=s.day>=10?3:1;s.iceCount=((s.iceCount||0)+1)%(max+1);s.ice=!!s.iceCount;s.stationError=null;render()}],['clearBtn',()=>{clearDrink();render()}],['stirBtn',()=>{if(s.mix.length&&(!s.stirred||s.mixAt<s.mix.length)){s.stirred=true;s.mixAt=s.mix.length;s.stationError=null;render()}}],['finishBtn',makeDrink],['heatMinus',()=>{s.foodHeat=Math.max(0,(s.foodHeat||0)-1);render()}],['heatPlus',()=>{if(s.foodKind!=='비가열')s.foodHeat=Math.min(10,(s.foodHeat||0)+1);render()}],['foodClear',()=>{s.foodBase=s.foodSauce=s.foodKind=null;s.foodAddons=[];s.foodHeat=0;s.extra=null;s.stationError=null;render()}],['foodMake',makeFood]]){let el=$(id);if(el)el.onclick=fn}}
 
 // Only explicitly scripted days are playable. Raise this constant after adding and testing the next day's script.
-const LAST_SCRIPTED_DAY=38;
+const LAST_SCRIPTED_DAY=39;
 function mzDayLimit(){return s.devPreview?50:LAST_SCRIPTED_DAY;}
 mzDevOptions.history=true;
 function mz186PopulateDeveloperHistory(){
@@ -23571,7 +24163,7 @@ function mzDeveloperBoot(el,shell){
 }
 function nextDay(){
  if(s.day>=mzDayLimit()||mzWeekendEligible()&&!s.devPreview)return;
- s.day++;if(s.day===21){s.recipeNotices=Array.isArray(s.recipeNotices)?s.recipeNotices:[];for(const r of fishRecipes)if(!s.recipeNotices.includes(r.name))s.recipeNotices.push(r.name);}if(s.day===10){s.recipeNotices=Array.isArray(s.recipeNotices)?s.recipeNotices:[];for(const r of friedRecipes)if(!s.recipeNotices.includes(r.name))s.recipeNotices.push(r.name);}s.phase='prep';s.visit=0;s.line=0;s.sub='dialogue';s.waitUntil=null;if(s.day===27)mzDay27TrendId();
+ s.day++;if(s.day===21){s.recipeNotices=Array.isArray(s.recipeNotices)?s.recipeNotices:[];for(const r of fishRecipes)if(!s.recipeNotices.includes(r.name))s.recipeNotices.push(r.name);}if(s.day===10){s.recipeNotices=Array.isArray(s.recipeNotices)?s.recipeNotices:[];for(const r of friedRecipes)if(!s.recipeNotices.includes(r.name))s.recipeNotices.push(r.name);}s.phase='prep';s.visit=0;s.line=0;s.sub='dialogue';s.waitUntil=null;if(s.day===27)mzDay27TrendId();if(s.day===39)mzDay39TrendId();
  s.station='drink';s.completed=[];clearDrink();s.foodBase=s.foodSauce=s.foodKind=null;s.foodHeat=0;
  s.remarked=false;s.lightComment=null;s.specialOutcome=null;s.garnishDialogue=[];s.phoneTab='feed';
  const id='day'+s.day;if(!s.deliveredMessages.includes(id)){s.deliveredMessages.push(id);playEffect('mail');}
@@ -23728,7 +24320,7 @@ function mz289DecorateLiquid(root=document){
  });
 }
 
-function render(){mzRestoreHearts();if(!Array.isArray(s.readPosts))s.readPosts=[];if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule'];const unread=s.deliveredMessages.filter(id=>!s.readMessages.includes(id)).length;mzRefreshGuestNewBadge();const recipeBadge=$('v57RecipeUnread');if(recipeBadge)recipeBadge.hidden=!v57UnseenRecipes().length;const dot=$('messageUnread');dot.hidden=unread===0;dot.textContent=unread;const side=$('messageSide');side.classList.toggle('mail-alert',unread>0);side.setAttribute('aria-label',unread?'새 메시지 '+unread+'개, 받은편지함':'받은편지함');side.title=unread?'새 메시지 '+unread+'개':'메시지';document.body.classList.toggle('light',s.light==='light');window.mzVisuals?.apply?.();$('clock').textContent=s.phase==='open'?(s.sub==='interlude'?(todayVisits()[Math.max(0,s.visit-1)]?.time||'18:00'):current().time):s.phase==='closing'?'02:00':'18:00';$('branchDay').textContent='ZERO GATE BRANCH · '+dayLabel(s.day)+(s.day===27?' · 토핑 데이: '+(garnishById(mzDay27TrendId())?.name||'기본 메뉴'):'');v48RenderWallet();scene();dialog();renderStation();bootView();phoneView();mz289DecorateLiquid();waitTick();$('headerLightButton').textContent=s.light==='dark'?'☀ 라이트 모드':'☾ 다크 모드';$('headerLightButton').setAttribute('aria-pressed',s.light==='light'?'true':'false');u219SyncThemeButtons();}
+function render(){mzRestoreHearts();if(!Array.isArray(s.readPosts))s.readPosts=[];if(!Array.isArray(s.readMessages))s.readMessages=[];if(!Array.isArray(s.deliveredMessages))s.deliveredMessages=['welcome','schedule'];const unread=s.deliveredMessages.filter(id=>!s.readMessages.includes(id)).length;mzRefreshGuestNewBadge();const recipeBadge=$('v57RecipeUnread');if(recipeBadge)recipeBadge.hidden=!v57UnseenRecipes().length;const dot=$('messageUnread');dot.hidden=unread===0;dot.textContent=unread;const side=$('messageSide');side.classList.toggle('mail-alert',unread>0);side.setAttribute('aria-label',unread?'새 메시지 '+unread+'개, 받은편지함':'받은편지함');side.title=unread?'새 메시지 '+unread+'개':'메시지';document.body.classList.toggle('light',s.light==='light');window.mzVisuals?.apply?.();$('clock').textContent=s.phase==='open'?(s.sub==='interlude'?(todayVisits()[Math.max(0,s.visit-1)]?.time||'18:00'):current().time):s.phase==='closing'?'02:00':'18:00';$('branchDay').textContent='ZERO GATE BRANCH · '+dayLabel(s.day)+(s.day===27?' · 토핑 데이: '+(garnishById(mzDay27TrendId())?.name||'기본 메뉴'):s.day===39?' · 토핑 데이: '+(garnishById(mzDay39TrendId())?.name||'기본 메뉴'):'');v48RenderWallet();scene();dialog();renderStation();bootView();phoneView();mz289DecorateLiquid();waitTick();$('headerLightButton').textContent=s.light==='dark'?'☀ 라이트 모드':'☾ 다크 모드';$('headerLightButton').setAttribute('aria-pressed',s.light==='light'?'true':'false');u219SyncThemeButtons();}
 const U219_SUN='<svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3" fill="currentColor"/><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1.5v1.4M8 13.1v1.4M1.5 8h1.4M13.1 8h1.4M3.4 3.4l1 1M11.6 11.6l1 1M3.4 12.6l1-1M11.6 4.4l-1 1"/></g></svg>';
 const U219_MOON='<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M13.5 9.8A5.6 5.6 0 0 1 6.2 2.5a5.6 5.6 0 1 0 7.3 7.3z" fill="currentColor"/></svg>';
 function u219RefreshThemeButton(button){
@@ -24283,7 +24875,7 @@ function showMail(id){
  const m=inbox.find(m=>m.id===id&&s.deliveredMessages.includes(id));if(!m)return;
  if(!s.readMessages.includes(id))s.readMessages.push(id);
  render();
- $('mailContent').innerHTML=`<button class="btn mail-back" id="mailBack">‹ 받은편지함</button><h3>${esc(m.title)}</h3><div class="mail-meta"><span>${esc(m.sender)}</span><span>${dayLabel(s.day)}</span></div><div class="mail-body">${esc(m.body)}</div>`;
+ $('mailContent').innerHTML=`<button class="btn mail-back" id="mailBack">‹ 받은편지함</button><h3>${esc(m.title)}</h3><div class="mail-meta"><span>${esc(m.sender)}</span><span>${dayLabel(s.day)}</span></div><div class="mail-body">${esc(mzDay39MailText(m.body))}</div>`;
  $('mailBack').onclick=showInbox;
 }
 // ===== MAIN MENU RETURN / OPTIONAL SAVE =====
