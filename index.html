@@ -21611,99 +21611,6 @@ feedPosts.push(...[
   }
 ]);
 
-
-// DAY35 weekend SNS: exact user-edited four entries, weekendOnly.
-feedPosts.push(...[
-  {
-    "id": "p35_week_01",
-    "day": 35,
-    "weekendOnly": true,
-    "author": "버슝슝",
-    "time": "09:18",
-    "text": "주말이라 한산할 줄 알고 버스 탔는데 사람이 왜 이렇게 많아?? 나만 쉬는 줄 알았지 또",
-    "comments": [
-      [
-        "종점에서내려요",
-        "다들 쉬니까 나오는 거지"
-      ],
-      [
-        "버슝슝",
-        "내가 왜 이걸 몰랐지.... 나도 놀러가는거면 좋겠다"
-      ]
-    ]
-  },
-  {
-    "id": "p35_week_02",
-    "day": 35,
-    "weekendOnly": true,
-    "author": "나사한통",
-    "time": "11:36",
-    "text": "아는 사람이 가구 조립 좀 도와달라고 해서 갔거든? 도착하니까 이미 다 조립해 놨더라ㅋㅋ 그냥 같이 점심 먹고 옴",
-    "comments": [
-      [
-        "초록장갑",
-        "밥 같이 먹자고 부른 거 아냐?"
-      ],
-      [
-        "나사한통",
-        "헉 처음부터 그렇게 말하지"
-      ],
-      [
-        "관성",
-        "그랬으면 안 갔을 거면서"
-      ],
-      [
-        "나사한통",
-        "..."
-      ]
-    ]
-  },
-  {
-    "id": "p35_week_04",
-    "day": 35,
-    "weekendOnly": true,
-    "author": "종이수집가",
-    "time": "16:09",
-    "text": "친구한테 편지 쓰다가 봉투에 이름을 잘못 적었어 봉투가 아까워서 한참 보고 있는데 그냥 새 봉투 쓰는 게 맞겠지??",
-    "comments": [
-      [
-        "뿌꾸",
-        "받는 사람 이름을 틀린 거야?"
-      ],
-      [
-        "종이수집가",
-        "수신인에 내 이름을 적었어"
-      ]
-    ]
-  },
-  {
-    "id": "p35_week_05",
-    "day": 35,
-    "weekendOnly": true,
-    "author": "모래먼지",
-    "time": "18:27",
-    "text": "오랜만에 황무지 쪽에서 온 사람 만나서 얘기하다가 저녁까지 같이 먹었다. 서로 아는 정착지는 하나도 안 겹치더라. 생각해 보면 당연한 건데",
-    "comments": [
-      [
-        "외곽생활",
-        "그쪽도 넓으니까"
-      ],
-      [
-        "모래먼지",
-        "그러게. 얘기하다 보니 다른 데 사는 사람 같았어"
-      ],
-      [
-        "동네산책",
-        "둘이 뭐 먹었어?"
-      ],
-      [
-        "모래먼지",
-        "온소바"
-      ]
-    ]
-  }
-]);
-
 // DAY 34 SNS: public feed; no required shop rumor or recurring group-chat thread.
 feedPosts.push(...[
   {
@@ -22718,6 +22625,11 @@ function restoreState(raw){
   s.garnishDialogue=[];
   if(s.phase==='open'&&s.sub==='after'&&(!Number.isInteger(s.line)||s.line<0||s.line>=day35Visits[14].after.length))s.line=0;
  }
+ // v360: Reconstruct only provably completed scripted visits from old save dayStats.
+ // Preserve existing guestVisits; never extrapolate from day alone or unlock future scenes.
+ if(!Array.isArray(s.guestVisits))s.guestVisits=[];
+ if(!Array.isArray(s.guestClues))s.guestClues=[];
+ backfillGuestHistory();
  mzRestoreHearts();if(!Number.isInteger(s.mixAt)||s.mixAt<0||s.mixAt>s.mix.length)s.mixAt=s.stirred?s.mix.length:0;if(!s.lightSeen||typeof s.lightSeen!=='object')s.lightSeen={};if(!unlockedGarnishes().some(g=>g.id===s.extra))s.extra=null;
  if(s.phase==='open'&&s.sub==='interlude'&&!(Number.isFinite(s.waitUntil)&&s.waitUntil>0))s.waitUntil=Date.now()+WAIT_SECONDS[Math.min(s.visit,WAIT_SECONDS.length-1)]*1000;
  s.stationError=null;
@@ -22937,15 +22849,15 @@ function backfillGuestHistory(){
 // An unlock is shown only after a visit where the script establishes it.
 // Undiscovered entries remain hidden until a later authored scene supplies evidence.
 const mzRegularPreferences={
- '야간 정비사':{like:['얼음','매콤함','바삭함','훈연 향'],dislike:['달콤함'],discover:{'얼음':1,'매콤함':9,'바삭함':11,'훈연 향':8,'달콤함':16}},
- '정기 화물 기사':{like:['육류'],dislike:['알코올'],discover:{'육류':3,'알코올':6}},
- '인근 직장인':{like:['달콤함','곡물 반죽'],dislike:['매콤함','신맛'],discover:{'달콤함':2,'곡물 반죽':6,'매콤함':11,'신맛':11}},
- '황무지 출신 정착민':{like:['과실 향'],dislike:['얼음'],discover:{'과실 향':4,'얼음':7}},
- '마렌':{like:['담백함'],dislike:[],discover:{'담백함':18}},
- '리안':{like:['국물','채소','층 유지'],dislike:[],discover:{'국물':20,'채소':4,'층 유지':18}},
- '토르반':{like:['알코올','깔끔함','아내:달콤함'],dislike:[],discover:{'알코올':10,'깔끔함':8,'아내:달콤함':8}},
- '카이렌':{like:['채소','튀김'],dislike:['과실 향'],discover:{'채소':17,'튀김':21,'과실 향':15}},
- '미카':{like:['육류','튀김','얼음'],dislike:['신맛'],discover:{'튀김':17,'얼음':20}}
+ "야간 정비사":{"like": ["얼음", "매콤함", "바삭함", "훈연 향"], "dislike": ["달콤함"], "discover": {"얼음": 1, "매콤함": 9, "바삭함": 11, "훈연 향": 8, "달콤함": 16}},
+ "정기 화물 기사":{"like": ["육류", "매콤함", "청량함"], "dislike": ["알코올"], "discover": {"육류": 3, "매콤함": 17, "청량함": 17, "알코올": 6}},
+ "인근 직장인":{"like": ["달콤함", "곡물 반죽", "담백함"], "dislike": ["매콤함", "신맛"], "discover": {"달콤함": 2, "곡물 반죽": 6, "담백함": 28, "매콤함": 11, "신맛": 11}},
+ "황무지 출신 정착민":{"like": ["과실 향", "국물"], "dislike": ["얼음"], "discover": {"과실 향": 4, "국물": 22, "얼음": 7}},
+ "마렌":{"like": ["담백함", "감자", "과실 향"], "dislike": [], "discover": {"담백함": 18, "감자": 6, "과실 향": 16}},
+ "리안":{"like": ["국물", "채소", "층 유지"], "dislike": [], "discover": {"국물": 20, "채소": 4, "층 유지": 18}},
+ "토르반":{"like": ["알코올", "깔끔함", "구이"], "dislike": [], "discover": {"알코올": 10, "깔끔함": 8, "구이": 36}},
+ "카이렌":{"like": ["채소", "튀김", "생선"], "dislike": ["과실 향", "얼음"], "discover": {"채소": 17, "튀김": 21, "생선": 21, "과실 향": 15, "얼음": 30}},
+ "미카":{"like": ["육류", "튀김", "얼음", "바삭함"], "dislike": ["신맛"], "discover": {"육류": 19, "튀김": 17, "얼음": 20, "바삭함": 27}}
 };
 // Narrative snapshots: show the story's *current* state, never later spoilers.
 const mzRegularStoryMilestones={
@@ -22958,33 +22870,42 @@ const mzRegularStoryMilestones={
  '정기 화물 기사':[
   {day:3,text:'정기 운송 노선을 오가며 운전 전후로 MILE ZERO에 들른다.'},
   {day:15,text:'최근 차 안에서 정체 모를 소리가 나기 시작해 차량 상태를 걱정하고 있다.'},
-  {day:17,text:'짐칸에서 작은 동물을 발견했다. 먹을 것을 챙겨 주면서도 절대 정을 주지 않겠다고 주장한다.'}
+  {day:17,text:'짐칸에서 작은 동물을 발견했다. 먹을 것을 챙겨 주면서도 절대 정을 주지 않겠다고 주장한다.'},
+  {day:24, text:"차 안에 눌러앉은 작은 동물의 사진을 보여 주었다. 처음에는 잠시 맡아 둘 생각이었지만 이제는 일상에서 계속 신경 쓰고 있다."},
+  {day:33, text:"작은 동물을 처음 발견했던 황무지 근처로 다시 갈 기회가 생겼다. 돌려보내는 것이 맞을지 고민하며, 그곳이 안전한지 확인하려 한다."},
+  {day:35, text:"결국 작은 동물과 계속 함께 지내기로 결정했다. 녀석의 먹이를 알아보다 식재료 납품업자에게 들은 비가열 조리법을 전해 주었다.", requiresUnlock:"nonheat"},
+  {day:35, text:"차량 옆에서 작은 동물을 돌보는 동안 기사가 직접 쉴 자리를 만들었다. 완성된 집에 들어간 녀석의 사진을 기념으로 받았다.", requiresWeekendStory:"freight_care_35"}
  ],
  '인근 직장인':[
   {day:2,text:'늦은 퇴근과 잦은 야근에 지쳐 MILE ZERO에서 잠시 숨을 돌린다.'},
   {day:11,text:'퇴근 후에도 상사와 회의 걱정에서 쉽게 벗어나지 못한다.'},
   {day:23,text:'회사에서 급하다던 업무들이 미뤄지고, 자신이 맡던 일도 다른 쪽으로 넘어가고 있다. 이유를 알 수 없어 불안해한다.'},
   {day:25,text:'회사에서 해고 통보를 받았다. 술에 취해 가게를 찾아와 울면서, 이제 어디로 가야 할지 모르겠다고 털어놓았다.'},
+  {day:31, text:"구직 공고를 보기 시작했지만, 지원 버튼을 누르는 것조차 망설이고 있다. 다시 비슷한 직장 생활을 반복할까 두려워한다."}
  ],
  '황무지 출신 정착민':[
   {day:2,text:'황무지에서 안전도시로 이주한 뒤, 어디서나 같은 메뉴를 먹을 수 있는 생활을 반가워한다.'},
   {day:9,text:'안전도시 안쪽에서 황무지 출신이라는 이유로 차별을 경험했다.'},
-  {day:16,text:'안전도시 생활을 좋아하지만, 동료들 앞에서 자신의 출신을 어떻게 이야기해야 할지 망설였다.'}
+  {day:16,text:'안전도시 생활을 좋아하지만, 동료들 앞에서 자신의 출신을 어떻게 이야기해야 할지 망설였다.'},
+  {day:18, text:"안전도시에 처음 들어왔을 때 마신 음료가 게이트 라이트였다고 이야기했다. 낯선 도시에서 마신 첫 잔을 지금도 기억하고 있다."},
+  {day:36, text:"사실 황무지 시절의 동료들은 사고로 모두 세상을 떠났으며, 본인은 동료들이 없는 곳에서 더는 지내기 어려워 안전도시로 자리를 옮겼다고 털어놓았다."}
  ],
  '마렌':[
   {day:1,text:'관문 거리에서 오랫동안 점포를 운영해 온 상인이다.'},
   {day:9,text:'떠났던 옛 이웃이 다시 돌아와 가게를 열었다는 소식을 반가워했다.'},
-  {day:16,text:'MILE ZERO의 추천 지점 선정을 축하하며, 늘어난 거리의 손님들 이야기를 들려줬다.'}
+  {day:16,text:'MILE ZERO의 추천 지점 선정을 축하하며, 늘어난 거리의 손님들 이야기를 들려줬다.'},
+  {day:29, text:"관문 상권을 처음 찾는 손님들이 길을 헷갈리는 일이 잦아지자, 골목을 안내할 방법을 생각하기 시작했다."}
  ],
  '리안':[
   {day:2,text:'관문에서 근무하며, 교대가 끝나면 이 가게에 들른다.'},
   {day:11,text:'서류 문제로 방문객을 돌려보낸 뒤, 규정을 유지하면서도 더 잘 안내할 방법을 고민한다.'},
   {day:14,text:'방문 목적별 서류 안내표를 동료와 검토하며 누락된 경우를 보완하고 있다.'},
-  {day:17,text:'안내표를 일부 창구에서 시험하고 이용객 반응을 반영해 표현을 개선하려 한다.'}
+  {day:17,text:'안내표를 일부 창구에서 시험하고 이용객 반응을 반영해 표현을 개선하려 한다.'},
+  {day:32, text:"관문 안내 개선의 성과를 인정받아, 새 정착민들이 지역 생활에 필요한 정보와 사람을 찾도록 돕는 업무로 승진했다."}
  ],
  '토르반':[
   {day:3,text:'황무지와 안전도시를 오가며 물자를 납품하는 운송대원이다.'},
-  {day:8,text:'황무지에 있는 아내가 간식을 챙겨 주었다며 즐겁게 이야기한다.'},
+  {day:8,text:'황무지에 있는 아내가 간식을 챙겨 주었다며 즐겁게 이야기한다. 아내는 달콤한 음식을 좋아하는 듯 하다.'},
   {day:11,text:'아내에게 도시에서만 맛볼 수 있는 것을 선물하고 싶어 한다.'},
   {day:16,text:'일 때문에 안전도시에 다시 들렀다. 아내와 함께 올 만한 장소를 여전히 알아보는 중이다.'},
   {day:29,text:'아내와 함께 MILE ZERO에 방문했다. 저물녘 운송길을 닮은 「선셋 로드」를 만들어 주었고, 아내에게서 「황무지의 꽃다발」을 선물받았다.'}
@@ -22992,10 +22913,16 @@ const mzRegularStoryMilestones={
  '카이렌':[
   {day:13,text:'관문 출입 서류를 다시 준비한 끝에 안전도시에 들어와 가게를 찾았다.'},
   {day:15,text:'가게에 다시 들러 퉁명스럽지만 나름대로 음식 맛을 칭찬했다.'},
-  {day:17,text:'미카를 데리고 가게에 방문했다. 서로 편하게 농담을 주고받는 사이로 보인다.'}
+  {day:17,text:'미카를 데리고 가게에 방문했다. 서로 편하게 농담을 주고받는 사이로 보인다.'},
+  {day:21, text:"새로운 튀김 메뉴를 먹고 감동했다."},
+  {day:22, text:"도시에서의 일을 마무리하고 돌아갈 준비를 하면서도 다시 들렀다. 동료들과 함께 와 볼 생각도 내비쳤다."},
+  {day:30, text:"미카가 예약한 일행과 함께 가게에 방문했다. 여럿이 둘러앉는 자리를 어색해하면서도 끝까지 함께했다."}
  ],
  '미카':[
-  {day:17,text:'카이렌과 함께 처음 방문했다. 카이렌과 편하게 농담을 주고받는다.'}
+  {day:17,text:'카이렌과 함께 처음 방문했다. 카이렌과 편하게 농담을 주고받는다.'},
+  {day:19, text:"혼자서 다시 찾아와 고기 요리를 먹고 얼음을 넉넉히 넣은 음료를 주문했다."},
+  {day:28, text:"동료들과 함께 가게를 방문할 수 있도록 DAY30 단체 자리를 예약했다."},
+  {day:30, text:"카이렌을 비롯한 일행과 함께 가게를 방문했다. 여러 사람이 함께하는 식사 자리를 즐겼다."}
  ]
 };
 function mzHasFinishedRegularVisit(name,day){
@@ -23007,11 +22934,11 @@ function mzRegularPrefsVisible(name){
  return {like:meta.like.filter(unlocked),dislike:meta.dislike.filter(unlocked)};
 }
 function mzRegularStoryVisible(name){
- return (mzRegularStoryMilestones[name]||[]).filter(x=>x.requiresUnlock?(Array.isArray(s.regularUnlocks)&&s.regularUnlocks.includes(x.requiresUnlock)):mzHasFinishedRegularVisit(name,x.day));
+ return (mzRegularStoryMilestones[name]||[]).filter(x=>mzHasFinishedRegularVisit(name,x.day)&&(!x.requiresUnlock||(Array.isArray(s.regularUnlocks)&&s.regularUnlocks.includes(x.requiresUnlock)))&&(!x.requiresWeekendStory||(Array.isArray(s.weekendStoriesDone)&&s.weekendStoriesDone.includes(x.requiresWeekendStory))));
 }
 function mzGuestArchiveEvents(name){
  const p=mzRegularPrefsVisible(name), stories=mzRegularStoryVisible(name);
- return [...stories.map(x=>({id:`story:${name}:${x.day}${x.requiresUnlock?':'+x.requiresUnlock:''}`,day:x.day,text:x.text})),
+ return [...stories.map(x=>({id:`story:${name}:${x.day}${x.requiresUnlock?':'+x.requiresUnlock:''}${x.requiresWeekendStory?':weekend:'+x.requiresWeekendStory:''}`,day:x.day,text:x.text})),
  ...p.like.map(x=>({id:`pref:${name}:like:${x}`,day:mzRegularPreferences[name].discover[x],text:x})),
  ...p.dislike.map(x=>({id:`pref:${name}:dislike:${x}`,day:mzRegularPreferences[name].discover[x],text:x}))];
 }
