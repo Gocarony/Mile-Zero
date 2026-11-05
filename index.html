@@ -21497,6 +21497,9 @@ feedPosts.push(...[{"id": "mz30_01", "day": 30, "author": "관문골목", "time"
 // DAY 33 public SNS entries — user edited and p33_04 approved.
 feedPosts.push(...[{"id": "p33_01", "author": "개굴", "time": "09:26", "text": "나 네일 새로 했어 짜잔~", "comments": [["샤카샤카밤바", "사진이 없는데?"], ["개굴", "ㅋㅋ실수"], ["동네산책", "뭐야 보여줘"]], "day": 33}, {"id": "p33_02", "author": "종이수집가", "time": "11:48", "text": "책갈피 대신 끼워둔 영수증에서 글씨 다 지워졌어. 이건 이제 무슨 영수증이지", "comments": [["관성", "카드 내역 보면 되잖아"], ["종이수집가", "언제 샀는지도 모르겠는데.."], ["관성", "그러길래 가계부를 썼어야지"]], "day": 33}, {"id": "p33_03", "author": "저녁버스창가", "time": "14:17", "text": "버스 타고 가다가 반대편 자리에 내 가방이랑 똑같은 거 봄. 색까지 똑같아서 내릴 때 두 번 확인했어", "comments": [["버슝슝", "가방에 뭐 달아두는 게 편함"], ["저녁버스창가", "열쇠고리 하나 달아야겠다"]], "day": 33}, {"id": "p33_04", "author": "부릉부릉", "time": "17:36", "text": "일 끝나고 머리 자르러 갔는데 의자에 앉아서 졸아버림ㅋㅋ\n눈 뜨니까 다 끝나 있었음. 미용사님이 너무 잘 자길래 안 깨웠대", "comments": [["잠깐눈감음", "잘라도 모를 정도면 진짜 피곤했나 보다"]], "day": 33}, {"id": "p33_05", "author": "차가운장바구니", "time": "20:12", "text": "저녁에 장 보러 왔는데 벌써 제일 먹고 싶던 반찬 다 팔렸다", "comments": [["개굴", "뭐였는데"], ["차가운장바구니", "버섯전.."], ["개굴", "전은 몰르겠는데 근처 식당에 비슷한거 팔지 않나? 포장해가셈"]], "day": 33}] );
 
+// DAY35 weekend SNS — exact four posts from the user-reviewed TXT.
+feedPosts.push(...[{"id":"p35_week_01","day":35,"weekendOnly":true,"author":"버슝슝","time":"09:18","text":"주말이라 한산할 줄 알고 버스 탔는데 사람이 왜 이렇게 많아?? 나만 쉬는 줄 알았지 또","comments":[["종점에서내려요","다들 쉬니까 나오는 거지"],["버슝슝","내가 왜 이걸 몰랐지.... 나도 놀러가는거면 좋겠다"]]},{"id":"p35_week_02","day":35,"weekendOnly":true,"author":"나사한통","time":"11:36","text":"아는 사람이 가구 조립 좀 도와달라고 해서 갔거든? 도착하니까 이미 다 조립해 놨더라ㅋㅋ 그냥 같이 점심 먹고 옴","comments":[["초록장갑","밥 같이 먹자고 부른 거 아냐?"],["나사한통","헉 처음부터 그렇게 말하지"],["관성","그랬으면 안 갔을 거면서"],["나사한통","..."]]},{"id":"p35_week_04","day":35,"weekendOnly":true,"author":"종이수집가","time":"16:09","text":"친구한테 편지 쓰다가 봉투에 이름을 잘못 적었어 봉투가 아까워서 한참 보고 있는데 그냥 새 봉투 쓰는 게 맞겠지??","comments":[["뿌꾸","받는 사람 이름을 틀린 거야?"],["종이수집가","수신인에 내 이름을 적었어"]]},{"id":"p35_week_05","day":35,"weekendOnly":true,"author":"모래먼지","time":"18:27","text":"오랜만에 황무지 쪽에서 온 사람 만나서 얘기하다가 저녁까지 같이 먹었다. 서로 아는 정착지는 하나도 안 겹치더라. 생각해 보면 당연한 건데","comments":[["외곽생활","그쪽도 넓으니까"],["모래먼지","그러게. 얘기하다 보니 다른 데 사는 사람 같았어"],["동네산책","둘이 뭐 먹었어?"],["모래먼지","온소바"]]}]);
+
 function mzSnsPublicationOrder(p){return (Number(p.day)||1)*2+(p.weekendOnly?1:0)}
 function visiblePosts(){return feedPosts.filter(p=>(!p.day||p.day<=s.day)&&(!p.weekendOnly||s.day>p.day||(s.day===p.day&&(bootScreen==='weekend'||(s.weekendsCompleted||[]).includes(p.day))))).slice().sort((a,b)=>mzSnsPublicationOrder(b)-mzSnsPublicationOrder(a)||String(b.time||'').localeCompare(String(a.time||'')))}
 function unreadPosts(){return visiblePosts().filter(p=>!(s.readPosts||[]).includes(p.id)).length}
@@ -22625,8 +22628,8 @@ function restoreState(raw){
   s.garnishDialogue=[];
   if(s.phase==='open'&&s.sub==='after'&&(!Number.isInteger(s.line)||s.line<0||s.line>=day35Visits[14].after.length))s.line=0;
  }
- // v360: Reconstruct only provably completed scripted visits from old save dayStats.
- // Preserve existing guestVisits; never extrapolate from day alone or unlock future scenes.
+ // v361: Restore visits only from explicit named visit records.
+ // A served count is not proof of which person visited, particularly across builds.
  if(!Array.isArray(s.guestVisits))s.guestVisits=[];
  if(!Array.isArray(s.guestClues))s.guestClues=[];
  backfillGuestHistory();
@@ -22838,12 +22841,11 @@ function rememberGuestVisit(who,day,visit){
  }
 }
 function backfillGuestHistory(){
- // Older save files tracked per-day visits but did not store archive entries.
- for(const [key,stats] of Object.entries(s.dayStats||{})){
-  const d=Number(key),roster=dailyVisits[d];if(!roster||!Number.isInteger(d))continue;
-  const count=Math.min(roster.length,Math.max(0,Number(stats?.served)||0));
-  for(let i=0;i<count;i++){rememberGuestVisit(roster[i].who,d,i);rememberAdditionalGuests(roster[i],d,i);}
- }
+ // Never infer WHO completed a visit from dayStats.served (a count only).
+ // guestClues and garnishDiscoveries can be recorded before the visitor leaves,
+ // so they are not completion evidence either. Keep existing exact guestVisits.
+ // An older save without named completion history cannot be reconstructed safely.
+ if(!Array.isArray(s.guestVisits))s.guestVisits=[];
 }
 // Canonical preferences are authored, not inferred from every menu ordered.
 // An unlock is shown only after a visit where the script establishes it.
