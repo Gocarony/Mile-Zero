@@ -25210,7 +25210,8 @@ function preparedFoodMatchesOrder(order){
  if(!f||!mzFoodMatchesDiet(order)||s.foodBase!==f.base||s.foodSauce!==f.sauce||s.foodKind!==f.kind)return false;
  const addons=(s.foodAddons||[]).slice().sort();
  const custom=(s.customRecipes||[]).find(v=>v.name===order.name&&v.kind==='food');
- const expected=(order.addons||((mzIsAnyMenuOrder(order)||order.flavorRequest)?f.addons:custom?.addons)||f.addons||[]).slice().sort();
+ // Story-special orders use their own registered specification, not a same-named legacy custom recipe.
+ const expected=(order.addons||(order.regularSpecial==='mechanic'?f.addons:((mzIsAnyMenuOrder(order)||order.flavorRequest)?f.addons:custom?.addons))||f.addons||[]).slice().sort();
  const allowBadAddons=!!current()?.afterBad&&Array.isArray(order.addons)&&order.addons.length>0;
  const plainRecipe=availableFoods().some(base=>base.base===s.foodBase&&base.sauce===s.foodSauce&&base.kind===s.foodKind&&!((base.addons||[]).length));
  const addonMatch=addons.join('|')===expected.join('|')||(allowBadAddons&&addons.length===0&&plainRecipe);
