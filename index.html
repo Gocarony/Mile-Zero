@@ -25549,7 +25549,7 @@ function mzPortraitIdsForCurrentVisit(v){
  if(mzVisualPrefs.portraits===false||s.phase!=='open'||s.sub==='interlude'||!v)return [];
  if(v.who==='토르반'&&s.day===29)return ['torbanwife','torban'];
  if(v.who==='카이렌과 미카'||v.who==='미카와 카이렌')return ['mika','kairen'];
- if(v.who==='빨간 노래를 부르는 두 손님'||v.who==='인근 학생 두 명')return ['redsonga','redsongb'];
+ if((s.day===19&&v.who==='빨간 노래를 부르는 두 손님')||(s.day===32&&v.who==='인근 학생 두 명'))return ['redsonga','redsongb'];
  if(s.day===30&&v.who==='관문 대기객')return ['gatewaiter30'];
  const id=mzPortraitIdForWho(v.who);
  if(id)return [id];
