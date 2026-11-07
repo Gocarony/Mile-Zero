@@ -24669,7 +24669,7 @@ function mzBindDesk(root){
 let mzDevPortraitChoice='maren';
 const mzDevPortraitChoices=[
  ['maren','마렌'],['mechanic','야간 정비사'],['rian','리안'],
- ['freight','정기 화물 기사'],['settler','황무지 출신 정착민'],['kairen','카이렌'],['torban','토르반'],
+ ['freight','정기 화물 기사'],['settler','황무지 출신 정착민'],['kairen','카이렌'],['mika','미카'],['torban','토르반'],
  ['torbanwife','토르반의 아내'],['couple','토르반 부부']
 ];
 function mzDevPortraitPreview(){
@@ -25356,6 +25356,7 @@ const STANDING_LAYERS={
  freight:{label:'정기 화물 기사',base:'assets/characters/freight-driver-base.png',expressions:{normal:'assets/characters/freight-driver-expression-normal.gif'}},
  settler:{label:'황무지 출신 정착민',base:'assets/characters/settler-base.png',expressions:{normal:'assets/characters/settler-expression-normal.png'}},
  kairen:{label:'카이렌',base:'assets/characters/kairen-base.png',expressions:{normal:'assets/characters/kairen-expression-normal.gif'}},
+ mika:{label:'미카',base:'assets/characters/mika-base.png',expressions:{normal:'assets/characters/mika-expression-normal.gif'}},
  torban:{label:'토르반',base:'assets/characters/torban-base.png',expressions:{normal:'assets/characters/torban-expression-normal.gif'}},
  torbanwife:{label:'토르반의 아내',base:'assets/characters/torban-wife-base.png',expressions:{normal:'assets/characters/torban-wife-expression-normal.gif'}}
 };
@@ -25365,6 +25366,7 @@ const MAREN_FACE_WEBP='assets/characters/maren-face.webp';
 const FREIGHT_FACE_WEBP='assets/characters/freight-face.webp';
 const SETTLER_FACE_WEBP='assets/characters/settler-face.webp';
 const KAIREN_FACE_WEBP='assets/characters/kairen-face.webp';
+const MIKA_FACE_WEBP='assets/characters/mika-face.webp';
 const TORBAN_FACE_WEBP='assets/characters/torban-face.webp';
 const FREIGHT_DAY36_PARTS_GIF='assets/characters/freight-driver-animal.gif';
 function mzPortraitBackLayerSrc(id){
@@ -25393,6 +25395,7 @@ function mzPortraitIdForWho(who){
  if(who==='정기 화물 기사')return 'freight';
  if(who==='황무지 출신 정착민')return 'settler';
  if(who==='카이렌')return 'kairen';
+ if(who==='미카')return 'mika';
  if(who==='토르반')return 'torban';
  if(who==='토르반의 아내')return 'torbanwife';
  return null;
@@ -25966,7 +25969,7 @@ function guestArchiveMarkup(){
  const all=history.concat(active&&!history.some(x=>x.id===active.id)?[active]:[]);
  const regular=regularCustomerNames.filter(name=>all.some(x=>x.who===name));
  const visitors=all.filter(x=>!regularCustomerNames.includes(x.who));
- const tiles=regular.map(name=>{const entries=all.filter(x=>x.who===name);const hasFace=['마렌','야간 정비사','리안','정기 화물 기사','황무지 출신 정착민','카이렌','토르반'].includes(name);const faceSrc=name==='마렌'?MAREN_FACE_WEBP:name==='야간 정비사'?MECHANIC_FACE_WEBP:name==='리안'?RIAN_FACE_WEBP:name==='정기 화물 기사'?FREIGHT_FACE_WEBP:name==='황무지 출신 정착민'?SETTLER_FACE_WEBP:name==='카이렌'?KAIREN_FACE_WEBP:TORBAN_FACE_WEBP;return `<button type="button" class="v48-guest-tile" data-v48-guest="${esc(name)}" aria-expanded="false"><span class="v48-guest-symbol" aria-hidden="true">${hasFace?`<img class="mz-custom-character-image mz-guest-face" src="${faceSrc}" alt=""><span class="mz-guest-fallback">${['◇','✦','◈','⌁','▣','◆','⬡'][regularCustomerNames.indexOf(name)%7]}</span>`:['◇','✦','◈','⌁','▣','◆','⬡'][regularCustomerNames.indexOf(name)%7]}</span><strong>${esc(name)}</strong><small>첫 방문 ${dayLabel(entries[0].day)} · ${entries.filter(x=>!x.active).length}회</small>${v48ArchiveNew(name)?'<span class="v48-new">NEW</span>':''}</button>`}).join('');
+ const tiles=regular.map(name=>{const entries=all.filter(x=>x.who===name);const hasFace=['마렌','야간 정비사','리안','정기 화물 기사','황무지 출신 정착민','카이렌','미카','토르반'].includes(name);const faceSrc=name==='마렌'?MAREN_FACE_WEBP:name==='야간 정비사'?MECHANIC_FACE_WEBP:name==='리안'?RIAN_FACE_WEBP:name==='정기 화물 기사'?FREIGHT_FACE_WEBP:name==='황무지 출신 정착민'?SETTLER_FACE_WEBP:name==='카이렌'?KAIREN_FACE_WEBP:name==='미카'?MIKA_FACE_WEBP:TORBAN_FACE_WEBP;return `<button type="button" class="v48-guest-tile" data-v48-guest="${esc(name)}" aria-expanded="false"><span class="v48-guest-symbol" aria-hidden="true">${hasFace?`<img class="mz-custom-character-image mz-guest-face" src="${faceSrc}" alt=""><span class="mz-guest-fallback">${['◇','✦','◈','⌁','▣','◆','⬡'][regularCustomerNames.indexOf(name)%7]}</span>`:['◇','✦','◈','⌁','▣','◆','⬡'][regularCustomerNames.indexOf(name)%7]}</span><strong>${esc(name)}</strong><small>첫 방문 ${dayLabel(entries[0].day)} · ${entries.filter(x=>!x.active).length}회</small>${v48ArchiveNew(name)?'<span class="v48-new">NEW</span>':''}</button>`}).join('');
  const visitorCards=visitors.map(x=>{const v=(dailyVisits[x.day]||[])[x.visit];return `<div class="v39-guest-card"><h3>${esc(x.who)}</h3><div class="v39-small">${dayLabel(x.day)} · ${x.active?'방문 중':esc(v?.orders.map(o=>o.name).join(', ')||'방문 기록')}</div></div>`}).join('');
  return `<h2>단골 손님</h2><div class="v39-archive-tabs"><button type="button" class="btn active" id="v39RegularTab" aria-pressed="true">단골</button><button type="button" class="btn" id="v39VisitorTab" aria-pressed="false">방문객</button></div><section id="v39RegularPanel"><div class="v48-guest-grid">${tiles||'<p class="note">아직 만난 단골이 없습니다.</p>'}</div></section><section id="v39VisitorPanel" hidden>${visitorCards||'<p class="note">아직 만난 방문객이 없습니다.</p>'}</section>`;
 }
@@ -25978,7 +25981,7 @@ function v48GuestDetail(name){
  const stories=mzRegularStoryVisible(name);
  const preferenceTags=values=>values.length?v32Tags([],values):'<p class="v39-empty">아직 확인한 취향이 없습니다.</p>';
  const orders=records.filter(x=>!x.active).map(x=>{const v=(dailyVisits[x.day]||[])[x.visit];return v?`${dayLabel(x.day)} · ${v.orders.map(o=>o.name).join(', ')}`:null}).filter(Boolean);
-  return `<div class="v48-guest-detail">${['마렌','야간 정비사','리안','정기 화물 기사','황무지 출신 정착민','카이렌','토르반'].includes(name)?`<img class="mz-custom-character-image mz-guest-detail-face" src="${name==='마렌'?MAREN_FACE_WEBP:name==='야간 정비사'?MECHANIC_FACE_WEBP:name==='리안'?RIAN_FACE_WEBP:name==='정기 화물 기사'?FREIGHT_FACE_WEBP:name==='황무지 출신 정착민'?SETTLER_FACE_WEBP:name==='카이렌'?KAIREN_FACE_WEBP:TORBAN_FACE_WEBP}" alt="${esc(name)} 얼굴">`:``}<h3>${esc(name)}</h3><p class="v39-small">첫 방문 ${records.length?dayLabel(records[0].day):''} · 완료된 방문 ${orders.length}회</p><h4>취향</h4><div class="mz-regular-preferences"><div class="mz-pref-group"><strong>선호</strong>${preferenceTags(p.like)}</div><div class="mz-pref-group"><strong>비선호</strong>${preferenceTags(p.dislike)}</div></div><h4>기억에 남는 이야기</h4>${stories.length?stories.map(e=>`<div class="v39-memory"><p>${esc(e.text)}</p><small>${dayLabel(e.day)}</small></div>`).join(''):'<p class="v39-empty">아직 기록된 이야기가 없습니다.</p>'}<details><summary>지금까지의 주문 (${orders.length})</summary>${orders.map(x=>`<p class="v39-small">${esc(x)}</p>`).join('')}</details></div>`;
+  return `<div class="v48-guest-detail">${['마렌','야간 정비사','리안','정기 화물 기사','황무지 출신 정착민','카이렌','미카','토르반'].includes(name)?`<img class="mz-custom-character-image mz-guest-detail-face" src="${name==='마렌'?MAREN_FACE_WEBP:name==='야간 정비사'?MECHANIC_FACE_WEBP:name==='리안'?RIAN_FACE_WEBP:name==='정기 화물 기사'?FREIGHT_FACE_WEBP:name==='황무지 출신 정착민'?SETTLER_FACE_WEBP:name==='카이렌'?KAIREN_FACE_WEBP:name==='미카'?MIKA_FACE_WEBP:TORBAN_FACE_WEBP}" alt="${esc(name)} 얼굴">`:``}<h3>${esc(name)}</h3><p class="v39-small">첫 방문 ${records.length?dayLabel(records[0].day):''} · 완료된 방문 ${orders.length}회</p><h4>취향</h4><div class="mz-regular-preferences"><div class="mz-pref-group"><strong>선호</strong>${preferenceTags(p.like)}</div><div class="mz-pref-group"><strong>비선호</strong>${preferenceTags(p.dislike)}</div></div><h4>기억에 남는 이야기</h4>${stories.length?stories.map(e=>`<div class="v39-memory"><p>${esc(e.text)}</p><small>${dayLabel(e.day)}</small></div>`).join(''):'<p class="v39-empty">아직 기록된 이야기가 없습니다.</p>'}<details><summary>지금까지의 주문 (${orders.length})</summary>${orders.map(x=>`<p class="v39-small">${esc(x)}</p>`).join('')}</details></div>`;
 }
 function bindGuestArchive(){
  const a=$('v39RegularTab'),b=$('v39VisitorTab'),pa=$('v39RegularPanel'),pb=$('v39VisitorPanel');if(!a||!b||!pa||!pb)return;
