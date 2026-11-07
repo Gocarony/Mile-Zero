@@ -1260,7 +1260,9 @@ body.light .mz186-room-stage::after{opacity:.30; filter:blur(3.4px)}
  position:absolute;inset:0;display:block;width:100%;height:100%;
  object-fit:contain;image-rendering:pixelated;pointer-events:none;
 }
-.scene #figure .mz267-expression-layer {z-index:1}
+.scene #figure .mz267-back-layer {z-index:0}
+.scene #figure .mz267-base-layer {z-index:1}
+.scene #figure .mz267-expression-layer {z-index:2}
 /* v283: a couple should retain approximately the single portrait height.
    The shared frame expands sideways; each 3:4 portrait is full-height. */
 .scene #figure.mz267-dual-portraits{
@@ -25210,8 +25212,7 @@ function preparedFoodMatchesOrder(order){
  if(!f||!mzFoodMatchesDiet(order)||s.foodBase!==f.base||s.foodSauce!==f.sauce||s.foodKind!==f.kind)return false;
  const addons=(s.foodAddons||[]).slice().sort();
  const custom=(s.customRecipes||[]).find(v=>v.name===order.name&&v.kind==='food');
- // Story-special orders use their own registered specification, not a same-named legacy custom recipe.
- const expected=(order.addons||(order.regularSpecial==='mechanic'?f.addons:((mzIsAnyMenuOrder(order)||order.flavorRequest)?f.addons:custom?.addons))||f.addons||[]).slice().sort();
+ const expected=(order.addons||((mzIsAnyMenuOrder(order)||order.flavorRequest)?f.addons:custom?.addons)||f.addons||[]).slice().sort();
  const allowBadAddons=!!current()?.afterBad&&Array.isArray(order.addons)&&order.addons.length>0;
  const plainRecipe=availableFoods().some(base=>base.base===s.foodBase&&base.sauce===s.foodSauce&&base.kind===s.foodKind&&!((base.addons||[]).length));
  const addonMatch=addons.join('|')===expected.join('|')||(allowBadAddons&&addons.length===0&&plainRecipe);
@@ -25361,6 +25362,11 @@ const MECHANIC_FACE_WEBP='assets/characters/night-mechanic-face.webp';
 const MAREN_FACE_WEBP='assets/characters/maren-face.webp';
 const FREIGHT_FACE_WEBP='assets/characters/freight-face.webp';
 const TORBAN_FACE_WEBP='assets/characters/torban-face.webp';
+const FREIGHT_DAY36_PARTS_GIF='assets/characters/freight-driver-animal.gif';
+function mzPortraitBackLayerSrc(id){
+ if(id==='freight'&&s.day>=36)return FREIGHT_DAY36_PARTS_GIF;
+ return null;
+}
 // Use the drink's actual mix boundary for the serving counter.
 // The mixed portion takes up as much of the glass as its ingredient count;
 // older saves sometimes store mode='mix' even when mixAt marks a partial mix.
@@ -25395,7 +25401,9 @@ function mzPortraitIdsForCurrentVisit(v){
 function mzPortraitHTML(id,face){
  const portrait=STANDING_LAYERS[id];
  if(!portrait)return '';
+ const backLayer=mzPortraitBackLayerSrc(id);
  return '<div class="mz267-layered-portrait" data-portrait-id="'+id+'" role="img" aria-label="'+portrait.label+' 스탠딩">'+
+  (backLayer?'<img class="mz267-back-layer" src="'+backLayer+'" alt="" draggable="false">':'')+
   '<img class="mz267-base-layer" src="'+portrait.base+'" alt="" draggable="false">'+
   '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
   '</div>';
