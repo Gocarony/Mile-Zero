@@ -22650,7 +22650,7 @@ let mzVisualPrefs=mzReadVisualPrefs();document.body?.classList.toggle('mz-custom
 function mzWriteVisualPrefs(next){mzVisualPrefs={...mzVisualPrefs,...next};try{localStorage.setItem(MZ_VISUAL_KEY,JSON.stringify(mzVisualPrefs));}catch(e){};mzApplyVisualPrefs();}
 function mzApplyVisualPrefs(root=document){const enabled=mzVisualPrefs.panorama!==false;document.body.classList.toggle('mz-panorama-disabled',!enabled);document.body.classList.toggle('mz-custom-images-disabled',mzVisualPrefs.portraits===false);const strip=root.getElementById?root.getElementById('mzPanoramaStrip'):document.getElementById('mzPanoramaStrip');if(strip){strip.dataset.enabled=enabled?'true':'false';strip.dataset.running=enabled?'true':'false';}}
 window.mzVisuals={getPrefs:()=>({...mzVisualPrefs}),isPanoramaEnabled:()=>mzVisualPrefs.panorama!==false,setPanoramaEnabled:v=>mzWriteVisualPrefs({panorama:!!v}),isPortraitEnabled:()=>mzVisualPrefs.portraits!==false,setPortraitEnabled:v=>{mzWriteVisualPrefs({portraits:!!v});scene();},apply:mzApplyVisualPrefs};
-function initial(){return {day:1,phase:'prep',visit:0,line:0,sub:'dialogue',waitUntil:null,station:'drink',mix:[],ice:false,iceCount:0,stirred:false,mixAt:0,extra:null,foodBase:null,foodSauce:null,foodKind:null,foodHeat:0,completed:[],tips:0,served:0,mistakes:0,light:'dark',lightSeen:{},log:[],remarked:false,lightComment:null,seenIntro:false,phoneTab:'feed',readPosts:[],readMessages:[],deliveredMessages:['welcome','schedule'],dayStats:{},customRecipes:[],unlockedExtras:[],developmentDone:false,developmentDays:[],ownedMarket:[],wallet:0,friendCounterUnlockDay:null,randomSeed:Math.floor(Math.random()*2147483647),day27TrendId:null,day39TrendId:null,sunsetRoadRecipe:null,regularUnlocks:[],mechanicRegularFrom:null,dayTenMechanicScheduled:null,foodAddons:[],specialOutcome:null,garnishDialogue:[],garnishDiscoveries:[],snsHearts:[],guestVisits:[],guestClues:[],guestArchiveSeen:[],recipeNotices:[],recipeNoticeSeen:[],darkMatterFound:false,weekendDiaries:{},weekendsCompleted:[],appointments:[],weekendStoriesDone:[],weekendStoryCursor:0,weekendStoryAnswers:{},appointmentDecisions:[],deskOwned:[],deskPlaced:[],marketSeenStockIds:[],weekendActive:false,arcadeRepaired:false};}
+function initial(){return {day:1,phase:'prep',visit:0,line:0,sub:'dialogue',waitUntil:null,station:'drink',mix:[],ice:false,iceCount:0,stirred:false,mixAt:0,extra:null,foodBase:null,foodSauce:null,foodKind:null,foodHeat:0,completed:[],tips:0,served:0,mistakes:0,light:'dark',lightSeen:{},log:[],remarked:false,lightComment:null,seenIntro:false,phoneTab:'feed',readPosts:[],readMessages:[],deliveredMessages:['welcome','schedule'],dayStats:{},customRecipes:[],unlockedExtras:[],developmentDone:false,developmentDays:[],ownedMarket:[],wallet:0,friendCounterUnlockDay:null,randomSeed:Math.floor(Math.random()*2147483647),day27TrendId:null,day39TrendId:null,sunsetRoadRecipe:null,regularUnlocks:[],mechanicRegularFrom:null,dayTenMechanicScheduled:null,foodAddons:[],specialOutcome:null,garnishDialogue:[],garnishDiscoveries:[],snsHearts:[],guestVisits:[],guestClues:[],guestArchiveSeen:[],recipeNotices:[],recipeNoticeSeen:[],darkMatterFound:false,weekendDiaries:{},weekendsCompleted:[],appointments:[],weekendStoriesDone:[],weekendStoryCursor:0,weekendStoryAnswers:{},appointmentDecisions:[],deskOwned:[],deskPlaced:[],marketSeenStockIds:[],genericPortraitAssignments:{},weekendActive:false,arcadeRepaired:false};}
 function seedPick(state,day,index,salt){let h=((state.randomSeed||104729) ^ Math.imul(day+1,0x45d9f3b) ^ Math.imul(index+1,0x119de1f3) ^ Math.imul(salt+1,0x27d4eb2d))>>>0;h^=h>>>16;h=Math.imul(h,0x7feb352d);h^=h>>>15;return (h>>>0)/4294967296;}
 let s=initial(),modal=null;
 const $=x=>document.getElementById(x),esc=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -24680,6 +24680,7 @@ let mzDevPortraitChoice='maren';
 const mzDevPortraitChoices=[
  ['maren','마렌'],['mechanic','야간 정비사'],['officeworker','인근 직장인'],['rian','리안'],
  ['freight','정기 화물 기사'],['settler','황무지 출신 정착민'],['kairen','카이렌'],['mika','미카'],['torban','토르반'],
+ ['genericcasuala','일반 손님 · 일상복 A'],['genericcasualb','일반 손님 · 일상복 B'],
  ['torbanwife','토르반의 아내'],['couple','토르반 부부']
 ];
 function mzDevPortraitPreview(){
@@ -25369,8 +25370,12 @@ const STANDING_LAYERS={
  kairen:{label:'카이렌',base:'assets/characters/kairen-base.png',expressions:{normal:'assets/characters/kairen-expression-normal.gif'}},
  mika:{label:'미카',base:'assets/characters/mika-base.png',expressions:{normal:'assets/characters/mika-expression-normal.gif'}},
  torban:{label:'토르반',base:'assets/characters/torban-base.png',expressions:{normal:'assets/characters/torban-expression-normal.gif'}},
- torbanwife:{label:'토르반의 아내',base:'assets/characters/torban-wife-base.png',expressions:{normal:'assets/characters/torban-wife-expression-normal.gif'}}
+ torbanwife:{label:'토르반의 아내',base:'assets/characters/torban-wife-base.png',expressions:{normal:'assets/characters/torban-wife-expression-normal.gif'}},
+ genericcasuala:{label:'일반 손님 · 일상복 A',base:'assets/characters/generic-casual-a.png',expressions:{normal:'assets/characters/generic-casual-a.png'}},
+ genericcasualb:{label:'일반 손님 · 일상복 B',base:'assets/characters/generic-casual-b.png',expressions:{normal:'assets/characters/generic-casual-b.png'}}
 };
+const MZ_GENERIC_SOLO_PORTRAIT_POOLS={casual:['genericcasuala','genericcasualb'],work:[],travel:[]};
+const MZ_GENERIC_GROUP_PORTRAIT_POOLS={duo:[],trio:[],crowd:[]};
 const RIAN_FACE_WEBP='assets/characters/rian-face.webp';
 const MECHANIC_FACE_WEBP='assets/characters/night-mechanic-face.webp';
 const OFFICEWORKER_FACE_WEBP='assets/characters/office-worker-face.webp';
@@ -25413,13 +25418,55 @@ function mzPortraitIdForWho(who){
  if(who==='토르반의 아내')return 'torbanwife';
  return null;
 }
+function mzGenericPortraitState(){
+ if(!s.genericPortraitAssignments||typeof s.genericPortraitAssignments!=='object'||Array.isArray(s.genericPortraitAssignments))s.genericPortraitAssignments={};
+ return s.genericPortraitAssignments;
+}
+function mzGenericPortraitHash(text){
+ const str=String(text||'');
+ let h=2166136261>>>0;
+ for(let i=0;i<str.length;i++)h=Math.imul(h^str.charCodeAt(i),16777619)>>>0;
+ return h>>>0;
+}
+function mzGenericPortraitLikelyGroup(v){
+ const who=String(v?.who||'');
+ if(!who)return false;
+ if(who==='카이렌과 미카'||who==='미카와 카이렌')return true;
+ return ['부부','일행','두 사람','세 사람','네 사람','다섯 사람','여섯 사람','단체','모임','커플','과 ','와 ',' 팀'].some(token=>who.includes(token));
+}
+function mzGenericPortraitPool(group,type){
+ if(group==='group')return MZ_GENERIC_GROUP_PORTRAIT_POOLS[type]||[];
+ if(group==='solo')return MZ_GENERIC_SOLO_PORTRAIT_POOLS[type]||[];
+ return [];
+}
+function mzGenericPortraitPick(v,group,type){
+ const pool=mzGenericPortraitPool(group,type).filter(id=>!!STANDING_LAYERS[id]);
+ if(!pool.length)return [];
+ const key='generic:'+group+':'+type+':'+s.day+':'+s.visit+':'+String(v?.who||'');
+ const state=mzGenericPortraitState();
+ const saved=state[key];
+ if(pool.includes(saved))return [saved];
+ const salt=7000+(mzGenericPortraitHash(key)%1000000);
+ const pick=pool[Math.floor(seedPick(s,s.day,s.visit,salt)*pool.length)]||pool[0];
+ state[key]=pick;
+ return [pick];
+}
+function mzGenericPortraitIdsForVisit(v){
+ if(!v)return [];
+ const explicitGroup=v.portraitGroup==='group'?'group':(v.portraitGroup==='solo'?'solo':null);
+ const group=explicitGroup||(mzGenericPortraitLikelyGroup(v)?'group':'solo');
+ const type=(typeof v.portraitType==='string'&&v.portraitType)?v.portraitType:(group==='solo'?'casual':null);
+ if(!type)return [];
+ return mzGenericPortraitPick(v,group,type);
+}
 function mzPortraitIdsForCurrentVisit(v){
  if(bootScreen==='devPortrait')return mzDevPortraitChoice==='couple'?['torbanwife','torban']:[mzDevPortraitChoice];
  if(mzVisualPrefs.portraits===false||s.phase!=='open'||s.sub==='interlude'||!v)return [];
  if(v.who==='토르반'&&s.day===29)return ['torbanwife','torban'];
  if(v.who==='카이렌과 미카'||v.who==='미카와 카이렌')return ['mika','kairen'];
  const id=mzPortraitIdForWho(v.who);
- return id?[id]:[];
+ if(id)return [id];
+ return mzGenericPortraitIdsForVisit(v);
 }
 function mzPortraitHTML(id,face){
  const portrait=STANDING_LAYERS[id];
@@ -25640,7 +25687,7 @@ function restoreState(raw){
  mzCurrentVisitCacheKey=null;mzCurrentVisitCacheValue=null;
  const base=initial();s={...base,...raw};if(typeof raw.arcadeRepaired!=='boolean')s.arcadeRepaired=s.day>=32&&(s.day>32||s.visit>=3);activeTypeKey=null;if(!Number.isInteger(s.friendCounterUnlockDay)||s.friendCounterUnlockDay<1)s.friendCounterUnlockDay=null;
  if(s.day===10&&typeof raw.dayTenMechanicScheduled!=='boolean'&&raw.visit>=(dailyVisits[10]||[]).length)s.dayTenMechanicScheduled=true;
- if(!s.weekendDiaries||typeof s.weekendDiaries!=='object')s.weekendDiaries={};if(!Array.isArray(s.weekendsCompleted))s.weekendsCompleted=[];if(!Array.isArray(s.appointments))s.appointments=[];if(!Array.isArray(s.weekendStoriesDone))s.weekendStoriesDone=[];if(!Array.isArray(s.appointmentDecisions))s.appointmentDecisions=[];if(!Number.isInteger(s.weekendStoryCursor))s.weekendStoryCursor=0;if(!s.weekendStoryAnswers||typeof s.weekendStoryAnswers!=='object')s.weekendStoryAnswers={};
+ if(!s.weekendDiaries||typeof s.weekendDiaries!=='object')s.weekendDiaries={};if(!Array.isArray(s.weekendsCompleted))s.weekendsCompleted=[];if(!Array.isArray(s.appointments))s.appointments=[];if(!Array.isArray(s.weekendStoriesDone))s.weekendStoriesDone=[];if(!Array.isArray(s.appointmentDecisions))s.appointmentDecisions=[];if(!Number.isInteger(s.weekendStoryCursor))s.weekendStoryCursor=0;if(!s.weekendStoryAnswers||typeof s.weekendStoryAnswers!=='object')s.weekendStoryAnswers={};if(!s.genericPortraitAssignments||typeof s.genericPortraitAssignments!=='object'||Array.isArray(s.genericPortraitAssignments))s.genericPortraitAssignments={};
  for(const key of ['completed','mix','readMessages','readPosts','deliveredMessages'])if(!Array.isArray(s[key]))s[key]=base[key]||[];
  if(!s.day||s.day<1||s.day>50)s.day=1;if(s.day>LAST_SCRIPTED_DAY&&!s.devPreview){s.day=LAST_SCRIPTED_DAY;s.phase='closing';s.visit=0;s.line=0;s.sub='dialogue';s.completed=[];s.waitUntil=null;}if(!Number.isInteger(s.randomSeed))s.randomSeed=104729;if(!Array.isArray(s.ownedMarket))s.ownedMarket=[];if(!Array.isArray(s.marketSeenStockIds))s.marketSeenStockIds=[];s.marketSeenStockIds=[...new Set(s.marketSeenStockIds.filter(id=>typeof id==='string'))];if(s.ownedMarket.includes('floral'))s.ownedMarket=[...new Set(s.ownedMarket.map(id=>id==='floral'?'cherry':id))];if(!Array.isArray(s.foodAddons))s.foodAddons=[];s.foodHeat=Math.max(0,Math.min(10,Math.trunc(Number(s.foodHeat)||0)));s.iceCount=Math.max(0,Math.min(s.day>=10?3:1,Object.prototype.hasOwnProperty.call(raw,'iceCount')?Number(s.iceCount):(raw.ice?1:0)));s.ice=!!s.iceCount;if(!Number.isFinite(s.wallet))s.wallet=(Object.values(s.dayStats||{}).reduce((t,d)=>t+(Number(d.orders)||0),0)+(s.completed||[]).length)*5+(Number(s.tips)||0);if(!s.dayStats||typeof s.dayStats!=='object')s.dayStats={};if(!Array.isArray(s.customRecipes))s.customRecipes=[];migrateMarketRecipeNames();if(!Array.isArray(s.developmentDays))s.developmentDays=s.developmentDone?[3]:[];s.developmentDays=[...new Set(s.developmentDays.filter(d=>Number.isInteger(d)&&d>=3&&d<=LAST_SCRIPTED_DAY&&d%3===0))];if(s.developmentDone&&!s.developmentDays.includes(3))s.developmentDays.unshift(3);
  // v65: migrate displayed market recipe names without changing the stable ingredient ID.
