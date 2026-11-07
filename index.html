@@ -24737,6 +24737,7 @@ const mzDevPortraitChoices=[
  ['generictravela','일반 손님 · 여행복 A'],['generictravelb','일반 손님 · 여행복 B'],
  ['genericworka','일반 손님 · 업무복 A'],['genericworkb','일반 손님 · 업무복 B'],
  ['gatewaiter30','DAY30 · 관문 대기객'],
+ ['mukbanginfluencer','먹방 인플루언서'],['zeroinspector','ZERO 현장 점검 직원'],
  ['redsonga','빨간 노래 손님 A'],['redsongb','빨간 노래 손님 B'],
  ['torbanwife','토르반의 아내'],['couple','토르반 부부']
 ];
@@ -25434,6 +25435,8 @@ const STANDING_LAYERS={
  generictravelb:{label:'일반 손님 · 여행복 B',base:'assets/characters/generic-travel-b.png',expressions:{normal:'assets/characters/generic-travel-b.png'}},
  genericworka:{label:'일반 손님 · 업무복 A',base:'assets/characters/generic-work-a.png',expressions:{normal:'assets/characters/generic-work-a.png'}},
  genericworkb:{label:'일반 손님 · 업무복 B',base:'assets/characters/generic-work-b.png',expressions:{normal:'assets/characters/generic-work-b.png'}},
+ mukbanginfluencer:{label:'먹방 인플루언서',base:'assets/characters/mukbang-influencer.gif',expressions:{normal:'assets/characters/mukbang-influencer.gif'}},
+ zeroinspector:{label:'ZERO 현장 점검 직원',base:'assets/characters/zero-field-inspector.gif',expressions:{normal:'assets/characters/zero-field-inspector.gif'}},
  redsonga:{label:'빨간 노래 손님 A',base:'assets/characters/red-song-guest-a.gif',expressions:{normal:'assets/characters/red-song-guest-a.gif'}},
  redsongb:{label:'빨간 노래 손님 B',base:'assets/characters/red-song-guest-b.gif',expressions:{normal:'assets/characters/red-song-guest-b.gif'}},
  gatewaiter30:{label:'DAY30 · 관문 대기객',base:'assets/characters/gate-waiting-guest-day30.gif',expressions:{normal:'assets/characters/gate-waiting-guest-day30.gif'}}
@@ -25552,6 +25555,8 @@ function mzPortraitIdsForCurrentVisit(v){
  if(mzVisualPrefs.portraits===false||s.phase!=='open'||s.sub==='interlude'||!v)return [];
  if(v.who==='토르반'&&s.day===29)return ['torbanwife','torban'];
  if(v.who==='카이렌과 미카'||v.who==='미카와 카이렌')return ['mika','kairen'];
+ if(v.who==='먹방 인플루언서')return ['mukbanginfluencer'];
+ if(v.who==='ZERO 현장 점검 직원')return ['zeroinspector'];
  if((s.day===19&&v.who==='빨간 노래를 부르는 두 손님')||(s.day===32&&v.who==='인근 학생 두 명'))return ['redsonga','redsongb'];
  if(s.day===30&&v.who==='관문 대기객')return ['gatewaiter30'];
  const id=mzPortraitIdForWho(v.who);
