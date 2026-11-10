@@ -1239,6 +1239,10 @@ body.light .mz186-room-stage::after{opacity:.30; filter:blur(3.4px)}
   overflow-wrap:break-word;
 }
 
+/* DAY43: dried flower — a decorative drink garnish unlocked by Rian. */
+.v54-garnish-flower i:first-child{width:25px;height:25px;left:6px;top:6px;background:#e8b7cb;clip-path:polygon(50% 9%,61% 32%,85% 19%,73% 44%,98% 53%,72% 60%,82% 87%,55% 72%,39% 95%,35% 67%,8% 77%,26% 50%,5% 31%,35% 36%)}
+.v54-garnish-flower i:nth-child(2){width:8px;height:8px;left:14px;top:15px;border-radius:50%;background:#f4d788}
+.v54-cup-garnish.v54-garnish-flower,.served-extra.v54-served-flower{color:#e7a6c1;text-shadow:0 1px 2px rgba(88,47,72,.6);}
 /* DAY 26: "불" is a normal garnish-slot item. Tiny flame on cups/counter. */
 .v54-garnish-fire i:first-child{width:19px;height:27px;left:8px;top:3px;background:linear-gradient(155deg,#ffdb66 13%,#ff8b2e 56%,#dd4535 95%);clip-path:polygon(49% 0,78% 28%,78% 47%,100% 67%,78% 94%,46% 100%,12% 83%,4% 60%,26% 38%,30% 54%,52% 45%);filter:drop-shadow(0 0 4px #ffb54b)}
 .v54-garnish-fire i:nth-child(2){width:8px;height:14px;left:14px;top:15px;background:#fff3ac;clip-path:polygon(40% 0,100% 68%,72% 100%,0 87%,10% 43%)}
@@ -21423,7 +21427,938 @@ const day41Visits=[
     "day41MarketFood": true
   }
 ];
-const dailyVisits={1:visits,2:dayTwoVisits,3:dayThreeVisits,4:dayFourVisits,5:dayFiveVisits,6:daySixVisits,7:daySevenVisits,8:dayEightVisits,9:dayNineVisits,10:dayTenVisits,11:dayElevenVisits,12:dayTwelveVisits,13:day13Visits,14:day14Visits,15:day15Visits,16:day16Visits,17:day17Visits,18:day18Visits,19:day19Visits,20:day20Visits,21:day21Visits,22:day22Visits,23:day23Visits,24:day24Visits,25:day25Visits,26:day26Visits,27:day27Visits,28:day28Visits,29:day29Visits,30:day30Visits,31:day31Visits,32:day32Visits,33:day33Visits,34:day34Visits,35:day35Visits,36:day36Visits,37:day37Visits,38:day38Visits,39:day39Visits,40:day40Visits,41:day41Visits};
+// DAY42 — user-reviewed text applied as authored; guest dialogue preserved.
+const day42Visits=[
+  {
+    "who": "시장 상인",
+    "time": "18:11",
+    "dialogue": [
+      [
+        "시장 상인",
+        "안녕하세요. 애프터 시프트 한 잔 주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "애프터 시프트",
+        "iceCount": 0
+      }
+    ],
+    "after": [
+      [
+        "시장 상인",
+        "감사합니다. 아, 그러고보니 김장철이 와서 김치를 새로 담아 가게에 내놨는데 확인하셨나요?"
+      ]
+    ]
+  },
+  {
+    "who": "관문 우편 담당",
+    "time": "18:39",
+    "dialogue": [
+      [
+        "관문 우편 담당",
+        "허브구이 감자 하나요. 여기서 먹고 갈게요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허브구이 감자"
+      }
+    ],
+    "after": [
+      [
+        "관문 우편 담당",
+        "여기 음식은 포장도 되나요? 아, 알겠습니다. 다음엔 조금 일찍 와서 가져가야겠네요."
+      ]
+    ]
+  },
+  {
+    "who": "여행객 두 명",
+    "time": "19:08",
+    "dialogue": [
+      [
+        "친구 A",
+        "난 프리즘 믹스."
+      ],
+      [
+        "친구 B",
+        "그럼 나는 그냥 프리즘. 같은 재료로 만드는 거 맞죠?"
+      ],
+      [
+        "친구 A",
+        "야, 그럼 바꿔서 한 모금씩 마셔 보자."
+      ],
+      [
+        "친구 B",
+        "아직 나오지도 않았는데 벌써 내 거 가져갈 생각부터 하네?"
+      ],
+      [
+        "친구 A",
+        "아, 그리고 팬케이크 하나 같이 먹을게요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "프리즘 믹스"
+      },
+      {
+        "type": "drink",
+        "name": "프리즘"
+      },
+      {
+        "type": "food",
+        "name": "허니 팬케이크"
+      }
+    ],
+    "after": [
+      [
+        "친구 A",
+        "너는 어느 쪽이 좋아?"
+      ],
+      [
+        "친구 B",
+        "잠깐. 내 거부터 제대로 마시고."
+      ]
+    ]
+  },
+  {
+    "who": "심야 배송원",
+    "time": "19:34",
+    "dialogue": [
+      [
+        "심야 배송원",
+        "오늘은 더 이상 운전할 일이 없어요. 나이트 드라이브 하나 부탁합니다."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "나이트 드라이브"
+      }
+    ],
+    "after": [
+      [
+        "심야 배송원",
+        "오늘은 서둘러 나갈 필요가 없네요. 천천히 마실게요."
+      ]
+    ]
+  },
+  {
+    "who": "미카",
+    "time": "20:03",
+    "dialogue": [
+      [
+        "미카",
+        "안녕하세요! 오늘은 크리스피 치킨이랑 루비 라인 주세요. 루비 라인에는 얼음 두 번 넣어 주세요."
+      ],
+      [
+        "미카",
+        "아, 저 오늘 장비 정리하다가 깜짝 놀란 일이 있었어요."
+      ],
+      [
+        "미카",
+        "한동안 안 쓴 가방을 열었는데 안쪽 주머니에서 장갑 한 짝이 나오더라고요. 분명 잃어버렸다고 생각해서 새 걸 샀거든요."
+      ],
+      [
+        "미카",
+        "그래서 나머지 한 짝도 찾아봤어요. 혹시 또 가방에 들어 있나 싶어서요. 그런데 그건 진짜 없더라고요."
+      ],
+      [
+        "미카",
+        "지금은 같은 쪽 장갑만 두 짝이에요. 누가 보면 한 손만 두 개인 줄 알겠어요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "크리스피 치킨"
+      },
+      {
+        "type": "drink",
+        "name": "루비 라인",
+        "iceCount": 2
+      }
+    ],
+    "after": [
+      [
+        "미카",
+        "감사합니다! 혹시 여기에서 장갑 한 짝 발견하신 적은 없죠?"
+      ],
+      [
+        "미카",
+        "아하하, 그냥 물어봤어요. 다음에 뵈어요!"
+      ]
+    ]
+  },
+  {
+    "who": "관문 시설 정비원",
+    "time": "20:36",
+    "dialogue": [
+      [
+        "관문 시설 정비원",
+        "가든 야채스프 하나 주세요."
+      ],
+      [
+        "관문 시설 정비원",
+        "목이 좀 걸걸해서 약간 더 따뜻하게 먹고 싶은데, 두번 더 끓여 주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "가든 야채스프",
+        "heat": 2
+      }
+    ],
+    "after": [
+      [
+        "관문 시설 정비원",
+        "아, 이게 훨씬 낫네요. 감사합니다."
+      ]
+    ]
+  },
+  {
+    "who": "인근 직장인",
+    "time": "21:12",
+    "dialogue": [
+      [
+        "인근 직장인",
+        "안녕하세요. 오늘은 생선구이 하나랑 라스트 마일 한 잔 주세요."
+      ],
+      [
+        "인근 직장인",
+        "그... 전에 여기서 가져갔던 빈 점포 공고 있잖아요."
+      ],
+      [
+        "인근 직장인",
+        "거기 적힌 곳에 전화를 걸었어요, 가게 임대 문의... 그거 때문에요."
+      ],
+      [
+        "인근 직장인",
+        "뭐라고 말해야 할지 몰라서 좀 헤맸는데, 보증금이랑 월세도 물어봤어요. 생각보다 확인할 게 많더라고요."
+      ],
+      [
+        "인근 직장인",
+        "그리고 안을 직접 볼 수 있냐고 여쭤봤는데... 그래서 이번주 안에 보러 가기로 했어요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "생선구이"
+      },
+      {
+        "type": "drink",
+        "name": "라스트 마일"
+      }
+    ],
+    "after": [
+      [
+        "인근 직장인",
+        "감사합니다."
+      ],
+      [
+        "인근 직장인",
+        "생각해 보니 회사에 있을 때도 모르는 게 생기면 먼저 확인할 목록부터 만들었거든요. 이런 데에도 그게 통할지는 모르겠지만요."
+      ],
+      [
+        "인근 직장인",
+        "집에 가면 물어볼 것부터 적어 두려고요. ...좀 긴장되네요."
+      ],
+      [
+        "인근 직장인",
+        "잘 먹었습니다. 다음에 뵐게요."
+      ]
+    ]
+  },
+  {
+    "who": "인근 학생 두 명",
+    "time": "21:49",
+    "dialogue": [
+      [
+        "학생 A",
+        "블루 아워 하나하고요, 넌 뭐 마실래?"
+      ],
+      [
+        "학생 B",
+        "나도 그거."
+      ],
+      [
+        "학생 A",
+        "그러면 블루 아워 두 잔이요. 저는 얼음 빼 주시고요."
+      ],
+      [
+        "학생 B",
+        "저는 얼음 세 번 넣어 주세요."
+      ],
+      [
+        "학생 A",
+        "넌 얼음만 먹으려고?"
+      ],
+      [
+        "학생 B",
+        "너는 왜 차가운 음료를 미지근하게 마시려고 해?"
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "iceCount": 0
+      },
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "iceCount": 3
+      }
+    ],
+    "after": [
+      [
+        "학생 A",
+        "아, 내 잔은 이쪽이지?"
+      ],
+      [
+        "학생 B",
+        "맞아. 얼음 보면 알잖아."
+      ]
+    ]
+  },
+  {
+    "who": "외곽 장비 판매원",
+    "time": "22:17",
+    "dialogue": [
+      [
+        "외곽 장비 판매원",
+        "허니버터 감자튀김 하나 부탁합니다. 바삭바삭한 게 참 맛있어 보이네요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허니버터 감자튀김"
+      }
+    ],
+    "after": [
+      [
+        "외곽 장비 판매원",
+        "냅킨 좀 더 가져가도 될까요? 고맙습니다."
+      ]
+    ]
+  },
+  {
+    "who": "관문 여행객",
+    "time": "22:46",
+    "dialogue": [
+      [
+        "관문 여행객",
+        "오버 더 호라이즌 한 잔 주시겠어요?"
+      ],
+      [
+        "관문 여행객",
+        "예전에 여기서 마셨던 것 같은데 이름을 잊어버려서 한참 메뉴판을 봤네요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "오버 더 호라이즌"
+      }
+    ],
+    "after": [
+      [
+        "관문 여행객",
+        "아, 이거 맞아요. 감사합니다."
+      ]
+    ]
+  },
+  {
+    "who": "퇴근길 간호 직원",
+    "time": "23:20",
+    "dialogue": [
+      [
+        "퇴근길 간호 직원",
+        "제육볶음밥 하나 주세요. 여긴 식사도 팔아서 참 좋다니까요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "제육볶음밥",
+        "addons": [
+          "rice"
+        ]
+      }
+    ],
+    "after": [
+      [
+        "퇴근길 간호 직원",
+        "아, 숟가락은 저쪽에 있군요. 감사합니다."
+      ]
+    ]
+  },
+  {
+    "who": "퇴근길 가게 직원",
+    "time": "23:58",
+    "dialogue": [
+      [
+        "퇴근길 가게 직원",
+        "게이트 라이트 주세요."
+      ],
+      [
+        "퇴근길 가게 직원",
+        "아까 계산대에 놓아 둔 물건이 안 보여서 한참 찾았는데, 손님이 계산하시려고 집어 들고 계시더라고요. 제가 놔둔 자리부터 찾았지 뭐예요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "게이트 라이트"
+      }
+    ],
+    "after": [
+      [
+        "퇴근길 가게 직원",
+        "오늘도 고생 많으시네요. 전 이만 들어가 볼게요."
+      ]
+    ]
+  },
+  {
+    "who": "외곽 운송 연락원",
+    "time": "00:29",
+    "dialogue": [
+      [
+        "외곽 운송 연락원",
+        "매운탕 하나요. 음료는 됐습니다."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "매운탕"
+      }
+    ],
+    "after": [
+      [
+        "외곽 운송 연락원",
+        "뜨겁네요. 조금 식혀 먹겠습니다."
+      ],
+      [
+        "외곽 운송 연락원",
+        "그런데 매운탕이란 메뉴는 어떻게 생각하신 건가요? 여기 바 아니었나요?"
+      ],
+      [
+        "외곽 운송 연락원",
+        "물론 맛있으니 저야 좋지만요."
+      ]
+    ]
+  },
+  {
+    "who": "한밤 산책객",
+    "time": "01:06",
+    "dialogue": [
+      [
+        "한밤 산책객",
+        "애프터 시프트 한 잔 부탁드릴게요. 너무 차갑지 않게 얼음은 한번만요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "애프터 시프트",
+        "iceCount": 1
+      }
+    ],
+    "after": [
+      [
+        "한밤 산책객",
+        "창가 자리에 앉아도 되나요? 고맙습니다."
+      ]
+    ]
+  },
+  {
+    "who": "야간 열차 승객",
+    "time": "01:47",
+    "dialogue": [
+      [
+        "야간 열차 승객",
+        "혹시 음식도 아직 주문할 수 있나요?"
+      ],
+      [
+        "야간 열차 승객",
+        "그렇다면 소금구이 꼬치 하나 부탁합니다. 열차 기다리면서 먹으려고요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "소금구이 꼬치"
+      }
+    ],
+    "after": [
+      [
+        "야간 열차 승객",
+        "잘 먹었습니다. 이번엔 시간 맞춰 나가겠네요."
+      ]
+    ]
+  }
+];
+// DAY43 user-reviewed full script.
+const day43Visits=[
+  {
+    "who": "관문 근무자",
+    "time": "18:18",
+    "dialogue": [
+      [
+        "관문 근무자",
+        "오늘은 게이트 라이트 한 잔이요. 얼음은 세 번 넣어 주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "게이트 라이트",
+        "iceCount": 3
+      }
+    ],
+    "after": [
+      [
+        "관문 근무자",
+        "와, 차갑네요. 딱 좋습니다."
+      ]
+    ]
+  },
+  {
+    "who": "여행 중인 동료",
+    "time": "18:54",
+    "dialogue": [
+      [
+        "A",
+        "나는 허니 팬케이크 하나 먹을래. 넌?"
+      ],
+      [
+        "B",
+        "음료나 마시지. 블루 아워 하나요."
+      ],
+      [
+        "A",
+        "아, 그럼 나도 음료 한 잔 추가할게. 루비 라인으로 주세요."
+      ],
+      [
+        "B",
+        "아까는 목 안 마르다더니?"
+      ],
+      [
+        "A",
+        "너가 주문하는데 나도 빠질 수 없지."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허니 팬케이크"
+      },
+      {
+        "type": "drink",
+        "name": "블루 아워"
+      },
+      {
+        "type": "drink",
+        "name": "루비 라인"
+      }
+    ],
+    "after": [
+      [
+        "B",
+        "우리 내일 아침엔 어디부터 갈까?"
+      ],
+      [
+        "A",
+        "그건 이거 다 먹고 정하자. 지금은 아무 생각도 하기 싫어."
+      ]
+    ]
+  },
+  {
+    "who": "관문 소방 설비 기사",
+    "time": "19:31",
+    "dialogue": [
+      [
+        "관문 소방 설비 기사",
+        "(상점 해금 안주) 하나 주세요."
+      ],
+      [
+        "관문 소방 설비 기사",
+        "점검표에 확인 날짜를 잘못 적었더군요. 다시 확인하러 한 바퀴 더 돌았습니다."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허브구이 감자",
+        "day43MarketFood": true
+      }
+    ],
+    "after": [
+      [
+        "관문 소방 설비 기사",
+        "잘 먹었습니다. 내일부턴 날짜부터 확인해야겠어요."
+      ]
+    ]
+  },
+  {
+    "who": "시장 방문객",
+    "time": "20:02",
+    "dialogue": [
+      [
+        "시장 방문객",
+        "오늘은 애프터 시프트 한 잔 주세요."
+      ],
+      [
+        "시장 방문객",
+        "그리고 이런 메뉴도 있네요? (사용자 커스텀 메뉴) 하나도 같이 주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "애프터 시프트"
+      },
+      {
+        "type": "food",
+        "name": "스파이시 그릴 미트",
+        "day43Custom": true
+      }
+    ],
+    "after": [
+      [
+        "시장 방문객",
+        "두개의 색 조합이 오묘하네요. 잘 먹겠습니다."
+      ]
+    ]
+  },
+  {
+    "who": "야간 택배 정리원 두 명",
+    "time": "20:29",
+    "dialogue": [
+      [
+        "정리원 A",
+        "뭐 먹을래? 나 허브구이 감자."
+      ],
+      [
+        "정리원 B",
+        "난 제육볶음밥. 음료도 하나 마셔야지."
+      ],
+      [
+        "정리원 A",
+        "그럼 블루 아워 두 잔 주세요. 하나는 얼음 없이요."
+      ],
+      [
+        "정리원 B",
+        "잠깐, 제 건 얼음 넣어 주세요. 많이 넣어주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허브구이 감자"
+      },
+      {
+        "type": "food",
+        "name": "제육볶음밥",
+        "addons": [
+          "rice"
+        ]
+      },
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "iceCount": 0
+      },
+      {
+        "type": "drink",
+        "name": "블루 아워",
+        "iceCount": 3
+      }
+    ],
+    "after": [
+      [
+        "정리원 B",
+        "오늘은 내가 네 메뉴 한 입 먹어도 되지?"
+      ],
+      [
+        "정리원 A",
+        "그래놓고 바꾸자고 하지 마."
+      ]
+    ]
+  },
+  {
+    "who": "리안",
+    "time": "21:17",
+    "dialogue": [
+      [
+        "리안",
+        "안녕하세요. 가든 야채스프 하나하고 애프터 시프트 한 잔 부탁드릴게요."
+      ],
+      [
+        "리안",
+        "아, 전에 제가 다녀온 황무지 정착지, 기억하시죠? 거기서 오늘 첫 물건을 보내왔어요."
+      ],
+      [
+        "리안",
+        "지난번에 말씀드린대로 정착 지원 창구에서 여러 분과 이야기를 나눠 봤거든요. 그러다 관문시장 상인분하고 정착지 분들이 서로 필요한 물건이 있다는 걸 알게 됐어요."
+      ],
+      [
+        "리안",
+        "그래서 양쪽에 연락할 수 있는 곳을 알려드렸는데, 그 뒤로는 직접 이야기를 나누시더라고요."
+      ],
+      [
+        "리안",
+        "이번에는 정착지에서 식용 꽃을 보내고, 시장에서는 작업용 소모품을 보냈대요. 원래 오가던 운송편을 이용해서 생각보다 수월하게 진행됐다고 하더라고요."
+      ],
+      [
+        "리안",
+        "오늘 물건이 무사히 도착했다는 연락을 받았어요. 상인분은 다음에도 필요한 게 생기면 직접 연락해 보겠다고 하셨고요."
+      ],
+      [
+        "리안",
+        "저는 처음에 이것저것 걱정했는데, 막상 양쪽에서 직접 이야기를 나누시니까 제가 신경 쓸 일이 별로 없었어요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "가든 야채스프"
+      },
+      {
+        "type": "drink",
+        "name": "애프터 시프트"
+      }
+    ],
+    "after": [
+      [
+        "리안",
+        "감사합니다. 잘 먹겠습니다."
+      ],
+      [
+        "리안",
+        "이번에 연락처를 알려드린 분들 말고도 비슷한 어려움을 겪는 분들이 계실 것 같아요. 다음에 그런 분을 만나면 어떻게 도와드리면 좋을지 조금은 알 것 같고요."
+      ],
+      [
+        "리안",
+        "아, 그러고 보니 드릴 게 하나 있어요. 잠시만요."
+      ],
+      [
+        "리안",
+        "이거, 아까 말씀드린 정착지에서 보내온 꽃이에요. 식용으로 손질해서 말린 거라 음료에 올려도 된다고 하더라고요. 향도 꽤 좋고요."
+      ],
+      [
+        "리안",
+        "제가 여기 음료 이야기를 한번 했더니, 정착지에서 이 가게에도 한번 써 보라고 조금 더 보내주셨어요. 괜찮으시면 받아 주세요."
+      ],
+      [
+        "리안",
+        "다음에 들르면 음료에 올라간 것도 볼 수 있겠죠? 어떻게 쓰셨는지 정착지 분들께도 전해 드릴게요. 분명 좋아하실 거예요."
+      ],
+      [
+        "리안",
+        "오늘은 기분 좋게 퇴근하네요. 잘 먹었습니다!"
+      ]
+    ]
+  },
+  {
+    "who": "야간 통신원",
+    "time": "22:07",
+    "dialogue": [
+      [
+        "야간 통신원",
+        "프리즘 믹스 한 잔 주세요."
+      ],
+      [
+        "야간 통신원",
+        "오늘은 통화가 끊길 때마다 제 장비부터 의심했는데, 나중에 보니 상대편 단말기 문제였어요. 진작 서로 바꿔서 확인해 볼 걸 그랬네요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "프리즘 믹스"
+      }
+    ],
+    "after": [
+      [
+        "야간 통신원",
+        "감사합니다. 내일은 그쪽 장비부터 점검한다더군요."
+      ]
+    ]
+  },
+  {
+    "who": "먼 길 온 방문객",
+    "time": "22:41",
+    "dialogue": [
+      [
+        "먼 길 온 방문객",
+        "허니버터 감자튀김이랑 게이트 라이트 하나 부탁합니다."
+      ],
+      [
+        "먼 길 온 방문객",
+        "메뉴가 생각보다 많네요. 원래는 음료만 마시려고 했는데 냄새 맡으니까 배가 고파졌어요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허니버터 감자튀김"
+      },
+      {
+        "type": "drink",
+        "name": "게이트 라이트"
+      }
+    ],
+    "after": [
+      [
+        "먼 길 온 방문객",
+        "아, 감자튀김 시키길 너무 잘했어요. 잘 먹었습니다."
+      ]
+    ]
+  },
+  {
+    "who": "퇴근길 판매 직원",
+    "time": "23:18",
+    "dialogue": [
+      [
+        "퇴근길 판매 직원",
+        "오늘은 매운탕으로 주세요."
+      ],
+      [
+        "퇴근길 판매 직원",
+        "매운탕이랑 어울리는 음료는 뭔가요? 추천해주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "매운탕"
+      },
+      {
+        "type": "drink",
+        "name": "게이트 라이트",
+        "anyMenu": true
+      }
+    ],
+    "after": [
+      [
+        "퇴근길 판매 직원",
+        "뜨거워서 좋네요. 오늘은 이거 먹고 바로 들어갈게요."
+      ]
+    ]
+  },
+  {
+    "who": "차량 대기 승객",
+    "time": "23:51",
+    "dialogue": [
+      [
+        "차량 대기 승객",
+        "루비 라인 하나 주세요. 얼음은 넣지 말아 주세요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "루비 라인",
+        "iceCount": 0
+      }
+    ],
+    "after": [
+      [
+        "차량 대기 승객",
+        "잘 마셨습니다. 이제 안내가 뜨겠네요."
+      ]
+    ]
+  },
+  {
+    "who": "관문 주변 대학생",
+    "time": "00:24",
+    "dialogue": [
+      [
+        "관문 주변 대학생",
+        "이 시간에도 주문 되죠? 달달한 음식 하나 주세요."
+      ],
+      [
+        "관문 주변 대학생",
+        "공부하다가 당이 떨어져서요. 같이 공부하던 사람은 끝까지 남겠다고 하던데, 저는 여기까지만 하려고요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "허니 팬케이크",
+        "anyMenu": true,
+        "flavorRequest": {
+          "require": [
+            "달콤함"
+          ]
+        }
+      }
+    ],
+    "after": [
+      [
+        "관문 주변 대학생",
+        "감사합니다. 내일 아침에 일어나서 다시 해야겠어요."
+      ]
+    ]
+  },
+  {
+    "who": "심야 산책객",
+    "time": "01:03",
+    "dialogue": [
+      [
+        "심야 산책객",
+        "오버 더 호라이즌 한 잔 부탁드릴게요."
+      ],
+      [
+        "심야 산책객",
+        "걷다가 바람이 차가워져서 들어왔어요. 오늘은 여기까지만 걷고 돌아가야겠네요."
+      ]
+    ],
+    "orders": [
+      {
+        "type": "drink",
+        "name": "오버 더 호라이즌"
+      }
+    ],
+    "after": [
+      [
+        "심야 산책객",
+        "천천히 마시고 나갈게요. 감사합니다."
+      ]
+    ]
+  },
+  {
+    "who": "공공시설 청소 직원",
+    "time": "01:36",
+    "dialogue": [
+      [
+        "공공시설 청소 직원",
+        "가든 야채스프 하나요. 혹시 여기에 공깃밥 하나도 주실 수 있나요?"
+      ]
+    ],
+    "orders": [
+      {
+        "type": "food",
+        "name": "가든 야채스프 (추가선택재료 밥 추가)"
+      }
+    ],
+    "after": [
+      [
+        "공공시설 청소 직원",
+        "잘 먹었습니다. 이런 시간에는 따뜻한 게 제일 좋네요."
+      ]
+    ]
+  }
+];
+const dailyVisits={1:visits,2:dayTwoVisits,3:dayThreeVisits,4:dayFourVisits,5:dayFiveVisits,6:daySixVisits,7:daySevenVisits,8:dayEightVisits,9:dayNineVisits,10:dayTenVisits,11:dayElevenVisits,12:dayTwelveVisits,13:day13Visits,14:day14Visits,15:day15Visits,16:day16Visits,17:day17Visits,18:day18Visits,19:day19Visits,20:day20Visits,21:day21Visits,22:day22Visits,23:day23Visits,24:day24Visits,25:day25Visits,26:day26Visits,27:day27Visits,28:day28Visits,29:day29Visits,30:day30Visits,31:day31Visits,32:day32Visits,33:day33Visits,34:day34Visits,35:day35Visits,36:day36Visits,37:day37Visits,38:day38Visits,39:day39Visits,40:day40Visits,41:day41Visits,42:day42Visits,43:day43Visits};
 
 let dayEightCacheKey=null,dayEightCache=null,dayFiveCacheKey=null,dayFiveCache=null,dayTenCacheKey=null,dayTenCache=null;
 
@@ -22398,7 +23333,27 @@ function mzDay41Variants(v,day,index){
  return v;
 }
 
+function mzDay43Variants(v,day,index){
+ if(index===2){
+  const choices=mzSpecialMenuChoices('market',day).filter(r=>r.kind==='food');
+  const chosen=choices.length?choices[Math.floor(seedPick(s,day,index,4303)*choices.length)]:null;
+  const name=chosen?chosen.name:'허브구이 감자';
+  return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('(상점 해금 안주)',name)]),orders:[{type:'food',name,...(chosen?.addons?{addons:[...chosen.addons]}:{})}]};
+ }
+ if(index===3){
+  const choices=mzSpecialMenuChoices('custom',day);
+  const chosen=choices.length?choices[Math.floor(seedPick(s,day,index,4304)*choices.length)]:null;
+  if(!chosen){return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('(사용자 커스텀 메뉴)','스파이시 그릴 미트')]),orders:[v.orders[0],{type:'food',name:'스파이시 그릴 미트'}]};}
+  return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('(사용자 커스텀 메뉴)',chosen.name)]),orders:[v.orders[0],{type:chosen.kind,name:chosen.name,custom:true,...(chosen.kind==='food'?{addons:[...(chosen.addons||[])]}:{})}]};
+ }
+ if(index===8){return {...v,orders:[v.orders[0],{type:'drink',name:'추천 음료',anyMenu:true}]};}
+ if(index===10){return {...v,orders:[{type:'food',name:'달콤한 안주',anyMenu:true,flavorRequest:{require:['달콤함']}}]};}
+ if(index===12){if(hasMarketItem('rice'))return v;
+  return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('혹시 여기에 공깃밥 하나도 주실 수 있나요?','이거 따뜻하게 부탁드릴게요.')]),orders:[{type:'food',name:'가든 야채스프'}]};}
+ return v;
+}
 function mzResolveVisitVariants(v,day,index){
+ if(day===43)return mzDay43Variants(v,day,index);
  if(day===41)return mzDay41Variants(v,day,index);
  if(day===40)return mzDay40Variants(v,day,index);
  if(day===39)return mzDay39Variants(v,day,index);
@@ -22579,6 +23534,7 @@ const garnishCatalog=[
  {id:'whippedcream',name:'휘핑 크림',source:'market',unlockDay:19,group:'안전도시 유통',category:['가니쉬','토핑'],taste:['달콤함','고소함'],description:'휘핑크림 마니 쥬세요! (귀엽다는 듯 웃기)',hiddenTags:[],symbol:'❀'},
  {id:'berrymix',name:'베리 믹스',source:'market',unlockDay:24,group:'안전도시 유통',category:['가니쉬','과실'],taste:['상큼함','신맛'],description:'여러 종류의 베리를 섞은 믹스. 김곡게는 못 먹는다.',hiddenTags:[],symbol:'✿'},
  {id:'fire',name:'불',source:'market',unlockDay:26,group:'안전도시 유통',category:['가니쉬','연출'],taste:['연출적'],description:'불입니다. 정말로요.',hiddenTags:[],symbol:'♨'},
+ {id:'flower',name:'꽃',source:'event',unlockDay:43,group:'황무지 교류',category:['가니쉬','연출'],taste:['연출적'],description:'황무지 정착지에서 보내온 식용 꽃. 말려서 음료에 올릴 수 있다.',hiddenTags:[],symbol:'✿'},
  {id:'sunfruit',name:'석양열매',source:'event',unlockDay:3,group:'황무지 운송',category:['가니쉬','과실'],taste:['달콤함', '과실 향', '신맛'],description:'황무지에서 들여온 과실. 특유의 붉은 이파리가 석양빛을 닮아 석양열매라 부른다.',hiddenTags:['황무지'],symbol:'◆'}
 ];
 const marketCatalog=[
@@ -22763,6 +23719,41 @@ inbox.push(...[
 // DAY 33 owner mail
 inbox.push(...[{"id": "day33", "sender": "사장님", "title": "손잡이가 또 말썽이야", "body": "좋은 저녁!\n\n낮에 손님이 들어오시는데 문이 잘 안 열린다고 하셔서 깜짝 놀랐어. 어제까지만 해도 괜찮았는데 말이지. 몇 번 열었다 닫아 보니까 손잡이 나사가 조금 풀려 있더라고.\n\n도구함에서 드라이버를 꺼내 조여 놨어. 크게 고장 난 건 아니라 다행이지. 그런데 손잡이 하나 만지다가 가게에 굴러다니던 가구들 수리까지 싹 다 해 버렸어. 이런 건 꺼냈을 때 해 둬야 하잖니.\n\n지금은 문 잘 열려. 혹시 저녁에 또 헐거워지면 알려 줘. 그럼 오늘도 잘 부탁해!", "when": "prep"}, {"id": "closing33", "sender": "사장님", "title": "접시가 모자란 줄 알았어", "body": "오늘도 수고했어!\n\n낮에 접시가 몇 장 안 보여서 한참 찾았단다. 분명 아침에 맞춰 놨는데 숫자가 안 맞더라고. 혹시 깨진 걸 깜빡했나 싶어서 싱크대 밑까지 봤어.\n\n그런데 세척기 안에 그대로 들어 있었지 뭐니. 아침에 한 번 돌려 놓고 꺼내는 걸 잊은 거야. 내가 넣어 놓고도 까맣게 잊어버렸어. 하하.\n\n저녁에 쓴 접시까지 더해서 내일은 넉넉히 꺼내 둘게. 오늘도 고생 많았어. 푹 쉬렴!", "when": "closing"}] );
 
+// DAY42 owner mail from user-reviewed script.
+inbox.push(...[
+  {
+    "id": "day42",
+    "sender": "사장님",
+    "title": "서랍 정리",
+    "body": "좋은 저녁!\n\n오늘 낮에 가게를 정리하다가 계산대 아래 서랍이 잘 안 열리는 걸 발견했어. 처음에는 어디가 고장 났나 싶었는데, 안쪽에 넣어 둔 물건들이 잔뜩 쌓여서 걸리는 거였더라.\n\n언제 이렇게 잡동사니가 많아졌는지 모르겠어. 다 쓰지도 않은 메모지에 여분의 펜, 어디서 나온 건지 모를 작은 상자까지 있더라고. 한참 정리하고 나니 서랍이 아주 부드럽게 열리네!\n\n네가 자주 쓰는 물건들은 찾기 편하게 앞쪽에 두었어. 혹시 평소랑 위치가 달라져서 헷갈리면 미안해.\n\n그럼 오늘도 영업 잘 부탁해!",
+    "when": "prep"
+  },
+  {
+    "id": "closing42",
+    "sender": "사장님",
+    "title": "내일 점심은",
+    "body": "오늘도 고생 많았어!\n\n아까 장을 보면서 집에서 먹을 점심거리도 조금 사 왔어. 그런데 냉장고를 열어 보니 어제 사 둔 것도 아직 그대로 있더라. 분명히 먹으려고 사 놓았는데 왜 자꾸 잊는 걸까.\n\n그래서 내일은 새로 뭘 만들지 말고 남은 것부터 먹으려고 해. 재료가 상하기 전에 먹는 것도 중요하니까. 그래 놓고 내일 또 다른 음식이 먹고 싶어지면 어쩌나 싶지만 말이야.\n\n늦게까지 가게 봐줘서 고마워. 돌아갈 때 조심하고, 푹 쉬렴!",
+    "when": "closing"
+  }
+]);
+
+// DAY43 user-reviewed mail.
+inbox.push(...[
+  {
+    "id": "day43",
+    "sender": "사장님",
+    "title": "이건 누구 거지?",
+    "body": "좋은 저녁!\n\n가게 뒷문 쪽에 우산 하나가 세워져 있더라. 누가 두고 간 건가 싶어서 안으로 들여놨어. 그런데 손잡이에 종이가 묶여 있는 거야. 이름이라도 적혀 있나 봤더니 '비 오면 쓰세요'라고만 되어 있네.\n\n내가 두고 갔나? 싶어서 한참 생각했는데 내 우산은 멀쩡히 집에 있어. 아무래도 근처 가게에서 누가 가져다 놓은 모양이야. 고맙긴 한데, 누구한테 고맙다고 해야 할지를 모르겠네.\n\n일단 뒷문 안쪽에 두었어. 혹시 찾으러 오시는 분이 있으면 알려 줘. 오늘도 잘 부탁해!",
+    "when": "prep"
+  },
+  {
+    "id": "closing43",
+    "sender": "사장님",
+    "title": "우산 주인 찾았어",
+    "body": "오늘도 고생 많았어!\n\n아까 말한 우산 주인이 누군지 알았어. 옆 가게에서 일하시는 분이 지난번에 비 맞고 들어가는 손님을 보셨대. 혹시 또 급하게 필요한 사람이 있을까 봐 여분을 하나 갖다 두신 거래.\n\n돌려드려야 하나 여쭤봤더니 그냥 같이 쓰자고 하시더라. 나도 다음에 비 오는 날엔 여분이 있는지 먼저 살펴봐야겠어.\n\n아무튼 뒷문 우산은 그대로 두었으니 알아만 둬. 오늘도 고생 많았어. 잘 쉬렴!",
+    "when": "closing"
+  }
+]);
 const feedPosts=[
   {
     "id": "p1",
@@ -24315,6 +25306,102 @@ feedPosts.push(...[{"id":"p37_01","day":37,"author":"야근망령","time":"09:42
 feedPosts.push(...[{"id": "p38_01", "day": 38, "author": "쓸데없는투표", "time": "08:57", "text": "님들아 님들은 가게 문에 밀어주세요 적혀 있으면 어케 함? 첫번에 제대로 밀어?", "comments": [["다섯번째달", "밀어주세요는 애초에 아무도 안 읽어 ㅋㅋㅋㅋ 거기 붙어있는지도 모를걸"], ["쓸데없는투표", "왜??"], ["개굴", "당연하지 사람들은 원래 밀고 나서 안 열리면 '당기세요'를 발견한다고"]]}, {"id": "p38_02", "day": 38, "author": "야근망령", "time": "12:26", "text": "우리 팀 채팅방 이름이 퇴근하고싶다로 바뀜 ㅋㅋㅋㅋ", "comments": [["무밈미", "그래도 되는거야?"], ["야근망령", "팀장이 바꿈"], ["회유", "ㅋㅋㅋㅋㅋ 그래서 퇴근은 시켜주심?"], ["야근망령", "아니"]]}, {"id": "p38_03", "day": 38, "author": "마라찌", "time": "15:39", "text": "이번에 새로 개봉한 영화 있잖아 그거 재밌음?", "comments": [["관성", "나쁘지 않음 ㅇㅇ"], ["마라찌", "많이 무서워?"], ["관성", "딱히??"], ["관문골목", "끝나고 화장실 혼자 못감"], ["마라찌", "왜 위랑 말이 달라"]]}, {"id": "p38_04", "day": 38, "author": "부릉부릉", "time": "19:08", "text": "그 영화 있잖아 거기서 먹방씬 나오는데 배고파 죽을 뻔 했어", "comments": [["초록장갑", "그것만 짤라서 클립 엄청 올라오던데"], ["부릉부릉", "맛있어보이지 않냐 특히 그거"], ["초록장갑", "내일 먹으러 갈까..."]]}]);
 // DAY40 weekend: approved posts; visible only on the weekend and afterward.
 feedPosts.push(...[{"id":"p40_week_01","day":40,"weekendOnly":true,"author":"할인사냥꾼","time":"10:18","text":"지도 보고 시장 처음 가본 골목으로 들어갔는데 작은 문구점 하나 발견함!! 내가 찾던 봉투 거기 다 있더라","comments":[["종이수집가","어느 골목??"],["할인사냥꾼","관문 쪽에서 두 번째 갈림길로 들어가면 나와"],["종이수집가","ㄱㅅㄱㅅ"]]},{"id":"p40_week_02","day":40,"weekendOnly":true,"author":"새벽밤","time":"12:47","text":"주말이라 더 자려고 누워 있었는데 배고파서 그냥 일어났어","comments":[["무밈미","벌써 점심시간이야 일어나"]]},{"id":"p40_week_03","day":40,"weekendOnly":true,"author":"부릉부릉","time":"15:32","text":"어제 운송 길에 들른 곳에서 차 한잔 얻어마셨는데 향이 아직도 기억남... 이름을 물어볼 걸 그랬어","comments":[["외곽생활","정착지마다 풀을 물에 넣기만 하면 차라고 부르는 데도 있어서 찾기 어려움ㅋㅋ 어떤 맛이었는데?"],["부릉부릉","색은 진했는데 달진 않았어"],["외곽생활","그걸로는 모르겠는데 뭐지"]]},{"id":"p40_week_04","day":40,"weekendOnly":true,"author":"마라찌","time":"18:06","text":"마라탕먹으러갈사람","comments":[["관성","나"],["초록장갑","어디서 먹어??"]]},{"id":"p40_week_05","day":40,"weekendOnly":true,"author":"관문골목","time":"21:13","text":"오늘 시장 골목에 평소보다 늦게까지 불 켜 둔 가게가 많네? 가게 앞에 작은 안내도 놓아 둔 곳도 여럿 보임","comments":[["동네산책","그거 손으로 그린 느낌의 지도 맞지??"],["관문골목","응. 갖고 다니는 사람 꽤 있더라"]]}]);
+// DAY43 user-reviewed SNS (two posts).
+feedPosts.push(...[
+  {
+    "id": "p43_03",
+    "day": 43,
+    "author": "먀항",
+    "time": "18:53",
+    "text": "오늘 과자 샀는데 계산하고 보니까 어제도 같은 거 샀었음. 집에 두 봉지 있다",
+    "comments": [
+      [
+        "도시에서락을하면도시락",
+        "두 봉지면 더 좋은 거 아냐?"
+      ],
+      [
+        "먀항",
+        "입이 짧은 편이라.. 한봉지 먹기도 전에 벌써 물렸어"
+      ]
+    ]
+  },
+  {
+    "id": "p43_04",
+    "day": 43,
+    "author": "마니마로",
+    "time": "23:28",
+    "text": "갑자기 카레가 너무 먹고 싶은데 어쩌지?",
+    "comments": [
+      [
+        "관성",
+        "근처에 파는 곳 없음?"
+      ],
+      [
+        "마니마로",
+        "괜히 이상한 데서 먹었다가 입맛 버릴까봐"
+      ]
+    ]
+  }
+]);
+// DAY42 SNS from user-reviewed script.
+feedPosts.push(...[
+  {
+    "id": "p42_01",
+    "day": 42,
+    "author": "개굴",
+    "time": "09:22",
+    "text": "안 쓰던 가방 뒤졌는데 영수증이 한움큼 나옴. 이거 언제 다 쓴 거지???",
+    "comments": [
+      [
+        "종이수집가",
+        "그중에 중요한 것도 있을걸? 잘 살펴봐"
+      ],
+      [
+        "개굴",
+        "그런 말 하지마 지금 버리려던 참인데"
+      ]
+    ]
+  },
+  {
+    "id": "p42_02",
+    "day": 42,
+    "author": "관문골목",
+    "time": "12:44",
+    "text": "골목 지도에 표시된 가게 중 하나 오늘은 일찍 문 닫는대. 가기 전에 확인해봐",
+    "comments": [
+      [
+        "동네산책",
+        "정보 고마워. 헛걸음할 뻔..."
+      ]
+    ]
+  },
+  {
+    "id": "p42_03",
+    "day": 42,
+    "author": "도시에서락을하면도시락",
+    "time": "16:17",
+    "text": "어제 해둔 오일파스타 오늘 먹음. 생각보다 맛있어서 기분좋아",
+    "comments": [
+      [
+        "무밈미",
+        "파스타 안 불어? 그걸로 밀프랩해도 돼?"
+      ]
+    ]
+  },
+  {
+    "id": "p42_04",
+    "day": 42,
+    "author": "새벽밤",
+    "time": "21:05",
+    "text": "요즘 잠이 안 와서 창밖만 봄. 지나가는 불빛 보는 것도 은근 재밌더라",
+    "comments": [
+      [
+        "밤비",
+        "집이 도로 근처임? 야경 끝내주겠다"
+      ]
+    ]
+  }
+]);
 // DAY41 edited SNS.
 feedPosts.push(...[
   {
@@ -25391,7 +26478,7 @@ function mzShowDay32ArcadeNotice(){
  popup.append(kicker,title,detail,hint,button);overlay.appendChild(popup);document.body.appendChild(overlay);button.focus();
 }
 
-function advanceGuest(){const completedGuest=current();const day32ArcadeFinish=s.day===32&&s.visit===2&&!s.arcadeRepaired;if(day32ArcadeFinish){s.arcadeRepaired=true;note('시스템','카이렌·미카의 이야기 완료 · 아케이드 게임기 수리');}mzFinishTorbanSunsetQuest(completedGuest);const showMechanicNotice=!!s.mechanicStoryNoticePending&&completedGuest?.who==='야간 정비사'&&completedGuest?.orders?.some(o=>o.regularSpecial==='mechanic');if(showMechanicNotice)s.mechanicStoryNoticePending=false;s.mechanicRetryActive=false;rememberGuestVisit(current().who,s.day,s.visit);rememberAdditionalGuests(current(),s.day,s.visit);s.stationError=null;s.served++;s.dayStats[s.day]??={served:0,orders:0,tips:0};s.dayStats[s.day].served++;s.dayStats[s.day].orders+=current().orders.length;s.visit++;startWaiting();s.line=0;s.completed=[];s.mix=[];s.ice=false;s.iceCount=0;s.stirred=false;s.mixAt=0;s.extra=null;s.foodBase=null;s.foodSauce=null;s.foodKind=null;s.foodAddons=[];s.foodHeat=0;s.remarked=false;s.lightComment=null;s.specialOutcome=null;s.garnishDialogue=[];render();if(completedGuest?.sunsetQuest)mzShowTorbanRewardNotice();if(showMechanicNotice)mzShowMechanicRewardNotice();if(day32ArcadeFinish)mzShowDay32ArcadeNotice()}
+function advanceGuest(){const completedGuest=current();if(s.day===43&&completedGuest?.who==='리안'&&!s.unlockedExtras.includes('flower')){s.unlockedExtras.push('flower');note('시스템','리안 개인 서사 완료 · 신규 음료 토핑 「꽃」 영구 해금');} const day32ArcadeFinish=s.day===32&&s.visit===2&&!s.arcadeRepaired;if(day32ArcadeFinish){s.arcadeRepaired=true;note('시스템','카이렌·미카의 이야기 완료 · 아케이드 게임기 수리');}mzFinishTorbanSunsetQuest(completedGuest);const showMechanicNotice=!!s.mechanicStoryNoticePending&&completedGuest?.who==='야간 정비사'&&completedGuest?.orders?.some(o=>o.regularSpecial==='mechanic');if(showMechanicNotice)s.mechanicStoryNoticePending=false;s.mechanicRetryActive=false;rememberGuestVisit(current().who,s.day,s.visit);rememberAdditionalGuests(current(),s.day,s.visit);s.stationError=null;s.served++;s.dayStats[s.day]??={served:0,orders:0,tips:0};s.dayStats[s.day].served++;s.dayStats[s.day].orders+=current().orders.length;s.visit++;startWaiting();s.line=0;s.completed=[];s.mix=[];s.ice=false;s.iceCount=0;s.stirred=false;s.mixAt=0;s.extra=null;s.foodBase=null;s.foodSauce=null;s.foodKind=null;s.foodAddons=[];s.foodHeat=0;s.remarked=false;s.lightComment=null;s.specialOutcome=null;s.garnishDialogue=[];render();if(completedGuest?.sunsetQuest)mzShowTorbanRewardNotice();if(showMechanicNotice)mzShowMechanicRewardNotice();if(day32ArcadeFinish)mzShowDay32ArcadeNotice()}
 
 // ===== SERVING / OUTCOME / RECIPE DISCOVERY =====
 function deliver(){
@@ -25573,7 +26660,7 @@ function mzPortraitHTML(id,face){
   '<img class="mz267-expression-layer" src="'+face+'" alt="" draggable="false">'+
   '</div>';
 }
-function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitIds=mzPortraitIdsForCurrentVisit(v);figure.style.display=portraitIds.length?'flex':'none';if(portraitIds.length){const portraits=portraitIds.map(id=>({id,portrait:STANDING_LAYERS[id]})).filter(x=>x.portrait);const portraitKey=portraits.map(x=>x.id+(mzPortraitBackLayerSrc(x.id)?':back':'')).join(',');const expressionId=bootScreen==='devPortrait'?'normal':mzActivePortraitExpression(v);if(figure.dataset.portraits!==portraitKey){figure.innerHTML=portraits.map(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;return mzPortraitHTML(x.id,face)}).join('');figure.dataset.portraits=portraitKey;}portraits.forEach(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;const expressionLayer=figure.querySelector('[data-portrait-id="'+x.id+'"] .mz267-expression-layer');if(expressionLayer&&expressionLayer.getAttribute('src')!==face)expressionLayer.setAttribute('src',face);});figure.classList.toggle('mz267-dual-portraits',portraits.length>1);figure.classList.toggle('mz-mika-kairen-pair',portraits.length===2&&portraits[0].id==='mika'&&portraits[1].id==='kairen');figure.classList.toggle('mz-redsong-pair',portraits.length===2&&portraits[0].id==='redsonga'&&portraits[1].id==='redsongb');figure.dataset.expression=expressionId;}else{if(figure.dataset.portraits){figure.innerHTML='';delete figure.dataset.portraits;delete figure.dataset.expression;}figure.classList.remove('mz267-dual-portraits','mz-mika-kairen-pair','mz-redsong-pair');}$('guestIdentity').innerHTML=bootScreen==='devPortrait'?'<strong>'+esc(mzDevPortraitChoices.find(x=>x[0]===mzDevPortraitChoice)?.[1]||'스탠딩')+'</strong>':s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
+function scene(){document.querySelector('.scene')?.classList.toggle('mz256-friend-counter-active',Number.isInteger(s.friendCounterUnlockDay)&&s.day>=s.friendCounterUnlockDay);const v=current();const figure=$('figure');const portraitIds=mzPortraitIdsForCurrentVisit(v);figure.style.display=portraitIds.length?'flex':'none';if(portraitIds.length){const portraits=portraitIds.map(id=>({id,portrait:STANDING_LAYERS[id]})).filter(x=>x.portrait);const portraitKey=portraits.map(x=>x.id+(mzPortraitBackLayerSrc(x.id)?':back':'')).join(',');const expressionId=bootScreen==='devPortrait'?'normal':mzActivePortraitExpression(v);if(figure.dataset.portraits!==portraitKey){figure.innerHTML=portraits.map(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;return mzPortraitHTML(x.id,face)}).join('');figure.dataset.portraits=portraitKey;}portraits.forEach(x=>{const face=(x.portrait.expressions&&x.portrait.expressions[expressionId])||x.portrait.expressions.normal;const expressionLayer=figure.querySelector('[data-portrait-id="'+x.id+'"] .mz267-expression-layer');if(expressionLayer&&expressionLayer.getAttribute('src')!==face)expressionLayer.setAttribute('src',face);});figure.classList.toggle('mz267-dual-portraits',portraits.length>1);figure.classList.toggle('mz-mika-kairen-pair',portraits.length===2&&portraits[0].id==='mika'&&portraits[1].id==='kairen');figure.classList.toggle('mz-redsong-pair',portraits.length===2&&portraits[0].id==='redsonga'&&portraits[1].id==='redsongb');figure.dataset.expression=expressionId;}else{if(figure.dataset.portraits){figure.innerHTML='';delete figure.dataset.portraits;delete figure.dataset.expression;}figure.classList.remove('mz267-dual-portraits','mz-mika-kairen-pair','mz-redsong-pair');}$('guestIdentity').innerHTML=bootScreen==='devPortrait'?'<strong>'+esc(mzDevPortraitChoices.find(x=>x[0]===mzDevPortraitChoice)?.[1]||'스탠딩')+'</strong>':s.phase==='open'&&s.sub==='interlude'?'':s.phase==='open'?`<strong>${esc(v.who)}</strong>`:s.phase==='closing'?dayLabel(s.day)+'<br><strong>영업 종료</strong>':'관문 구역<br><strong>영업 준비 중</strong>';let c=s.completed.map(x=>{let preview;if(x.type==='food'){preview='<span class="plate-pixel" aria-hidden="true"><i></i></span>'}else{const strips=mzServedLiquidStrips(x);preview=`<span class="served-cup" aria-hidden="true"><span class="served-liquid">${strips}</span>${iceVisual(x.iceCount??(x.ice?1:0),true)}${x.extra?`<span class="served-extra v54-served-${esc(x.extra)}" title="${esc(garnishById(x.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨',flower:'✿'})[x.extra]||'✦')}</span>`:''}</span>`}return `<div class="served ${x.type==='food'?'food':''}" title="${esc(x.name)}">${preview}<span>${esc(x.name)}</span></div>`}).join('');$('counter').classList.toggle('mz-bulk-order',s.completed.length>=5);$('counter').innerHTML=c||'';}
 let activeTypeKey=null,activeTypeTimer=null,activeTypeComplete=true,activeTypeFull='';
 function revealDialogue(){
  if(activeTypeComplete)return false;
@@ -25649,13 +26736,13 @@ if(s.sub.startsWith('mz35Care')){mz35CareDialogue(add);return;}
  const lines=s.sub==='after'?currentAfterLines(v):v.dialogue;const [who,line]=lines[s.line];const displayWho=s.day>=23&&((who==='방문객'&&v.who==='퇴근길 방문객')||(who==='화물 기사'&&v.who==='정기 화물 기사'))?v.who:who;const shownLine=mzTaggedLineDisplay(line);$('speaker').textContent=displayWho;typeDialogue(who,shownLine,s.visit+':'+s.sub+':'+s.line+':'+shownLine);add(s.line===lines.length-1?s.sub==='after'?'손님 배웅하기':'주문 받기':'계속',dialogueClick(()=>{note(who,shownLine);if(s.day===6&&s.visit===2&&s.sub==='dialogue'&&s.line===2){recordGuestClue('야간 정비사',6,2)}nextLine()}),true);}
 let v119GarnishPage=0;
 function renderStation(){v119GarnishPage=Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1));const isOpen=s.phase==='open'&&s.sub==='order';$('stationName').textContent=s.station==='drink'?'DRINK STATION':'FOOD STATION';for(const [id,type] of [['drinkIndicator','drink'],['foodIndicator','food']]){const el=$(id);el.classList.toggle('selected',s.station===type);el.setAttribute('aria-current',s.station===type?'page':'false')} $('orderLabel').textContent=isOpen?current().orders.filter(o=>!orderDone(o)).map(o=>o.name).join(' · ')||'서빙 대기':'주문 대기';let html='';if(s.station==='drink'){
-html=`<div class="view"><div><div class="materials">${ingredients.map(a=>`<button class="material" style="background:${a[2]}" data-add="${a[0]}" ${!isOpen||!selectedOrder('drink')||s.mix.length>=10||s.mix.filter(x=>x===a[0]).length>=5?'disabled':''}>${a[0]}<small>${a[1]}</small></button>`).join('')}</div>${unlockedGarnishes().length?`<section class="v32-extra v35-garnish" aria-label="가니쉬 조리대"><div class="v32-extra-head"><span>GARNISH / 가니쉬</span><span class="v32-extra-count">${String(unlockedGarnishes().length).padStart(2,'0')} AVAILABLE</span></div><div class="v120-garnish-row">${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="prev"  aria-label="이전 가니시 4개">‹</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}<div class="v35-garnish-grid">${unlockedGarnishes().slice(Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4,Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4+4).map(g=>garnishCard(g,s.extra===g.id,!isOpen||!selectedOrder('drink'))).join('')}</div>${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="next"  aria-label="다음 가니시 4개">›</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}</div></section>`:''}<div class="ingredient-count">${esc(countStr())} · ${s.mix.length}/10</div><div class="tools"><button class="btn ${s.ice?'active':''}" id="iceBtn" ${!isOpen||!selectedOrder('drink')?'disabled':''}>❄ 얼음 ${s.iceCount?`${s.iceCount}회`:'추가'}</button><button class="btn ${s.stirred?'active':''}" id="stirBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length||s.mixAt===s.mix.length&&s.stirred?'disabled':''}>↻ 섞기 ${s.stirred&&s.mixAt===s.mix.length?'완료':'실행'}</button><button class="btn" id="clearBtn" ${!s.mix.length&&!s.ice&&!s.stirred&&!s.extra?'disabled':''}>▤ 쓰레기통</button></div><div class="actions"><button class="btn primary" id="finishBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length?'disabled':''}>완성 · 카운터에 놓기</button></div></div><div class="cupbox"><div class="note">제조 중인 컵</div><div class="cup">${s.stirred?`<div class="layer" style="height:${s.mixAt*14}px;background:${blendColor(s.mix.slice(0,s.mixAt))}"></div>`+s.mix.slice(s.mixAt).map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join(''):s.mix.map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join('')}${iceVisual(s.iceCount)}${s.extra?`<span class="v54-cup-garnish v54-garnish-${esc(s.extra)}" title="${esc(garnishById(s.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨'})[s.extra]||'✦')}</span>`:''}</div><div class="note">${s.stirred?`혼합 ${s.mixAt}단위${s.mix.length>s.mixAt?' + 위쪽 층 '+(s.mix.length-s.mixAt)+'단위':''}`:esc(s.mix.join(' → ')||'—')}</div></div></div>`;
+html=`<div class="view"><div><div class="materials">${ingredients.map(a=>`<button class="material" style="background:${a[2]}" data-add="${a[0]}" ${!isOpen||!selectedOrder('drink')||s.mix.length>=10||s.mix.filter(x=>x===a[0]).length>=5?'disabled':''}>${a[0]}<small>${a[1]}</small></button>`).join('')}</div>${unlockedGarnishes().length?`<section class="v32-extra v35-garnish" aria-label="가니쉬 조리대"><div class="v32-extra-head"><span>GARNISH / 가니쉬</span><span class="v32-extra-count">${String(unlockedGarnishes().length).padStart(2,'0')} AVAILABLE</span></div><div class="v120-garnish-row">${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="prev"  aria-label="이전 가니시 4개">‹</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}<div class="v35-garnish-grid">${unlockedGarnishes().slice(Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4,Math.min(v119GarnishPage,Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1))*4+4).map(g=>garnishCard(g,s.extra===g.id,!isOpen||!selectedOrder('drink'))).join('')}</div>${unlockedGarnishes().length>4?`<button type="button" class="btn v120-garnish-arrow" data-garnish-page="next"  aria-label="다음 가니시 4개">›</button>`:`<span class="v120-garnish-arrow-placeholder" aria-hidden="true"></span>`}</div></section>`:''}<div class="ingredient-count">${esc(countStr())} · ${s.mix.length}/10</div><div class="tools"><button class="btn ${s.ice?'active':''}" id="iceBtn" ${!isOpen||!selectedOrder('drink')?'disabled':''}>❄ 얼음 ${s.iceCount?`${s.iceCount}회`:'추가'}</button><button class="btn ${s.stirred?'active':''}" id="stirBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length||s.mixAt===s.mix.length&&s.stirred?'disabled':''}>↻ 섞기 ${s.stirred&&s.mixAt===s.mix.length?'완료':'실행'}</button><button class="btn" id="clearBtn" ${!s.mix.length&&!s.ice&&!s.stirred&&!s.extra?'disabled':''}>▤ 쓰레기통</button></div><div class="actions"><button class="btn primary" id="finishBtn" ${!isOpen||!selectedOrder('drink')||!s.mix.length?'disabled':''}>완성 · 카운터에 놓기</button></div></div><div class="cupbox"><div class="note">제조 중인 컵</div><div class="cup">${s.stirred?`<div class="layer" style="height:${s.mixAt*14}px;background:${blendColor(s.mix.slice(0,s.mixAt))}"></div>`+s.mix.slice(s.mixAt).map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join(''):s.mix.map(x=>`<div class="layer" style="background:${ingredients.find(a=>a[0]===x)[2]}"></div>`).join('')}${iceVisual(s.iceCount)}${s.extra?`<span class="v54-cup-garnish v54-garnish-${esc(s.extra)}" title="${esc(garnishById(s.extra)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨',flower:'✿'})[s.extra]||'✦')}</span>`:''}</div><div class="note">${s.stirred?`혼합 ${s.mixAt}단위${s.mix.length>s.mixAt?' + 위쪽 층 '+(s.mix.length-s.mixAt)+'단위':''}`:esc(s.mix.join(' → ')||'—')}</div></div></div>`;
 }else{let bases=['육류','버섯','감자','채소','곡물 반죽',...(s.day>=21?['생선']:[])],sauces=['소금','매운 양념','허브','달콤한 소스'],kinds=s.day>=10?['구이','볶음','국물','튀김',...(mzNonheatUnlocked()?['비가열']:[])]:['구이','볶음','국물'];const buttons=(arr,field)=>arr.map(v=>`<button class="btn ${s[field]===v?'active':''}" data-field="${field}" data-value="${esc(v)}" ${!isOpen||!selectedOrder('food')?'disabled':''}>${esc(v)}</button>`).join('');html=`<div class="foodgrid"><div><div class="note">주재료</div><div class="actions">${buttons(bases,'foodBase')}</div><div class="note" style="margin-top:14px">양념</div><div class="actions">${buttons(sauces,'foodSauce')}</div>${s.day>=7&&foodMarketItems().length?`<section class="v54-food-addons"><div class="note">추가 재료 · 최대 2종</div><div class="actions">${foodMarketItems().map(m=>`<button type="button" class="btn v54-food-addon ${s.foodAddons.includes(m.id)?'active is-selected':''}" data-food-addon="${m.id}" aria-pressed="${s.foodAddons.includes(m.id)?'true':'false'}" ${!isOpen||!selectedOrder('food')?'disabled':''}>${s.foodAddons.includes(m.id)?'✓ ':''}${esc(m.name)}</button>`).join('')}</div></section>`:''}</div><div><div class="note">조리 방식</div><div class="actions">${buttons(kinds,'foodKind')}</div>${s.day>=10?`<div class="note" style="margin-top:14px">추가 가열 · 선택 사항</div><div class="actions"><button class="btn" id="heatMinus" ${!isOpen||s.foodHeat<=0?'disabled':''}>−</button><span class="note" style="align-self:center;min-width:54px;text-align:center">${s.foodHeat||0}회</span><button class="btn" id="heatPlus" ${!isOpen||s.foodHeat>=10||s.foodKind==='비가열'?'disabled':''}>+</button></div>`:''}<div class="cupbox" style="min-height:90px;margin-top:12px"><div style="font-size:30px">◉</div><div class="note">${esc([s.foodBase,s.foodSauce,s.foodKind,...(s.foodAddons||[]).map(id=>marketCatalog.find(m=>m.id===id)?.name||id),...(s.foodHeat?['추가 가열 '+s.foodHeat+'회']:[])].filter(Boolean).join(' · ')||'—')}</div></div></div></div><div class="station-foot" style="margin-top:12px"><button class="btn" id="foodClear">재료 비우기</button><button class="btn primary" id="foodMake" ${!isOpen||!selectedOrder('food')||!s.foodBase||!s.foodSauce||!s.foodKind?'disabled':''}>조리 완료 · 카운터에 놓기</button></div>`;}
 $('stationBody').innerHTML=(s.stationError&&isOpen?`<div class="station-error" role="status">! ${esc(s.stationError)}</div>`:'')+html;
 $('stationBody').querySelectorAll('[data-food-addon]').forEach(b=>b.onclick=()=>{const id=b.dataset.foodAddon;if(!hasMarketItem(id))return;const list=s.foodAddons||[];s.foodAddons=list.includes(id)?list.filter(x=>x!==id):list.length<2?[...list,id]:list;s.stationError=null;render()});$('stationBody').querySelectorAll('[data-add]').forEach(b=>b.onclick=()=>addIng(b.dataset.add));$('stationBody').querySelectorAll('[data-field]').forEach(b=>b.onclick=()=>{s[b.dataset.field]=b.dataset.value;if(b.dataset.field==='foodKind'&&s.foodKind==='비가열')s.foodHeat=0;s.stationError=null;render()});$('stationBody').querySelectorAll('[data-garnish-page]').forEach(b=>b.onclick=()=>{const max=Math.max(0,Math.ceil(unlockedGarnishes().length/4)-1);v119GarnishPage=(v119GarnishPage+(b.dataset.garnishPage==='next'?1:-1)+(max+1))%(max+1);renderStation()});$('stationBody').querySelectorAll('[data-garnish]').forEach(b=>b.onclick=()=>{const id=b.dataset.garnish;if(!unlockedGarnishes().some(g=>g.id===id))return;const adding=s.extra!==id;s.extra=adding?id:null;s.stationError=null;if(adding)playEffect('topping');render()});for(let [id,fn] of [['iceBtn',()=>{const max=s.day>=10?3:1;s.iceCount=((s.iceCount||0)+1)%(max+1);s.ice=!!s.iceCount;s.stationError=null;render()}],['clearBtn',()=>{clearDrink();render()}],['stirBtn',()=>{if(s.mix.length&&(!s.stirred||s.mixAt<s.mix.length)){s.stirred=true;s.mixAt=s.mix.length;s.stationError=null;render()}}],['finishBtn',makeDrink],['heatMinus',()=>{s.foodHeat=Math.max(0,(s.foodHeat||0)-1);render()}],['heatPlus',()=>{if(s.foodKind!=='비가열')s.foodHeat=Math.min(10,(s.foodHeat||0)+1);render()}],['foodClear',()=>{s.foodBase=s.foodSauce=s.foodKind=null;s.foodAddons=[];s.foodHeat=0;s.extra=null;s.stationError=null;render()}],['foodMake',makeFood]]){let el=$(id);if(el)el.onclick=fn}}
 
 // Only explicitly scripted days are playable. Raise this constant after adding and testing the next day's script.
-const LAST_SCRIPTED_DAY=41;
+const LAST_SCRIPTED_DAY=43;
 function mzDayLimit(){return s.devPreview?50:LAST_SCRIPTED_DAY;}
 mzDevOptions.history=true;
 function mz186PopulateDeveloperHistory(){
@@ -25738,7 +26825,7 @@ function openDevelopment(editUid=null){
  let kind=existing?.kind||'drink',seq=existing?.seq||'',method=existing?.mode||'layer',devMixAt=existing?.mixAt||0,foodBase=existing?.foodBase||null,foodSauce=existing?.foodSauce||null,foodKind=existing?.foodKind||null,selectedGarnish=existing?.extra||null,recipeName=existing?.name||'',foodAddons=[...(existing?.addons||[])],error='';
  const draw=()=>{
   const recipeCup=seq?(devMixAt>0?`<div class="layer" style="height:${devMixAt*13}px;background:${blendColor(seq.slice(0,devMixAt).split(''))}"></div>`+seq.slice(devMixAt).split('').map(x=>`<div class="layer" style="background:${ingredients.find(i=>i[0]===x)[2]}"></div>`).join(''):seq.split('').map(x=>`<div class="layer" style="background:${ingredients.find(i=>i[0]===x)[2]}"></div>`).join('')):'';
-  const drinkUI=`<div class="dev-workbench"><div><div class="note">기본 재료 ${seq.length}/10 · 재료당 최대 5</div><div class="actions">${ingredients.map(i=>`<button class="btn" data-adddev="${i[0]}" ${seq.length>=10||seq.split('').filter(x=>x===i[0]).length>=5?'disabled':''}>${i[1]}</button>`).join('')}</div><div class="actions"><button class="btn" id="devUndo" ${!seq?'disabled':''}>한 단계 취소</button><button class="btn" id="devReset" ${!seq?'disabled':''}>비우기</button></div><div class="note" style="margin-top:14px">제조 방식</div><div class="actions"><button class="btn ${devMixAt>0?'active':''}" id="devMix" ${!seq||devMixAt>0?'disabled':''}>↻ 섞기 실행</button></div></div><div class="dev-cup-area"><span class="note">개발 중인 컵</span><div class="cup">${recipeCup}${selectedGarnish?`<span class="dev-fruit v54-cup-garnish v54-garnish-${esc(selectedGarnish)}" title="${esc(garnishById(selectedGarnish)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨'})[selectedGarnish]||'✦')}</span>`:''}</div><span class="note">${devMixAt>0?(seq.length>devMixAt?`혼합 ${devMixAt}단위 + 위쪽 층 ${seq.length-devMixAt}단위`:`혼합 ${devMixAt}단위`):'층 유지'}</span></div></div><div class="note">${seq?esc(seq.split('').map(x=>ingredients.find(i=>i[0]===x)[1]).join(' → ')):'빈 컵'}</div>`;
+  const drinkUI=`<div class="dev-workbench"><div><div class="note">기본 재료 ${seq.length}/10 · 재료당 최대 5</div><div class="actions">${ingredients.map(i=>`<button class="btn" data-adddev="${i[0]}" ${seq.length>=10||seq.split('').filter(x=>x===i[0]).length>=5?'disabled':''}>${i[1]}</button>`).join('')}</div><div class="actions"><button class="btn" id="devUndo" ${!seq?'disabled':''}>한 단계 취소</button><button class="btn" id="devReset" ${!seq?'disabled':''}>비우기</button></div><div class="note" style="margin-top:14px">제조 방식</div><div class="actions"><button class="btn ${devMixAt>0?'active':''}" id="devMix" ${!seq||devMixAt>0?'disabled':''}>↻ 섞기 실행</button></div></div><div class="dev-cup-area"><span class="note">개발 중인 컵</span><div class="cup">${recipeCup}${selectedGarnish?`<span class="dev-fruit v54-cup-garnish v54-garnish-${esc(selectedGarnish)}" title="${esc(garnishById(selectedGarnish)?.name||'가니쉬')}">${esc(({sunfruit:'✿',citrus:'◉',mint:'❧',cherry:'●',chocoball:'◉',tapioca:'◌',coffeejelly:'▦',whippedcream:'❀',berrymix:'✿',mintchoco:'❧',fire:'♨',flower:'✿'})[selectedGarnish]||'✦')}</span>`:''}</div><span class="note">${devMixAt>0?(seq.length>devMixAt?`혼합 ${devMixAt}단위 + 위쪽 층 ${seq.length-devMixAt}단위`:`혼합 ${devMixAt}단위`):'층 유지'}</span></div></div><div class="note">${seq?esc(seq.split('').map(x=>ingredients.find(i=>i[0]===x)[1]).join(' → ')):'빈 컵'}</div>`;
   const foodOptions=(items,field,val)=>items.map(item=>`<button class="btn ${val===item?'active':''}" data-dev-food="${field}" data-food-value="${esc(item)}" aria-pressed="${val===item?'true':'false'}">${esc(item)}</button>`).join('');
   const foodUI=`<div class="dev-food-builder"><p class="note">주재료, 양념, 조리 방식을 조합해서 새 안주를 개발합니다.</p><div class="note">주재료</div><div class="actions">${foodOptions(['육류','버섯','감자','채소','곡물 반죽',...(s.day>=21||foodBase==='생선'?['생선']:[])],'foodBase',foodBase)}</div><div class="note" style="margin-top:12px">양념 · 소스</div><div class="actions">${foodOptions(['소금','매운 양념','허브','달콤한 소스'],'foodSauce',foodSauce)}</div><div class="note" style="margin-top:12px">조리 방식</div><div class="actions">${foodOptions(['구이','볶음','국물',...(s.day>=10||foodKind==='튀김'?['튀김']:[]),...(mzNonheatUnlocked()||foodKind==='비가열'?['비가열']:[])],'foodKind',foodKind)}</div><div class="note" style="margin-top:12px">추가 재료 · 선택 사항</div><div class="actions">${marketCatalog.filter(item=>hasMarketItem(item.id)&&['smoke','crisp','spiceoil','curry','rice','vinegar','cheese','kimchi'].includes(item.id)).map(item=>`<button class="btn ${foodAddons.includes(item.id)?'active':''}" data-dev-addon="${esc(item.id)}" aria-pressed="${foodAddons.includes(item.id)}" ${!foodAddons.includes(item.id)&&foodAddons.length>=2?'disabled':''}>${esc(item.name)}</button>`).join('')}</div><div class="dev-food-preview">${esc([foodBase,foodSauce,foodKind,...foodAddons.map(id=>marketCatalog.find(item=>item.id===id)?.name||id)].filter(Boolean).join(' · ')||'조합을 선택하세요')}</div></div>`;
   $('modalRoot').innerHTML=`<div class="overlay" id="overlay"><div class="drawer" role="dialog" aria-modal="true"><header><span class="note">MILE ZERO · MENU LAB</span><button class="btn" id="closeDev">닫기 ×</button></header><h2>${existing?'지점 한정 메뉴 수정':'지점 한정 메뉴 개발'}</h2><p class="note">원하는 재료로 직접 구성하세요.</p><div class="tabs"><button class="btn ${kind==='drink'?'active':''}" data-kind="drink">음료</button><button class="btn ${kind==='food'?'active':''}" data-kind="food">안주</button></div>${kind==='drink'?drinkUI:foodUI}${kind==='drink'?`<div class="dev-topping v35-dev-garnish"><div class="note" style="margin-bottom:9px">GARNISH / 음료 가니쉬 · 선택 사항</div><div class="v35-garnish-grid">${unlockedGarnishes().map(g=>garnishCard(g,selectedGarnish===g.id)).join('')}</div>${!unlockedGarnishes().length?'<p class="note">사용 가능한 가니쉬가 없습니다.</p>':''}</div>`:''}<div class="item"><label for="devName">메뉴 이름</label><input id="devName" maxlength="24" autocomplete="off" placeholder="지점 한정 메뉴 이름 입력" value="${esc(recipeName)}" style="display:block;width:100%;margin-top:8px;padding:9px;background:var(--panel);color:var(--text);border:1px solid var(--line)"></div><div class="actions"><button class="btn primary" id="devSave">${existing?'수정 저장':'레시피 저장'}</button><button class="btn" id="devSkip">${existing?'수정 취소':'이번 개발 건너뛰기'}</button></div><div id="devError" role="status" class="note">${esc(error)}</div></div></div>`;
@@ -25794,7 +26881,7 @@ function restoreState(raw){
  if(Array.isArray(s.guestArchiveSeen))s.guestArchiveSeen=s.guestArchiveSeen.filter(id=>!/^clue:10:(3:마렌|7:토르반|9:황무지 출신 정착민)$/.test(id));
  if(s.sunsetRoadRecipe&&!mzValidSunsetSpec(s.sunsetRoadRecipe.seq,s.sunsetRoadRecipe.mixAt,s.sunsetRoadRecipe.extra))s.sunsetRoadRecipe=null;if(!Array.isArray(s.regularUnlocks))s.regularUnlocks=[];if(s.regularUnlocks.includes('mechanic')&&!Number.isInteger(s.mechanicRegularFrom))s.mechanicRegularFrom=8;if(!Array.isArray(s.recipeNotices))s.recipeNotices=[];if(!Array.isArray(s.recipeNoticeSeen))s.recipeNoticeSeen=[];if(s.day>=10){for(const recipe of friedRecipes)if(!s.recipeNotices.includes(recipe.name))s.recipeNotices.push(recipe.name);}
  if(mzNonheatUnlocked()){for(const dish of nonheatRecipes)if(!s.recipeNotices.includes(dish.name))s.recipeNotices.push(dish.name);}
- if(s.regularUnlocks.includes('mechanic')){s.mechanicRegularFrom=8;if(!s.recipeNotices.includes('훈연 바삭 꼬치'))s.recipeNotices.push('훈연 바삭 꼬치');}for(const r of s.customRecipes){if(r.kind==='food'){const spec=foodRecipeSpec(r);if(spec){r.foodBase=spec.base;r.foodSauce=spec.sauce;r.foodKind=spec.kind;}r.extra=null;}}syncMarketRecipeRewards();mzEnsureCustomIds();if(!Array.isArray(s.unlockedExtras))s.unlockedExtras=[];if(!Array.isArray(s.garnishDiscoveries))s.garnishDiscoveries=[];if(!Array.isArray(s.garnishDialogue))s.garnishDialogue=[];
+ if(s.regularUnlocks.includes('mechanic')){s.mechanicRegularFrom=8;if(!s.recipeNotices.includes('훈연 바삭 꼬치'))s.recipeNotices.push('훈연 바삭 꼬치');}for(const r of s.customRecipes){if(r.kind==='food'){const spec=foodRecipeSpec(r);if(spec){r.foodBase=spec.base;r.foodSauce=spec.sauce;r.foodKind=spec.kind;}r.extra=null;}}syncMarketRecipeRewards();mzEnsureCustomIds();if(!Array.isArray(s.unlockedExtras))s.unlockedExtras=[];if(s.day===43&&s.visit>5&&!s.unlockedExtras.includes('flower'))s.unlockedExtras.push('flower');if(!Array.isArray(s.garnishDiscoveries))s.garnishDiscoveries=[];if(!Array.isArray(s.garnishDialogue))s.garnishDialogue=[];
  // Sanitize only the in-memory DAY35 final-visitor state; preserve save slots.
  if(s.day===35&&s.visit===14){
   s.garnishDialogue=[];
