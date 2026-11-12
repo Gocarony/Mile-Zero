@@ -22347,7 +22347,10 @@ const day43Visits=[
     "orders": [
       {
         "type": "food",
-        "name": "가든 야채스프 (추가선택재료 밥 추가)"
+        "name": "가든 야채스프",
+        "addons": [
+          "rice"
+        ]
       }
     ],
     "after": [
@@ -23345,6 +23348,12 @@ function mzDay43Variants(v,day,index){
   const chosen=choices.length?choices[Math.floor(seedPick(s,day,index,4304)*choices.length)]:null;
   if(!chosen){return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('(사용자 커스텀 메뉴)','스파이시 그릴 미트')]),orders:[v.orders[0],{type:'food',name:'스파이시 그릴 미트'}]};}
   return {...v,dialogue:v.dialogue.map(([who,line])=>[who,line.replace('(사용자 커스텀 메뉴)',chosen.name)]),orders:[v.orders[0],{type:chosen.kind,name:chosen.name,custom:true,...(chosen.kind==='food'?{addons:[...(chosen.addons||[])]}:{})}]};
+ }
+ if(index===4&&!hasMarketItem('rice')){
+  // DAY43: the market rice addon is optional; never request an unavailable recipe.
+  return {...v,
+   dialogue:v.dialogue.map(([who,line])=>[who,line.replace('난 제육볶음밥. 음료도 하나 마셔야지.','난 스파이시 그릴 미트. 음료도 하나 마셔야지.')]),
+   orders:v.orders.map(o=>o.type==='food'&&o.name==='제육볶음밥'?{type:'food',name:'스파이시 그릴 미트'}:o)};
  }
  if(index===8){return {...v,orders:[v.orders[0],{type:'drink',name:'추천 음료',anyMenu:true}]};}
  if(index===10){return {...v,orders:[{type:'food',name:'달콤한 안주',anyMenu:true,flavorRequest:{require:['달콤함']}}]};}
